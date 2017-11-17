@@ -11,8 +11,8 @@ import com.chrissen.cartoon.util.NetworkCallback;
 
 public class BookModel {
 
-    public void getBookList(String name , String type , int skip , String finish , final BaseListener listener){
-        new BookListNetDao().queryBookList(name, type, skip, finish, new NetworkCallback<BookBean>() {
+    public void getBookList(String type , int skip , int finish , final BaseListener listener){
+        new BookListNetDao().queryBookList(type, skip, finish, new NetworkCallback<BookBean>() {
             @Override
             public void onSuccess(BookBean obj) {
                 listener.onSuccess(obj);

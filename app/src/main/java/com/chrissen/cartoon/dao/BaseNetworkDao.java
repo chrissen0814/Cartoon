@@ -40,7 +40,7 @@ public abstract class BaseNetworkDao<T> {
                         if (networkCallback != null) {
                             if (response == null) {
                                 networkCallback.onError(-1, "");
-                            } else if (response.error_code == 0) {
+                            } else if (response.error_code == 200 || response.error_code == 0) {
                                 networkCallback.onSuccess(response.result);
                             } else {
                                 networkCallback.onError(response.error_code , response.reson);

@@ -19,8 +19,8 @@ public class BookPresenter implements OnBookListener {
         mModel = new BookModel();
     }
 
-    public void getBookList(String name , String type , int skip , String finish){
-        mModel.getBookList(name,type,skip,finish,this);
+    public void getBookList(String type , int skip , int finish){
+        mModel.getBookList(type,skip,finish,this);
     }
 
     @Override

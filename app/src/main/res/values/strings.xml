@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Cartoon</string>
+
+    <!--navigation-->
+    <string name="navi_main">首页</string>
+    <string name="navi_type">分类</string>
+    <string name="navi_search">搜索</string>
+    <string name="navi_setting">设置</string>
+    <string name="navi_about">关于</string>
+
+    <!--漫画类型-->
+    <string-array name="comic_type">
+        <item>少年漫画</item>
+        <item>青年漫画</item>
+        <item>少女漫画</item>
+        <item>耽美漫画</item>
+    </string-array>
+
+    <!--书完结状态-->
+    <string name="book_finished">已完结</string>
+    <string name="book_unfinished">未完结</string>
+
 </resources>

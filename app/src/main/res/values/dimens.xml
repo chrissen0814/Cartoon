@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="card_view_margin_left_right">16dp</dimen>
+    <dimen name="card_view_margin_top_bottom">16dp</dimen>
+    <dimen name="card_view_elevation">3dp</dimen>
+    <dimen name="card_view_coner_radius">2dp</dimen>
+
+</resources>

@@ -47,6 +47,7 @@ public class BookBean {
         private String des;
         private boolean finish;
         private String lastUpdate;
+        private String coverImg;
 
 
         public String getName() {
@@ -95,6 +96,14 @@ public class BookBean {
 
         public void setLastUpdate(String lastUpdate) {
             this.lastUpdate = lastUpdate;
+        }
+
+        public String getCoverImg() {
+            return coverImg;
+        }
+
+        public void setCoverImg(String coverImg) {
+            this.coverImg = coverImg;
         }
     }
 

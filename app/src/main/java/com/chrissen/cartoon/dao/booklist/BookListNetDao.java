@@ -19,8 +19,12 @@ public class BookListNetDao extends BaseNetworkDao<Api> {
     }
 
 
-    public void queryBookList(String bookName , String type , int skip , String finish , NetworkCallback<BookBean> networkCallback){
-        doRequest(api.getBookList(ConfigUtil.CARTOON_KEY,bookName,type,skip,finish),networkCallback);
+    public void queryBookList(String type , int skip , int finish , NetworkCallback<BookBean> networkCallback){
+        if (skip == 0) {
+            doRequest(api.getBookList(ConfigUtil.CARTOON_KEY,type,finish),networkCallback);
+        }else {
+            doRequest(api.getBookList(ConfigUtil.CARTOON_KEY,type,skip,finish),networkCallback);
+        }
     }
 
 }

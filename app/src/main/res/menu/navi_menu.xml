@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navi_main"
+        android:title="@string/navi_main"
+        android:icon="@drawable/navi_main"/>
+
+    <item
+        android:id="@+id/navi_type"
+        android:title="@string/navi_type"
+        android:icon="@drawable/navi_type"/>
+
+    <item
+        android:id="@+id/navi_search"
+        android:title="@string/navi_search"
+        android:icon="@drawable/navi_search"/>
+
+    <item
+        android:id="@+id/navi_setting"
+        android:title="@string/navi_setting"
+        android:icon="@drawable/navi_setting"/>
+
+    <item
+        android:id="@+id/navi_about"
+        android:title="@string/navi_about"
+        android:icon="@drawable/navi_about"/>
+
+</menu>

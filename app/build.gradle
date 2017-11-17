@@ -3,7 +3,7 @@ apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 
 greendao {
-    schemaVersion 3
+    schemaVersion 4
     daoPackage 'com.chrissen.cartoon.dao.greendao'
     targetGenDir 'src/main/java'
 }
@@ -54,5 +54,5 @@ dependencies {
     //smartrefreshlayout
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
     // LeanCloud
-    compile ('cn.leancloud.android:avoscloud-sdk:v4.4.4')
+    compile('cn.leancloud.android:avoscloud-sdk:v4.4.4')
 }
