@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:layout_marginLeft="@dimen/card_view_margin_left_right"
+    android:layout_marginRight="@dimen/card_view_margin_left_right"
+    android:layout_marginTop="@dimen/card_view_margin_top_bottom"
+    app:cardCornerRadius="@dimen/card_view_coner_radius"
+    app:cardElevation="@dimen/card_view_elevation">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/dbbook_cover_iv"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/dbbook_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            app:layout_constraintLeft_toRightOf="@id/dbbook_cover_iv"
+            app:layout_constraintTop_toTopOf="@id/dbbook_cover_iv"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:gravity="center"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

@@ -24,7 +24,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="16dp"
             android:scaleType="centerCrop"
-            tools:src="@mipmap/ic_launcher"/>
+            tools:src="@mipmap/ic_launcher"
+            android:background="@drawable/book_bg"/>
 
 
         <TextView
@@ -34,6 +35,7 @@
             app:layout_constraintLeft_toRightOf="@id/item_book_cover_iv"
             app:layout_constraintTop_toTopOf="@id/item_book_cover_iv"
             android:layout_marginLeft="16dp"
+            android:textSize="18sp"
             tools:text="xxxxx"/>
 
         <TextView
@@ -58,6 +60,16 @@
             app:layout_constraintLeft_toLeftOf="@id/item_book_name_tv"
             app:layout_constraintBottom_toBottomOf="@id/item_book_cover_iv"
             tools:text="xxx"/>
+
+        <ImageView
+            android:id="@+id/book_collection_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_collection_normal"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/item_book_cover_iv"
+            android:layout_marginRight="16dp"
+            android:clickable="true"/>
 
     </android.support.constraint.ConstraintLayout>
 

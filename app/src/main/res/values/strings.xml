@@ -20,4 +20,11 @@
     <string name="book_finished">已完结</string>
     <string name="book_unfinished">未完结</string>
 
+    <!--toolbar title-->
+    <string name="title_main">我的漫画</string>
+    <string name="title_type">分类</string>
+    <string name="title_search">搜索</string>
+    <string name="title_about">关于</string>
+    <string name="title_setting">设置</string>
+
 </resources>

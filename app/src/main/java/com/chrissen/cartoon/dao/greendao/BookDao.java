@@ -27,13 +27,14 @@ public class BookDao extends AbstractDao<Book, Long> {
         public final static Property BookName = new Property(2, String.class, "bookName", false, "BOOK_NAME");
         public final static Property ChapterId = new Property(3, String.class, "chapterId", false, "CHAPTER_ID");
         public final static Property ChapterName = new Property(4, String.class, "chapterName", false, "CHAPTER_NAME");
-        public final static Property ImageId = new Property(5, int.class, "imageId", false, "IMAGE_ID");
+        public final static Property ImageId = new Property(5, String.class, "imageId", false, "IMAGE_ID");
         public final static Property Type = new Property(6, String.class, "type", false, "TYPE");
         public final static Property Area = new Property(7, String.class, "area", false, "AREA");
         public final static Property Finish = new Property(8, boolean.class, "finish", false, "FINISH");
         public final static Property LastUpdate = new Property(9, String.class, "lastUpdate", false, "LAST_UPDATE");
         public final static Property AddedTime = new Property(10, long.class, "addedTime", false, "ADDED_TIME");
-        public final static Property Comment = new Property(11, String.class, "comment", false, "COMMENT");
+        public final static Property UpdatedTime = new Property(11, long.class, "updatedTime", false, "UPDATED_TIME");
+        public final static Property Comment = new Property(12, String.class, "comment", false, "COMMENT");
     }
 
 
@@ -54,13 +55,14 @@ public class BookDao extends AbstractDao<Book, Long> {
                 "\"BOOK_NAME\" TEXT," + // 2: bookName
                 "\"CHAPTER_ID\" TEXT," + // 3: chapterId
                 "\"CHAPTER_NAME\" TEXT," + // 4: chapterName
-                "\"IMAGE_ID\" INTEGER NOT NULL ," + // 5: imageId
+                "\"IMAGE_ID\" TEXT," + // 5: imageId
                 "\"TYPE\" TEXT," + // 6: type
                 "\"AREA\" TEXT," + // 7: area
                 "\"FINISH\" INTEGER NOT NULL ," + // 8: finish
                 "\"LAST_UPDATE\" TEXT," + // 9: lastUpdate
                 "\"ADDED_TIME\" INTEGER NOT NULL ," + // 10: addedTime
-                "\"COMMENT\" TEXT);"); // 11: comment
+                "\"UPDATED_TIME\" INTEGER NOT NULL ," + // 11: updatedTime
+                "\"COMMENT\" TEXT);"); // 12: comment
     }
 
     /** Drops the underlying database table. */
@@ -97,7 +99,11 @@ public class BookDao extends AbstractDao<Book, Long> {
         if (chapterName != null) {
             stmt.bindString(5, chapterName);
         }
-        stmt.bindLong(6, entity.getImageId());
+ 
+        String imageId = entity.getImageId();
+        if (imageId != null) {
+            stmt.bindString(6, imageId);
+        }
  
         String type = entity.getType();
         if (type != null) {
@@ -115,10 +121,11 @@ public class BookDao extends AbstractDao<Book, Long> {
             stmt.bindString(10, lastUpdate);
         }
         stmt.bindLong(11, entity.getAddedTime());
+        stmt.bindLong(12, entity.getUpdatedTime());
  
         String comment = entity.getComment();
         if (comment != null) {
-            stmt.bindString(12, comment);
+            stmt.bindString(13, comment);
         }
     }
 
@@ -150,7 +157,11 @@ public class BookDao extends AbstractDao<Book, Long> {
         if (chapterName != null) {
             stmt.bindString(5, chapterName);
         }
-        stmt.bindLong(6, entity.getImageId());
+ 
+        String imageId = entity.getImageId();
+        if (imageId != null) {
+            stmt.bindString(6, imageId);
+        }
  
         String type = entity.getType();
         if (type != null) {
@@ -168,10 +179,11 @@ public class BookDao extends AbstractDao<Book, Long> {
             stmt.bindString(10, lastUpdate);
         }
         stmt.bindLong(11, entity.getAddedTime());
+        stmt.bindLong(12, entity.getUpdatedTime());
  
         String comment = entity.getComment();
         if (comment != null) {
-            stmt.bindString(12, comment);
+            stmt.bindString(13, comment);
         }
     }
 
@@ -188,13 +200,14 @@ public class BookDao extends AbstractDao<Book, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // bookName
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // chapterId
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // chapterName
-            cursor.getInt(offset + 5), // imageId
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // imageId
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // type
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // area
             cursor.getShort(offset + 8) != 0, // finish
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // lastUpdate
             cursor.getLong(offset + 10), // addedTime
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11) // comment
+            cursor.getLong(offset + 11), // updatedTime
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12) // comment
         );
         return entity;
     }
@@ -206,13 +219,14 @@ public class BookDao extends AbstractDao<Book, Long> {
         entity.setBookName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setChapterId(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setChapterName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setImageId(cursor.getInt(offset + 5));
+        entity.setImageId(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setType(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setArea(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setFinish(cursor.getShort(offset + 8) != 0);
         entity.setLastUpdate(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setAddedTime(cursor.getLong(offset + 10));
-        entity.setComment(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setUpdatedTime(cursor.getLong(offset + 11));
+        entity.setComment(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
      }
     
     @Override

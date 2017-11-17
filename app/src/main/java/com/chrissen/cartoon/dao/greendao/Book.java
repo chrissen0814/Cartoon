@@ -17,18 +17,22 @@ public class Book {
     private String bookName;
     private String chapterId;
     private String chapterName;
-    private int imageId;
+    private String imageId;
     private String type;
     private String area;
     private boolean finish;
     private String lastUpdate;
     private long addedTime;
+    private long updatedTime;
     private String comment;
 
-    @Generated(hash = 689635595)
+
+
+    @Generated(hash = 381347066)
     public Book(Long id, String userEmail, String bookName, String chapterId,
-            String chapterName, int imageId, String type, String area,
-            boolean finish, String lastUpdate, long addedTime, String comment) {
+            String chapterName, String imageId, String type, String area,
+            boolean finish, String lastUpdate, long addedTime, long updatedTime,
+            String comment) {
         this.id = id;
         this.userEmail = userEmail;
         this.bookName = bookName;
@@ -40,12 +44,15 @@ public class Book {
         this.finish = finish;
         this.lastUpdate = lastUpdate;
         this.addedTime = addedTime;
+        this.updatedTime = updatedTime;
         this.comment = comment;
     }
 
     @Generated(hash = 1839243756)
     public Book() {
     }
+
+
 
     public Long getId() {
         return id;
@@ -119,11 +126,11 @@ public class Book {
         this.chapterName = chapterName;
     }
 
-    public int getImageId() {
+    public String getImageId() {
         return imageId;
     }
 
-    public void setImageId(int imageId) {
+    public void setImageId(String imageId) {
         this.imageId = imageId;
     }
 
@@ -145,5 +152,13 @@ public class Book {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public long getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(long updatedTime) {
+        this.updatedTime = updatedTime;
     }
 }

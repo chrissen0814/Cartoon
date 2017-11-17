@@ -6,38 +6,36 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.chrissen.cartoon.R;
-import com.chrissen.cartoon.module.presenter.type.TypePresenter;
-import com.chrissen.cartoon.module.view.TypeView;
+import com.chrissen.cartoon.adapter.DbBookAdapter;
 
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements TypeView {
+public class MainActivity extends AppCompatActivity{
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
-
-    private TypePresenter mPresenter;
+    private RecyclerView mRecyclerView;
+    private DbBookAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        mPresenter = new TypePresenter(this);
-        mPresenter.getComicType();
     }
 
     private void initViews() {
         mDrawerLayout = findViewById(R.id.main_drawer_layout);
         mNavigationView = findViewById(R.id.main_navigation_view);
         mToolbar = findViewById(R.id.main_toolbar);
+        mRecyclerView = findViewById(R.id.main_rv);
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.toolbar_menu);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -65,15 +63,14 @@ public class MainActivity extends AppCompatActivity implements TypeView {
                 return false;
             }
         });
-    }
 
-
-    @Override
-    public void onShowSuccess(List<String> obj) {
     }
 
     @Override
-    public void onShowError(String errorMsg) {
-
+    protected void onStart() {
+        super.onStart();
+        mAdapter = new DbBookAdapter(this);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mAdapter);
     }
 }
