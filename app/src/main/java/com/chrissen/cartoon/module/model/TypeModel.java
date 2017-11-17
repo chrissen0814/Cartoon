@@ -1,7 +1,7 @@
 package com.chrissen.cartoon.module.model;
 
 import com.chrissen.cartoon.dao.cartoontype.TypeNetDao;
-import com.chrissen.cartoon.module.presenter.OnTypeListener;
+import com.chrissen.cartoon.module.presenter.BaseListener;
 import com.chrissen.cartoon.util.NetworkCallback;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TypeModel {
 
-    public void getComicType(final OnTypeListener listener){
+    public void getComicType(final BaseListener listener){
         new TypeNetDao().queryCartoonType(new NetworkCallback<List<String>>() {
             @Override
             public void onSuccess(List<String> obj) {
@@ -21,7 +21,7 @@ public class TypeModel {
 
             @Override
             public void onError(int errorCode, String reason) {
-                listener.onError(reason);
+                listener.onFail(reason);
             }
         });
     }

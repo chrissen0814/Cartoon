@@ -13,6 +13,7 @@ public class Book {
 
     @Id(autoincrement = true)
     private Long id;
+    private String userEmail;
     private String bookName;
     private String chapterId;
     private String chapterName;
@@ -22,12 +23,14 @@ public class Book {
     private boolean finish;
     private String lastUpdate;
     private long addedTime;
+    private String comment;
 
-    @Generated(hash = 1571759770)
-    public Book(Long id, String bookName, String chapterId, String chapterName,
-            int imageId, String type, String area, boolean finish,
-            String lastUpdate, long addedTime) {
+    @Generated(hash = 689635595)
+    public Book(Long id, String userEmail, String bookName, String chapterId,
+            String chapterName, int imageId, String type, String area,
+            boolean finish, String lastUpdate, long addedTime, String comment) {
         this.id = id;
+        this.userEmail = userEmail;
         this.bookName = bookName;
         this.chapterId = chapterId;
         this.chapterName = chapterName;
@@ -37,6 +40,7 @@ public class Book {
         this.finish = finish;
         this.lastUpdate = lastUpdate;
         this.addedTime = addedTime;
+        this.comment = comment;
     }
 
     @Generated(hash = 1839243756)
@@ -125,5 +129,21 @@ public class Book {
 
     public boolean getFinish() {
         return this.finish;
+    }
+
+    public String getUserEmail() {
+        return this.userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getComment() {
+        return this.comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

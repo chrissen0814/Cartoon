@@ -6,10 +6,11 @@ import java.util.List;
  * Created by chris on 2017/11/16.
  */
 
-public interface TypeView {
+public interface TypeView extends BaseView<List<String>> {
 
-    void onSuccess(List<String> typeList);
+    @Override
+    void onShowSuccess(List<String> obj);
 
-    void onError(String errorMsg);
-
+    @Override
+    void onShowError(String errorMsg);
 }

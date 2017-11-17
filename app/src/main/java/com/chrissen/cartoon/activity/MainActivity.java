@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.chrissen.cartoon.R;
-import com.chrissen.cartoon.module.presenter.TypePresenter;
+import com.chrissen.cartoon.module.presenter.type.TypePresenter;
 import com.chrissen.cartoon.module.view.TypeView;
 
 import java.util.List;
@@ -27,13 +27,13 @@ public class MainActivity extends AppCompatActivity implements TypeView {
 
 
     @Override
-    public void onSuccess(List<String> typeList) {
-        String type = typeList.get(0) + typeList.get(1);
+    public void onShowSuccess(List<String> obj) {
+        String type = obj.get(0) + obj.get(1);
         mTextView.setText(type);
     }
 
     @Override
-    public void onError(String errorMsg) {
+    public void onShowError(String errorMsg) {
 
     }
 }

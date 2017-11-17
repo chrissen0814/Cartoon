@@ -1,6 +1,7 @@
-package com.chrissen.cartoon.module.presenter;
+package com.chrissen.cartoon.module.presenter.type;
 
 import com.chrissen.cartoon.module.model.TypeModel;
+import com.chrissen.cartoon.module.view.BaseView;
 import com.chrissen.cartoon.module.view.TypeView;
 
 import java.util.List;
@@ -11,11 +12,11 @@ import java.util.List;
 
 public class TypePresenter implements OnTypeListener {
     private TypeModel mTypeModel;
-    private TypeView mTypeView;
+    private BaseView mBaseView;
 
 
     public TypePresenter( TypeView view){
-        mTypeView = view;
+        mBaseView = view;
         mTypeModel = new TypeModel();
     }
 
@@ -25,12 +26,13 @@ public class TypePresenter implements OnTypeListener {
 
 
     @Override
-    public void onSuccess(List<String> typeList) {
-        mTypeView.onSuccess(typeList);
+    public void onFail(String errorMsg) {
+        mBaseView.onShowError(errorMsg);
     }
 
     @Override
-    public void onError(String errorMsg) {
-        mTypeView.onError(errorMsg);
+    public void onSuccess(List<String> typeList) {
+        mBaseView.onShowSuccess(typeList);
     }
+
 }
