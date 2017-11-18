@@ -18,4 +18,8 @@ public interface Api {
                                                      @Query("comicName") String comicName,
                                                      @Query("skip") int skip);
 
+    @GET("chapter")
+    Observable<Response<ChapterBean>> getChapterList(@Query("key") String key,
+                                                     @Query("comicName") String comicName);
+
 }

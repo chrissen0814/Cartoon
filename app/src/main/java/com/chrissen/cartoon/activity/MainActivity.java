@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.chrissen.cartoon.R;
-import com.chrissen.cartoon.adapter.DbBookAdapter;
+import com.chrissen.cartoon.adapter.recyclerview.DbBookAdapter;
 
 public class MainActivity extends AppCompatActivity{
 

@@ -1,4 +1,4 @@
-package com.chrissen.cartoon.adapter;
+package com.chrissen.cartoon.adapter.recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -53,19 +53,28 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             holder.finishedTv.setTextColor(mContext.getResources().getColor(R.color.book_unfinished));
         }
         final boolean collected = bookDaoManager.judgeExist(book.getType(),book.getName(),book.getArea());
-        holder.collectionIv.setImageResource(collected ? R.drawable.icon_collection_selected : R.drawable.icon_collection_normal);
+        if (collected) {
+            holder.collectionIv.setImageResource(R.drawable.icon_collection_selected);
+            holder.collectionIv.setTag("1");
+        }else {
+            holder.collectionIv.setImageResource(R.drawable.icon_collection_normal);
+            holder.collectionIv.setTag("0");
+        }
         holder.collectionIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (collected) {
+                if (holder.collectionIv.getTag().equals("1")) {
                     Book savedBook = bookDaoManager.queryBookByBean(book);
                     if (savedBook != null) {
                         holder.collectionIv.setImageResource(R.drawable.icon_collection_normal);
+                        holder.collectionIv.setTag("0");
                         bookDaoManager.deleteBook(savedBook);
                     }
                 }else {
                     holder.collectionIv.setImageResource(R.drawable.icon_collection_selected);
+                    holder.collectionIv.setTag("1");
                     bookDaoManager.addBook(book);
+
                 }
             }
         });

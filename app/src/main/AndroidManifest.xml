@@ -21,11 +21,13 @@
         </activity>
         <activity android:name=".activity.TypeActivity">
         </activity>
-        <activity android:name=".activity.AboutActivity">
+        <activity android:name=".activity.system.AboutActivity">
         </activity>
         <activity android:name=".activity.SearchActivity">
         </activity>
-        <activity android:name=".activity.BookActivity">
+        <activity android:name=".activity.ChapterActivity">
+        </activity>
+        <activity android:name=".activity.ContentActivity">
         </activity>
     </application>
 

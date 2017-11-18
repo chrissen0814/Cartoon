@@ -19,7 +19,11 @@ public class ChapterNetDao extends BaseNetworkDao<Api>{
 
 
     public void queryChapterListByComicName(String comicName , int skip , NetworkCallback<ChapterBean> networkCallback){
-        doRequest(api.getChapterList(ConfigUtil.CARTOON_KEY,comicName,skip),networkCallback);
+        if (skip == 0) {
+            doRequest(api.getChapterList(ConfigUtil.CARTOON_KEY,comicName) , networkCallback);
+        }else {
+            doRequest(api.getChapterList(ConfigUtil.CARTOON_KEY,comicName,skip),networkCallback);
+        }
     }
 
 }

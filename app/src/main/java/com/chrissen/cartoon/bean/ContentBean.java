@@ -1,5 +1,6 @@
 package com.chrissen.cartoon.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class ContentBean {
         this.imageList = imageList;
     }
 
-    public static class Image{
+    public static class Image implements Serializable{
         private String imageUrl;
         private String id;
 

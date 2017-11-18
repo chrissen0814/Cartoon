@@ -1,17 +1,19 @@
-package com.chrissen.cartoon.activity;
+package com.chrissen.cartoon.fragment;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.chrissen.cartoon.R;
-import com.chrissen.cartoon.adapter.BookAdapter;
+import com.chrissen.cartoon.adapter.recyclerview.BookAdapter;
 import com.chrissen.cartoon.bean.BookBean;
 import com.chrissen.cartoon.module.presenter.book.BookPresenter;
 import com.chrissen.cartoon.module.view.BookListView;
-import com.chrissen.cartoon.util.IntentConstants;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -20,10 +22,14 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookActivity extends AppCompatActivity implements BookListView {
-    private static final int ALL = -1;
+/**
+ * Created by chris on 2017/11/18.
+ */
 
-    private Toolbar mToolbar;
+public class TypeFragment extends Fragment implements BookListView {
+    private static final int ALL = -1;
+    private static final String BOOK_TYPE = "book_type";
+
     private String bookType;
     private boolean isLoadingMore;
     private int skipCounts;
@@ -35,16 +41,32 @@ public class BookActivity extends AppCompatActivity implements BookListView {
     private BookAdapter mAdapter;
     private RecyclerView mRecyclerView;
 
+    public static TypeFragment newInstance(String bookType){
+        Bundle bundle = new Bundle();
+        bundle.putString(BOOK_TYPE,bookType);
+        TypeFragment fragment = new TypeFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book);
-        mToolbar = findViewById(R.id.book_type);
-        mRefreshLayout = findViewById(R.id.book_refresh_layout);
-        mRecyclerView = findViewById(R.id.book_rv);
-        bookType = getIntent().getStringExtra(IntentConstants.BOOK_TYPE);
-        mToolbar.setTitle(bookType);
+        bookType = getArguments().getString(BOOK_TYPE);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_type,container,false);
+        initViews(view);
+        return view;
+    }
+
+    private void initViews(View view) {
+        mRefreshLayout = view.findViewById(R.id.book_refresh_layout);
+        mRecyclerView = view.findViewById(R.id.book_rv);
         mPresenter = new BookPresenter(this);
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -63,8 +85,8 @@ public class BookActivity extends AppCompatActivity implements BookListView {
                 mPresenter.getBookList(bookType,skipCounts,ALL);
             }
         });
-        mAdapter = new BookAdapter(this,mBookList);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new BookAdapter(getContext(),mBookList);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
         mPresenter.getBookList(bookType,skipCounts,ALL);
     }
