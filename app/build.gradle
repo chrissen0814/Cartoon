@@ -1,9 +1,9 @@
 apply plugin: 'com.android.application'
-apply plugin: 'org.greenrobot.greendao' // apply plugin
+apply plugin: 'org.greenrobot.greendao'
 
 
 greendao {
-    schemaVersion 5
+    schemaVersion 6
     daoPackage 'com.chrissen.cartoon.dao.greendao'
     targetGenDir 'src/main/java'
 }
@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId "com.chrissen.cartoon"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

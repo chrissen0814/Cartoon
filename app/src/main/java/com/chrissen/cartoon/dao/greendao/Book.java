@@ -18,6 +18,7 @@ public class Book {
     private String chapterId;
     private String chapterName;
     private String imageId;
+    private String imageIndex;
     private String type;
     private String area;
     private boolean finish;
@@ -28,17 +29,18 @@ public class Book {
 
 
 
-    @Generated(hash = 381347066)
+    @Generated(hash = 112246388)
     public Book(Long id, String userEmail, String bookName, String chapterId,
-            String chapterName, String imageId, String type, String area,
-            boolean finish, String lastUpdate, long addedTime, long updatedTime,
-            String comment) {
+            String chapterName, String imageId, String imageIndex, String type,
+            String area, boolean finish, String lastUpdate, long addedTime,
+            long updatedTime, String comment) {
         this.id = id;
         this.userEmail = userEmail;
         this.bookName = bookName;
         this.chapterId = chapterId;
         this.chapterName = chapterName;
         this.imageId = imageId;
+        this.imageIndex = imageIndex;
         this.type = type;
         this.area = area;
         this.finish = finish;
@@ -160,5 +162,13 @@ public class Book {
 
     public void setUpdatedTime(long updatedTime) {
         this.updatedTime = updatedTime;
+    }
+
+    public String getImageIndex() {
+        return this.imageIndex;
+    }
+
+    public void setImageIndex(String imageIndex) {
+        this.imageIndex = imageIndex;
     }
 }
