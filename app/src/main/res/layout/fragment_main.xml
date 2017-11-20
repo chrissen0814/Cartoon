@@ -6,23 +6,10 @@
               android:orientation="vertical"
               xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/main_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:title="@string/navi_main"
-        app:titleTextColor="@android:color/white">
-    </android.support.v7.widget.Toolbar>
-
     <android.support.v7.widget.CardView
         android:id="@+id/main_hitokoto_layout_cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/card_view_margin_left_right"
-        android:layout_marginRight="@dimen/card_view_margin_left_right"
-        android:layout_marginTop="@dimen/card_view_margin_top_bottom"
-        android:layout_marginBottom="@dimen/card_view_margin_top_bottom"
         app:cardElevation="@dimen/card_view_elevation"
         app:cardCornerRadius="@dimen/card_view_coner_radius">
 

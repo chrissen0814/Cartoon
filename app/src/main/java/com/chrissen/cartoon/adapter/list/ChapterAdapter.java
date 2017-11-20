@@ -1,4 +1,4 @@
-package com.chrissen.cartoon.adapter.recyclerview;
+package com.chrissen.cartoon.adapter.list;
 
 import android.content.Context;
 import android.content.Intent;

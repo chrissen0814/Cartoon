@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.chrissen.cartoon.R;
-import com.chrissen.cartoon.adapter.recyclerview.ChapterAdapter;
+import com.chrissen.cartoon.adapter.list.ChapterAdapter;
 import com.chrissen.cartoon.bean.ChapterBean;
 import com.chrissen.cartoon.module.presenter.chapter.ChapterPresenter;
 import com.chrissen.cartoon.module.view.BookChapterView;

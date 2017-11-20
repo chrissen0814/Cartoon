@@ -27,4 +27,17 @@
     <string name="title_about">关于</string>
     <string name="title_setting">设置</string>
 
+
+    <string name="navi_open">打开</string>
+    <string name="navi_close">关闭</string>
+
+    <!--navi title-->
+    <string-array name="navi_title">
+        <item>首页</item>
+        <item>分类</item>
+        <item>搜索</item>
+        <item>设置</item>
+        <item>关于</item>
+    </string-array>
+
 </resources>

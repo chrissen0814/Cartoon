@@ -55,4 +55,6 @@ dependencies {
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
     // LeanCloud
     compile('cn.leancloud.android:avoscloud-sdk:v4.4.4')
+    //Navigation Drawer
+    compile 'nl.psdcompany:duo-navigation-drawer:2.0.7'
 }

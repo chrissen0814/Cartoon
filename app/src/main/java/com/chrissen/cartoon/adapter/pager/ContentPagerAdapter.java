@@ -1,8 +1,8 @@
-package com.chrissen.cartoon.adapter.viewpager;
+package com.chrissen.cartoon.adapter.pager;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
@@ -10,17 +10,14 @@ import java.util.List;
  * Created by chris on 2017/11/18.
  */
 
-public class TypePagerAdapter extends FragmentPagerAdapter {
+public class ContentPagerAdapter extends FragmentStatePagerAdapter {
 
-    private String[] mTitles;
     private List<Fragment> mFragmentList;
 
-    public TypePagerAdapter(FragmentManager fm , List<Fragment> fragmentList , String[] titles) {
+    public ContentPagerAdapter(FragmentManager fm , List<Fragment> fragmentList) {
         super(fm);
         mFragmentList = fragmentList;
-        mTitles = titles;
     }
-
 
     @Override
     public Fragment getItem(int position) {
@@ -30,11 +27,5 @@ public class TypePagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return mFragmentList.size();
-    }
-
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return mTitles[position];
     }
 }

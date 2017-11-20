@@ -6,7 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.chrissen.cartoon.R;
-import com.chrissen.cartoon.adapter.viewpager.ContentPagerAdapter;
+import com.chrissen.cartoon.adapter.pager.ContentPagerAdapter;
 import com.chrissen.cartoon.bean.ContentBean;
 import com.chrissen.cartoon.fragment.ContentFragment;
 import com.chrissen.cartoon.module.presenter.content.ContentPresenter;
