@@ -53,8 +53,10 @@ public class MainFragment extends Fragment {
                 super.handleMessage(msg);
                 if (msg.what == ConfigUtil.SUCCESS_MSG) {
                     HitokotoBean hitokotoBean = (HitokotoBean) msg.obj;
-                    mHitokotoTv.setText(hitokotoBean.getHitokoto());
-                    mHitokotoFromTv.setText(hitokotoBean.getFrom());
+                    if (hitokotoBean != null) {
+                        mHitokotoTv.setText(hitokotoBean.getHitokoto());
+                        mHitokotoFromTv.setText(hitokotoBean.getFrom());
+                    }
                 }else {
 
                 }

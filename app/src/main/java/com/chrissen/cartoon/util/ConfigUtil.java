@@ -14,11 +14,13 @@ public class ConfigUtil {
 //    一言
     public static final String HITOKOTO_URL = "https://sslapi.hitokoto.cn/?c=b";
 
-    public static final String ACG_URL = "http://acg.bakayun.cn/randbg.php?Type=json&t=dfproject ";
+//    ACG
+    public static final String ACG_URL = "http://acg.bakayun.cn/randbg.php?Type=json&t=dfzh";
 
 //    handler what value
     public static final int SUCCESS_MSG = 1;
     public static final int FAIL_MSG = -1;
+
 
     public static final String BG_IMAGE_NAME = "bg_image.jpg";
     public static final String APP_DIR = CartoonApplication.getContext().getPackageName();

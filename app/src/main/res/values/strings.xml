@@ -40,4 +40,19 @@
         <item>关于</item>
     </string-array>
 
+    <!--user-->
+    <string name="user_sign_in_welcome">终于等到你啦！</string>
+    <string name="user_sign_in_name_email">用户名/邮箱</string>
+    <string name="user_sign_in_pwd">密码</string>
+    <string name="user_sign_in_sign">登录</string>
+    <string name="user_register">新用户注册</string>
+    <string name="user_forget_pwd">忘记密码？</string>
+    <string name="user_register_name">用户名</string>
+    <string name="user_register_email">邮箱</string>
+    <string name="user_register_pwd">密码</string>
+    <string name="user_register_pwd_confirm">确认密码</string>
+    <string name="user_register_register">注册</string>
+    <string name="user_forget_email">请输入邮箱</string>
+    <string name="user_forget_post">提交</string>
+
 </resources>

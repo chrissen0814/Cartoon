@@ -7,7 +7,9 @@ import android.os.Environment;
 import com.alibaba.fastjson.JSON;
 import com.chrissen.cartoon.bean.AcgBean;
 import com.chrissen.cartoon.util.ConfigUtil;
+import com.chrissen.cartoon.util.ImageUtil;
 import com.chrissen.cartoon.util.OkHttpUtil;
+import com.chrissen.cartoon.util.PreferenceHelper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -98,6 +100,15 @@ public class AcgModel {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private void saveColor(String colorStr){
+        String[] rgb = colorStr.split(",");
+        int red = Integer.parseInt(rgb[0]);
+        int green = Integer.parseInt(rgb[1]);
+        int blue = Integer.parseInt(rgb[2]);
+        int color = ImageUtil.getIntFromColor(red,green,blue);
+        PreferenceHelper.putInt(PreferenceHelper.IMAGE_COLOR,color);
     }
 
     private void saveAcgBitmap(Bitmap bitmap){

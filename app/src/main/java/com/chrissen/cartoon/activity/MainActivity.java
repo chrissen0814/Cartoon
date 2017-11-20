@@ -1,20 +1,23 @@
 package com.chrissen.cartoon.activity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 
 import com.chrissen.cartoon.R;
+import com.chrissen.cartoon.activity.user.SignInActivity;
 import com.chrissen.cartoon.adapter.list.MenuAdapter;
 import com.chrissen.cartoon.fragment.MainFragment;
 import com.chrissen.cartoon.fragment.SearchFragment;
 import com.chrissen.cartoon.fragment.TypeFragment;
+import com.chrissen.cartoon.module.model.AcgModel;
 import com.chrissen.cartoon.util.ConfigUtil;
+import com.chrissen.cartoon.util.ImageUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -61,15 +64,16 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
     }
 
     private void initAcg() {
+        ImageView imageView = mMenuView.findViewById(R.id.duo_view_menu_background);
         File appDir = new File(Environment.getExternalStorageDirectory(), ConfigUtil.APP_DIR);
         File file = new File(appDir,ConfigUtil.BG_IMAGE_NAME);
         if (file != null && file.exists()) {
-            Bitmap bitmap = BitmapFactory.decodeFile(file.toString());
-//            mMenuView.setBackground(new GlideBitmapDrawable(null,bitmap));
+//            Bitmap bitmap = BitmapFactory.decodeFile(file.toString());
+            ImageUtil.loadBlurImageByFile(file,this,imageView);
         }else {
-//            mMenuView.setBackground(R.drawable.main_bg);
+            ImageUtil.loadBlurImageByRes(R.drawable.main_bg,this,imageView);
         }
-//        new AcgModel().saveAcg();
+        new AcgModel().saveAcg();
     }
 
 
@@ -83,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
 
     @Override
     public void onFooterClicked() {
-
+        startActivity(new Intent(this, SignInActivity.class));
     }
 
     @Override

@@ -3,8 +3,8 @@
           package="com.chrissen.cartoon">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".CartoonApplication"
@@ -26,6 +26,12 @@
         <activity android:name=".activity.ChapterActivity">
         </activity>
         <activity android:name=".activity.ContentActivity">
+        </activity>
+        <activity android:name=".activity.user.SignInActivity">
+        </activity>
+        <activity android:name=".activity.user.RegisterActivity">
+        </activity>
+        <activity android:name=".activity.user.ForgetPwdActivity">
         </activity>
     </application>
 
