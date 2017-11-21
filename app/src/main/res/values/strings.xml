@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Cartoon</string>
 
+    <string name="default_header_text">因为遇见你\n我才知道我也能拥有美丽的记忆</string>
+
     <!--navigation-->
     <string name="navi_main">首页</string>
     <string name="navi_type">分类</string>
@@ -40,6 +42,10 @@
         <item>关于</item>
     </string-array>
 
+    <!--navi-->
+    <string name="navi_register_sign_in">注册/登录</string>
+    <string name="navi_user_info">个人信息</string>
+
     <!--user-->
     <string name="user_sign_in_welcome">终于等到你啦！</string>
     <string name="user_sign_in_name_email">用户名/邮箱</string>
@@ -54,5 +60,21 @@
     <string name="user_register_register">注册</string>
     <string name="user_forget_email">请输入邮箱</string>
     <string name="user_forget_post">提交</string>
+
+    <!--toast-->
+    <string name="toast_forget_success">重置密码链接已发送到邮箱</string>
+    <string name="toast_forget_fail">邮箱格式有误</string>
+    <string name="toast_email_not_found">该邮箱没有注册，请先注册</string>
+    <string name="toast_sign_in_error">用户信息有误,请检查!</string>
+    <string name="toast_sign_in_email_not_found">邮箱没有注册，请先注册！</string>
+    <string name="toast_sign_in_user_not_exist">用户不存在</string>
+    <string name="toast_sign_in_user_name_error">用户名错误</string>
+    <string name="toast_sign_in_success">登录成功</string>
+    <string name="toast_register_email_error">邮箱格式有误，请检查！</string>
+    <string name="toast_register_email_registered">邮箱已被注册</string>
+    <string name="toast_register_user_name_same">用户名已经存在，请重新输入</string>
+    <string name="toast_register_pwd_not_same">密码不正确，请检查</string>
+    <string name="toast_register_success">注册成功</string>
+    <string name="toast_search_et_null">请输入书名</string>
 
 </resources>

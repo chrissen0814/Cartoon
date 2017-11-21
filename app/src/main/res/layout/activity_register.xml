@@ -7,18 +7,31 @@
     android:layout_height="match_parent"
     tools:context="com.chrissen.cartoon.activity.user.RegisterActivity">
 
+    <ImageView
+        android:id="@+id/register_back_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_back"
+        android:padding="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/back_margin_top"
+        android:layout_marginLeft="@dimen/back_margin_left"
+        android:clickable="true"
+        android:onClick="onBackClick"/>
+
     <android.support.design.widget.TextInputLayout
         android:id="@+id/register_name_til"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_back_iv"
         android:layout_marginLeft="@dimen/card_view_margin_left_right"
         android:layout_marginRight="@dimen/card_view_margin_left_right"
-        android:layout_marginTop="32dp">
+        android:layout_marginTop="24dp">
 
-        <EditText
+        <com.chrissen.cartoon.util.view.LimitEditText
             android:id="@+id/register_name_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +50,7 @@
         android:layout_marginRight="@dimen/card_view_margin_left_right"
         android:layout_marginTop="16dp">
 
-        <EditText
+        <com.chrissen.cartoon.util.view.LimitEditText
             android:id="@+id/register_email_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,7 +69,7 @@
         android:layout_marginRight="@dimen/card_view_margin_left_right"
         android:layout_marginTop="16dp">
 
-        <EditText
+        <com.chrissen.cartoon.util.view.LimitEditText
             android:id="@+id/register_pwd_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,7 +88,7 @@
         android:layout_marginRight="@dimen/card_view_margin_left_right"
         android:layout_marginTop="16dp">
 
-        <EditText
+        <com.chrissen.cartoon.util.view.LimitEditText
             android:id="@+id/register_pwd_confirm_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

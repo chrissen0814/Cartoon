@@ -4,9 +4,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import java.util.ArrayList;
+import com.chrissen.cartoon.util.view.DuoOptionView;
 
-import nl.psdcompany.duonavigationdrawer.views.DuoOptionView;
+import java.util.ArrayList;
 
 /**
  * Created by chris on 2017/11/20.

@@ -4,13 +4,14 @@
               android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/header_text_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:lineSpacingExtra="3dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:text="动漫天天"/>
+        android:layout_marginTop="32dp"
+        android:paddingRight="16dp"/>
 
 </LinearLayout>

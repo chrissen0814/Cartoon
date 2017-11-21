@@ -21,6 +21,8 @@ public class ForgetPwdModel {
                 Message message = new Message();
                 if (e == null) {
                     message.what = ConfigUtil.SUCCESS_MSG;
+                }else if(e.getCode() == AVException.EMAIL_NOT_FOUND){
+                    message.what = AVException.EMAIL_NOT_FOUND;
                 }else {
                     message.what = ConfigUtil.FAIL_MSG;
                     message.obj = e.getMessage();

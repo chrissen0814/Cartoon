@@ -4,12 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/type_tab_layout"
         android:layout_width="0dp"
         app:tabSelectedTextColor="@android:color/white"
+        app:tabTextColor="#aaaa"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

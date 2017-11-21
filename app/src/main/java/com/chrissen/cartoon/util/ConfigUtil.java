@@ -15,7 +15,7 @@ public class ConfigUtil {
     public static final String HITOKOTO_URL = "https://sslapi.hitokoto.cn/?c=b";
 
 //    ACG
-    public static final String ACG_URL = "http://acg.bakayun.cn/randbg.php?Type=json&t=dfzh";
+    public static final String ACG_URL = "http://acg.bakayun.cn/randbg.php?Type=json";
 
 //    handler what value
     public static final int SUCCESS_MSG = 1;

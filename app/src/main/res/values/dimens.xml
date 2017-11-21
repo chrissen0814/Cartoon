@@ -6,4 +6,13 @@
     <dimen name="card_view_elevation">3dp</dimen>
     <dimen name="card_view_coner_radius">2dp</dimen>
 
+    <!--user_info-->
+    <dimen name="user_info_tv_drawable_text_padding">10dp</dimen>
+    <dimen name="user_info_tv_top_bottom_margin">24dp</dimen>
+
+    <!--back_margin-->
+    <dimen name="back_margin_left">12dp</dimen>
+    <dimen name="back_margin_top">12dp</dimen>
+    <dimen name="back_padding">6dp</dimen>
+
 </resources>

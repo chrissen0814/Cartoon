@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="界面设置">
+
+        <SwitchPreference
+            android:key="setting_navi_bg"
+            android:title="侧边栏背景图"
+            android:summaryOn="显示背景图"
+            android:summaryOff="显示默认背景"
+            android:defaultValue="false"/>
+
+        <SwitchPreference
+            android:key="setting_hitokoto"
+            android:title="侧边栏头部显示Hitokoto"
+            android:summaryOn="显示Hitokoto"
+            android:summaryOff="显示默认语句"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="阅读设置">
+
+        <SwitchPreference
+            android:key="setting_wifi_download"
+            android:title="Wifi下下载书籍"
+            android:summaryOn="Wifi下自动下载书籍"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

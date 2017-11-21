@@ -2,6 +2,8 @@ package com.chrissen.cartoon.util;
 
 import android.content.Context;
 
+import com.chrissen.cartoon.CartoonApplication;
+
 /**
  * Created by daijiyuan on 2017/9/5.
  * 邮箱 948820549@qq.com
@@ -45,4 +47,10 @@ public class ScreenUtil {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
+
+
+    public static int getScreenWidth(){
+        return CartoonApplication.getContext().getResources().getDisplayMetrics().widthPixels;
+    }
+
 }

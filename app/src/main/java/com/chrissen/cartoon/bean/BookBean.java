@@ -1,12 +1,13 @@
 package com.chrissen.cartoon.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by chris on 2017/11/16.
  */
 
-public class BookBean {
+public class BookBean implements Serializable {
 
     private String total;
     private String limit;

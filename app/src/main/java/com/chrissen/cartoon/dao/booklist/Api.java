@@ -24,4 +24,8 @@ public interface Api {
                                                @Query("type") String type,
                                                @Query("finish") int finish);
 
+    @GET("book")
+    Observable<Response<BookBean>> getBookList(@Query("key") String key ,
+                                               @Query("name") String bookName);
+
 }

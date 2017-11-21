@@ -28,7 +28,7 @@ public class BookDao extends AbstractDao<Book, Long> {
         public final static Property ChapterId = new Property(3, String.class, "chapterId", false, "CHAPTER_ID");
         public final static Property ChapterName = new Property(4, String.class, "chapterName", false, "CHAPTER_NAME");
         public final static Property ImageId = new Property(5, String.class, "imageId", false, "IMAGE_ID");
-        public final static Property ImageIndex = new Property(6, String.class, "imageIndex", false, "IMAGE_INDEX");
+        public final static Property ImageIndex = new Property(6, int.class, "imageIndex", false, "IMAGE_INDEX");
         public final static Property Type = new Property(7, String.class, "type", false, "TYPE");
         public final static Property Area = new Property(8, String.class, "area", false, "AREA");
         public final static Property Finish = new Property(9, boolean.class, "finish", false, "FINISH");
@@ -57,7 +57,7 @@ public class BookDao extends AbstractDao<Book, Long> {
                 "\"CHAPTER_ID\" TEXT," + // 3: chapterId
                 "\"CHAPTER_NAME\" TEXT," + // 4: chapterName
                 "\"IMAGE_ID\" TEXT," + // 5: imageId
-                "\"IMAGE_INDEX\" TEXT," + // 6: imageIndex
+                "\"IMAGE_INDEX\" INTEGER NOT NULL ," + // 6: imageIndex
                 "\"TYPE\" TEXT," + // 7: type
                 "\"AREA\" TEXT," + // 8: area
                 "\"FINISH\" INTEGER NOT NULL ," + // 9: finish
@@ -106,11 +106,7 @@ public class BookDao extends AbstractDao<Book, Long> {
         if (imageId != null) {
             stmt.bindString(6, imageId);
         }
- 
-        String imageIndex = entity.getImageIndex();
-        if (imageIndex != null) {
-            stmt.bindString(7, imageIndex);
-        }
+        stmt.bindLong(7, entity.getImageIndex());
  
         String type = entity.getType();
         if (type != null) {
@@ -169,11 +165,7 @@ public class BookDao extends AbstractDao<Book, Long> {
         if (imageId != null) {
             stmt.bindString(6, imageId);
         }
- 
-        String imageIndex = entity.getImageIndex();
-        if (imageIndex != null) {
-            stmt.bindString(7, imageIndex);
-        }
+        stmt.bindLong(7, entity.getImageIndex());
  
         String type = entity.getType();
         if (type != null) {
@@ -213,7 +205,7 @@ public class BookDao extends AbstractDao<Book, Long> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // chapterId
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // chapterName
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // imageId
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // imageIndex
+            cursor.getInt(offset + 6), // imageIndex
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // type
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // area
             cursor.getShort(offset + 9) != 0, // finish
@@ -233,7 +225,7 @@ public class BookDao extends AbstractDao<Book, Long> {
         entity.setChapterId(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setChapterName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setImageId(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setImageIndex(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setImageIndex(cursor.getInt(offset + 6));
         entity.setType(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setArea(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setFinish(cursor.getShort(offset + 9) != 0);

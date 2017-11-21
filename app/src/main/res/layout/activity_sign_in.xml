@@ -16,7 +16,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="80dp"
-        android:text="@string/user_sign_in_welcome"
         android:textColor="@color/colorPrimary"
         android:textSize="36sp"
         android:textStyle="bold"/>
@@ -33,7 +32,7 @@
         android:layout_marginRight="@dimen/card_view_margin_left_right">
 
 
-        <EditText
+        <com.chrissen.cartoon.util.view.LimitEditText
             android:id="@+id/sign_in_name_email_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -50,16 +49,29 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sign_in_name_email_til"
         android:layout_marginLeft="@dimen/card_view_margin_left_right"
-        android:layout_marginRight="@dimen/card_view_margin_left_right"
+        android:layout_marginRight="46dp"
         android:layout_marginTop="32dp">
 
-        <EditText
+        <com.chrissen.cartoon.util.view.LimitEditText
             android:id="@+id/sign_in_pwd_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="@string/user_sign_in_pwd"/>
 
     </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/sign_in_lock_iv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/icon_lock"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/sign_in_pwd_til"
+        app:layout_constraintBottom_toBottomOf="@id/sign_in_pwd_til"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:onClick="onLockClick"/>
 
     <Button
         android:layout_width="0dp"

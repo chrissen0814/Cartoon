@@ -1,4 +1,4 @@
-package com.chrissen.cartoon.util;
+package com.chrissen.cartoon.util.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

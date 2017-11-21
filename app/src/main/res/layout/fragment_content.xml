@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.chrissen.cartoon.util.PinchImageView
+    <com.chrissen.cartoon.util.view.PinchImageView
         android:id="@+id/content_image_iv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

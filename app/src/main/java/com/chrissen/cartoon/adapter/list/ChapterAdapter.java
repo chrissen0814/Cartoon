@@ -6,11 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.activity.ContentActivity;
 import com.chrissen.cartoon.bean.ChapterBean;
+import com.chrissen.cartoon.dao.greendao.Book;
 import com.chrissen.cartoon.util.IntentConstants;
 
 import java.util.List;
@@ -24,9 +26,13 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
     private Context mContext;
     private String mComicName;
     private List<ChapterBean.Chapter> mChapterList;
+    private Book mBook;
 
-    public ChapterAdapter(Context context, String comicName, List<ChapterBean.Chapter> chapterList) {
+    private int pos = -1;
+
+    public ChapterAdapter(Context context, Book book ,  String comicName, List<ChapterBean.Chapter> chapterList) {
         mContext = context;
+        mBook = book;
         mComicName = comicName;
         mChapterList = chapterList;
     }
@@ -39,6 +45,11 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
 
     @Override
     public void onBindViewHolder(ChapterViewHolder holder, int position) {
+        if (pos == position) {
+            holder.bookmarkIv.setVisibility(View.VISIBLE);
+        }else {
+            holder.bookmarkIv.setVisibility(View.INVISIBLE);
+        }
         final ChapterBean.Chapter chapter = mChapterList.get(position);
         holder.nameTv.setText(chapter.getName());
         holder.layout.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +58,8 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
                 Intent intent = new Intent(mContext, ContentActivity.class);
                 intent.putExtra(IntentConstants.BOOK_NAME,mComicName);
                 intent.putExtra(IntentConstants.CHAPTER_ID,chapter.getId());
+                intent.putExtra(IntentConstants.BOOK,mBook);
+                intent.putExtra(IntentConstants.CHAPTER_NAME,chapter.getName());
                 mContext.startActivity(intent);
             }
         });
@@ -57,15 +70,23 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
         return mChapterList.size();
     }
 
+
+    public void setPosStatus(int posStatus){
+        pos = posStatus;
+    }
+
+
     class ChapterViewHolder extends RecyclerView.ViewHolder {
 
         private View layout;
         private TextView nameTv;
+        private ImageView bookmarkIv;
 
         public ChapterViewHolder(View itemView) {
             super(itemView);
             layout = itemView;
             nameTv = itemView.findViewById(R.id.chapter_name_tv);
+            bookmarkIv = itemView.findViewById(R.id.chapter_bookmark_iv);
         }
     }
 

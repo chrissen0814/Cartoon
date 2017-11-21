@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
         android:name=".CartoonApplication"
@@ -21,8 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.system.AboutActivity">
-        </activity>
         <activity android:name=".activity.ChapterActivity">
         </activity>
         <activity android:name=".activity.ContentActivity">
@@ -32,6 +32,10 @@
         <activity android:name=".activity.user.RegisterActivity">
         </activity>
         <activity android:name=".activity.user.ForgetPwdActivity">
+        </activity>
+        <activity android:name=".activity.user.UserInfoActivity">
+        </activity>
+        <activity android:name=".activity.system.SettingActivity">
         </activity>
     </application>
 

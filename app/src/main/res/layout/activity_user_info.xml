@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.chrissen.cartoon.activity.user.UserInfoActivity">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.38"/>
+
+
+    <ImageView
+        android:id="@+id/user_info_bg_iv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/guideline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/user_info_back_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_back"
+        android:padding="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:tint="@android:color/white"
+        android:clickable="true"
+        android:onClick="onBackClick"/>
+
+
+    <TextView
+        android:id="@+id/user_info_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/user_info_bg_iv"
+        android:layout_marginLeft="@dimen/card_view_margin_left_right"
+        android:layout_marginBottom="@dimen/card_view_margin_top_bottom"
+        android:textSize="32sp"
+        tools:text="Chrissen"/>
+
+    <TextView
+        android:id="@+id/user_info_email_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_info_bg_iv"
+        android:layout_marginLeft="@dimen/card_view_margin_left_right"
+        android:layout_marginTop="@dimen/user_info_tv_top_bottom_margin"
+        android:textColor="@android:color/black"
+        android:drawableLeft="@drawable/icon_email"
+        android:gravity="center_vertical"
+        android:drawablePadding="@dimen/user_info_tv_drawable_text_padding"
+        android:textSize="16sp"
+        tools:text="1453191344@qq.com"/>
+
+    <TextView
+        android:id="@+id/user_info_book_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_info_email_tv"
+        android:layout_marginLeft="@dimen/card_view_margin_left_right"
+        android:layout_marginTop="@dimen/user_info_tv_top_bottom_margin"
+        android:textColor="@android:color/black"
+        android:drawableLeft="@drawable/icon_book"
+        android:gravity="center_vertical"
+        android:drawablePadding="@dimen/user_info_tv_drawable_text_padding"
+        tools:text="您目前拥有2本书"/>
+
+    <TextView
+        android:id="@+id/user_info_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_info_book_tv"
+        android:layout_marginLeft="@dimen/card_view_margin_left_right"
+        android:layout_marginTop="@dimen/user_info_tv_top_bottom_margin"
+        android:drawableLeft="@drawable/icon_time"
+        android:gravity="center_vertical"
+        android:textColor="@android:color/black"
+        android:drawablePadding="@dimen/user_info_tv_drawable_text_padding"
+        tools:text="你上次看书的时间是18:60"/>
+
+
+    <TextView
+        android:id="@+id/user_info_log_out_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginRight="@dimen/card_view_margin_left_right"
+        android:layout_marginBottom="@dimen/card_view_margin_top_bottom"
+        android:textColor="@android:color/black"
+        android:padding="6dp"
+        android:text="登出"
+        android:clickable="true"
+        android:onClick="onLogoutClick"/>
+
+</android.support.constraint.ConstraintLayout>

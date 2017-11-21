@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.bean.ContentBean;
 import com.chrissen.cartoon.util.ImageUtil;
-import com.chrissen.cartoon.util.PinchImageView;
+import com.chrissen.cartoon.util.view.PinchImageView;
 
 /**
  * Created by chris on 2017/11/18.

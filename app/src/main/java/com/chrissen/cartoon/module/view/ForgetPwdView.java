@@ -9,6 +9,8 @@ public interface ForgetPwdView extends BaseView{
     @Override
     void onShowSuccess(Object obj);
 
+    void onEmailNotFound();
+
     @Override
     void onShowError(String errorMsg);
 

@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 import com.alibaba.fastjson.JSON;
+import com.chrissen.cartoon.CartoonApplication;
 import com.chrissen.cartoon.bean.AcgBean;
 import com.chrissen.cartoon.util.ConfigUtil;
 import com.chrissen.cartoon.util.ImageUtil;
@@ -112,25 +113,28 @@ public class AcgModel {
     }
 
     private void saveAcgBitmap(Bitmap bitmap){
-        File appDir = new File(Environment.getExternalStorageDirectory(), ConfigUtil.APP_DIR);
 
-        if (!appDir.exists()) {
-            appDir.mkdir();
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                || !Environment.isExternalStorageRemovable()) {
+
+            File appDir = CartoonApplication.getContext().getExternalCacheDir();
+
+            String fileName = ConfigUtil.BG_IMAGE_NAME;
+            File file = new File(appDir, fileName);
+
+            try {
+                FileOutputStream fos = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                fos.flush();
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
-        String fileName = ConfigUtil.BG_IMAGE_NAME;
-        File file = new File(appDir, fileName);
-
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 

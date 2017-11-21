@@ -1,15 +1,19 @@
 package com.chrissen.cartoon.dao.greendao;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
+
+import java.io.Serializable;
 
 /**
  * Created by chris on 2017/11/16.
  */
 
 @Entity
-public class Book {
+public class Book implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id(autoincrement = true)
     private Long id;
@@ -18,7 +22,7 @@ public class Book {
     private String chapterId;
     private String chapterName;
     private String imageId;
-    private String imageIndex;
+    private int imageIndex;
     private String type;
     private String area;
     private boolean finish;
@@ -29,9 +33,10 @@ public class Book {
 
 
 
-    @Generated(hash = 112246388)
+
+    @Generated(hash = 987431554)
     public Book(Long id, String userEmail, String bookName, String chapterId,
-            String chapterName, String imageId, String imageIndex, String type,
+            String chapterName, String imageId, int imageIndex, String type,
             String area, boolean finish, String lastUpdate, long addedTime,
             long updatedTime, String comment) {
         this.id = id;
@@ -53,6 +58,7 @@ public class Book {
     @Generated(hash = 1839243756)
     public Book() {
     }
+
 
 
 
@@ -164,11 +170,11 @@ public class Book {
         this.updatedTime = updatedTime;
     }
 
-    public String getImageIndex() {
-        return this.imageIndex;
+    public int getImageIndex() {
+        return imageIndex;
     }
 
-    public void setImageIndex(String imageIndex) {
+    public void setImageIndex(int imageIndex) {
         this.imageIndex = imageIndex;
     }
 }

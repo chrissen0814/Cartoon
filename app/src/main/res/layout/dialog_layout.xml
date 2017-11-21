@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_dialog"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/bottom_dialog_add_note_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableLeft="@drawable/icon_write"
+        android:drawablePadding="16dp"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:text="添加阅读笔记"
+        android:textColor="#666666"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/bottom_dialog_delete_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableLeft="@drawable/icon_delete"
+        android:drawablePadding="16dp"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:text="删除"
+        android:textColor="#666666"
+        android:textSize="14sp"/>
+
+</LinearLayout>

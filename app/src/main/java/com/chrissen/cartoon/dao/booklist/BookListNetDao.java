@@ -27,4 +27,8 @@ public class BookListNetDao extends BaseNetworkDao<Api> {
         }
     }
 
+    public void searchBook(String bookName , NetworkCallback<BookBean> networkCallback){
+        doRequest(api.getBookList(ConfigUtil.CARTOON_KEY,bookName) , networkCallback);
+    }
+
 }

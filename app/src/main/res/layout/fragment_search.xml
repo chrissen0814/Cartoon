@@ -5,6 +5,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.chrissen.cartoon.activity.SearchActivity">
+    android:background="@android:color/white">
+
+
+    <LinearLayout
+        android:id="@+id/search_search_layout_ll"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@color/colorPrimary">
+
+        <com.chrissen.cartoon.util.view.LimitEditText
+            android:id="@+id/search_input_text_et"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/card_view_margin_left_right"
+            android:background="@null"
+            android:textColor="@android:color/white"
+            android:textColorHint="#aaa"
+            android:hint="输入漫画书名"/>
+
+        <ImageView
+            android:id="@+id/search_search_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_search"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:tint="#aaa"
+            android:clickable="true"/>
+
+    </LinearLayout>
+
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/search_srl"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_search_layout_ll"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srlEnableRefresh="false">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/search_book_list_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+
 
 </android.support.constraint.ConstraintLayout>

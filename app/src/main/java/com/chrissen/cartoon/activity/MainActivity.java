@@ -2,20 +2,31 @@ package com.chrissen.cartoon.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.avos.avoscloud.AVUser;
+import com.chrissen.cartoon.CartoonApplication;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.activity.user.SignInActivity;
+import com.chrissen.cartoon.activity.user.UserInfoActivity;
 import com.chrissen.cartoon.adapter.list.MenuAdapter;
+import com.chrissen.cartoon.bean.HitokotoBean;
+import com.chrissen.cartoon.fragment.AboutFragment;
 import com.chrissen.cartoon.fragment.MainFragment;
 import com.chrissen.cartoon.fragment.SearchFragment;
+import com.chrissen.cartoon.fragment.SettingFragment;
 import com.chrissen.cartoon.fragment.TypeFragment;
 import com.chrissen.cartoon.module.model.AcgModel;
+import com.chrissen.cartoon.module.model.HitokotoModel;
 import com.chrissen.cartoon.util.ConfigUtil;
 import com.chrissen.cartoon.util.ImageUtil;
 
@@ -41,6 +52,13 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
         setContentView(R.layout.activity_main);
         findViews();
         initDrawer();
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         initView();
         initAcg();
     }
@@ -49,6 +67,39 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
         startFragment(new MainFragment(),false);
         mMenuAdapter.setViewSelected(0,true);
         setTitle(mTitleList.get(0));
+        Button button = mMenuView.getFooterView().findViewById(R.id.footer_bt);
+        initHitokoto();
+        if (AVUser.getCurrentUser() != null) {
+            button.setText(R.string.navi_user_info);
+        }else {
+            button.setText(R.string.navi_register_sign_in);
+        }
+    }
+
+
+    private void initHitokoto(){
+        final TextView textTv = mMenuView.getHeaderView().findViewById(R.id.header_text_tv);
+        final boolean hitokoto = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("setting_hitokoto",false);
+        if (hitokoto) {
+            new HitokotoModel().getHitokoto(new Handler(){
+                @Override
+                public void handleMessage(Message msg) {
+                    super.handleMessage(msg);
+                    if (msg.what == ConfigUtil.SUCCESS_MSG) {
+                        HitokotoBean hitokotoBean = (HitokotoBean) msg.obj;
+                        if (hitokotoBean != null) {
+                            textTv.setText(hitokotoBean.getHitokoto());
+                        }else {
+                            textTv.setText(R.string.default_header_text);
+                        }
+                    }else {
+                        textTv.setText(R.string.default_header_text);
+                    }
+                }
+            });
+        }else {
+            textTv.setText(R.string.default_header_text);
+        }
     }
 
     private void initDrawer() {
@@ -64,16 +115,21 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
     }
 
     private void initAcg() {
+        boolean acg = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("setting_navi_bg",false);
         ImageView imageView = mMenuView.findViewById(R.id.duo_view_menu_background);
-        File appDir = new File(Environment.getExternalStorageDirectory(), ConfigUtil.APP_DIR);
-        File file = new File(appDir,ConfigUtil.BG_IMAGE_NAME);
-        if (file != null && file.exists()) {
-//            Bitmap bitmap = BitmapFactory.decodeFile(file.toString());
-            ImageUtil.loadBlurImageByFile(file,this,imageView);
+        if (acg) {
+            File appDir = CartoonApplication.getContext().getExternalCacheDir();
+            File file = new File(appDir,ConfigUtil.BG_IMAGE_NAME);
+            if (file != null && file.exists()) {
+                ImageUtil.loadBlurImageByFile(file,this,imageView);
+            }else {
+                ImageUtil.loadBlurImageByRes(R.drawable.main_bg,this,imageView);
+            }
+            new AcgModel().saveAcg();
         }else {
-            ImageUtil.loadBlurImageByRes(R.drawable.main_bg,this,imageView);
+            imageView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
-        new AcgModel().saveAcg();
+
     }
 
 
@@ -87,7 +143,12 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
 
     @Override
     public void onFooterClicked() {
-        startActivity(new Intent(this, SignInActivity.class));
+        AVUser avUser = AVUser.getCurrentUser();
+        if (avUser != null) {
+            startActivity(new Intent(this, UserInfoActivity.class));
+        }else {
+            startActivity(new Intent(this, SignInActivity.class));
+        }
     }
 
     @Override
@@ -111,9 +172,12 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
                 startFragment(new SearchFragment(),false);
                 break;
             case 3:
-
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.main_container,new SettingFragment())
+                        .commit();
                 break;
             case 4:
+                startFragment(new AboutFragment(),false);
                 break;
         }
         mDrawerLayout.closeDrawer();

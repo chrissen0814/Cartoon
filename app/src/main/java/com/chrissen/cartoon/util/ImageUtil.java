@@ -2,6 +2,9 @@ package com.chrissen.cartoon.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -22,7 +25,7 @@ public class ImageUtil {
 
     private static RequestOptions mOptions = new RequestOptions()
             .centerCrop()
-            .transform(new MultiTransformation<Bitmap>(new BlurTransformation(20,3),new BrightnessFilterTransformation(-0.5f)))
+            .transform(new MultiTransformation<Bitmap>(new BlurTransformation(15,3),new BrightnessFilterTransformation(-0.3f)))
             .diskCacheStrategy(DiskCacheStrategy.NONE);
 
     public static void loadImageByUrl(String url , Context context , ImageView imageView){
@@ -49,5 +52,28 @@ public class ImageUtil {
 
         return 0xFF000000 | Red | Green | Blue; //0xFF000000 for 100% Alpha. Bitwise OR everything together.
     }
+
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        Bitmap bitmap = null;
+
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if(bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
+        }
+
+        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
 
 }
