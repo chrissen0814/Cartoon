@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.chrissen.cartoon.R;
@@ -15,6 +16,9 @@ import com.chrissen.cartoon.fragment.ContentFragment;
 import com.chrissen.cartoon.module.presenter.content.ContentPresenter;
 import com.chrissen.cartoon.module.view.BookContentView;
 import com.chrissen.cartoon.util.IntentConstants;
+import com.chrissen.cartoon.util.SystemUtil;
+import com.chrissen.cartoon.util.view.dialog.BrightnessDialog;
+import com.chrissen.cartoon.util.view.dialog.ListDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,5 +115,16 @@ public class ContentActivity extends AppCompatActivity implements BookContentVie
     }
 
 
+    public void onListClick(View view) {
+        ListDialog listDialog = ListDialog.newInstance(mBook,mComicName,mChapterId);
+        listDialog.show(getSupportFragmentManager(),null);
+    }
 
+    public void onTimerClick(View view) {
+    }
+
+    public void onBrightnessClick(View view) {
+        BrightnessDialog brightnessDialog = BrightnessDialog.newInstance(SystemUtil.getScreenBrightness(this));
+        brightnessDialog.show(getSupportFragmentManager(),null);
+    }
 }

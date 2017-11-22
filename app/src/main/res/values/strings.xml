@@ -77,4 +77,7 @@
     <string name="toast_register_success">注册成功</string>
     <string name="toast_search_et_null">请输入书名</string>
 
+    <!--content-->
+    <string name="content_brightness">亮度</string>
+
 </resources>

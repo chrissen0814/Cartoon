@@ -12,8 +12,18 @@
 
 
     <style name="BottomDialog.Animation" parent="Animation.AppCompat.Dialog">
-        <item name="android:windowEnterAnimation">@anim/translate_dialog_in</item>
-        <item name="android:windowExitAnimation">@anim/translate_dialog_out</item>
+        <item name="android:windowEnterAnimation">@anim/translate_dialog_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/translate_dialog_bottom_out</item>
+    </style>
+
+    <style name="BrightnessDialog.Animation" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/translate_dialog_right_in</item>
+        <item name="android:windowExitAnimation">@anim/translate_dialog_right_out</item>
+    </style>
+
+    <style name="ListDialog.Animation" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/translate_dialog_left_in</item>
+        <item name="android:windowExitAnimation">@anim/translate_dialog_left_out</item>
     </style>
 
     <style name="BottomDialog" parent="@style/Base.V7.Theme.AppCompat.Light.Dialog">

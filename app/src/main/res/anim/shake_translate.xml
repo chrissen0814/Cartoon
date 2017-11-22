@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromXDelta="-20"
+    android:toXDelta="40"
+    android:duration="120"
+    android:interpolator="@anim/shake_umeng_socialize_cycle_5">
+    <!--.
+        fromXDelta:x轴起点抖动位置
+        toXDelta:x轴终点抖动位置
+        duration:循环播放的时间
+        interpolator:循环不放设置（次数）
+    -->
+</translate>

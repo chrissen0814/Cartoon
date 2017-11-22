@@ -20,7 +20,7 @@
     <FrameLayout
         android:id="@+id/content_top_bar_ll"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="44dp"
         android:background="@android:color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -42,19 +42,46 @@
 
     </FrameLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/content_bottom_bar_ll"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
         android:background="@android:color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_list"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="16dp"
+            android:padding="2dp"
+            android:clickable="true"
+            android:onClick="onListClick"/>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_timer"
+            android:layout_gravity="center"
+            android:padding="2dp"
+            android:clickable="true"
+            android:onClick="onTimerClick"/>
 
-    </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_brightness"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="16dp"
+            android:padding="2dp"
+            android:clickable="true"
+            android:onClick="onBrightnessClick"/>
+
+    </FrameLayout>
 
 
 </android.support.constraint.ConstraintLayout>

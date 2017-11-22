@@ -81,7 +81,7 @@ public class DbBookAdapter extends RecyclerView.Adapter<DbBookAdapter.DbBookView
 
     private void initDialog() {
         mBottomDialog = new Dialog(mContext, R.style.BottomDialog);
-        View contentView = LayoutInflater.from(mContext).inflate(R.layout.dialog_layout, null);
+        View contentView = LayoutInflater.from(mContext).inflate(R.layout.dialog_book_edit, null);
         TextView addNoteTv = contentView.findViewById(R.id.bottom_dialog_add_note_tv);
         TextView deleteTv = contentView.findViewById(R.id.bottom_dialog_delete_tv);
         addNoteTv.setOnClickListener(new View.OnClickListener() {

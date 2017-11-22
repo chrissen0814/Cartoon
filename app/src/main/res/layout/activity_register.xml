@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@id/register_back_iv"
         android:layout_marginLeft="@dimen/card_view_margin_left_right"
         android:layout_marginRight="@dimen/card_view_margin_left_right"
-        android:layout_marginTop="24dp">
+        android:layout_marginTop="32dp">
 
         <com.chrissen.cartoon.util.view.LimitEditText
             android:id="@+id/register_name_et"
@@ -104,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@id/register_confirm_til"
         android:layout_marginLeft="@dimen/card_view_margin_left_right"
         android:layout_marginRight="@dimen/card_view_margin_left_right"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="42dp"
         android:background="@drawable/button_sign_bg"
         android:textColor="@android:color/white"
         android:text="@string/user_register_register"

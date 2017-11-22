@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,8 +13,7 @@ import android.widget.Toast;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.module.presenter.user.SignInPresenter;
 import com.chrissen.cartoon.module.view.SignInView;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
+import com.chrissen.cartoon.util.AnimUtil;
 
 import es.dmoral.toasty.Toasty;
 
@@ -25,7 +23,7 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
 
     private EditText mNameOrEmailEt , mPwdEt;
     private TextView mWelcomeTv;
-    private ImageView mLockIv;
+    private ImageView mLockIv , mImageIv;
     private boolean isPwdVisible;
     private SignInPresenter mPresenter;
 
@@ -40,15 +38,28 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
     private void initParams() {
         mWelcomeTv.setFocusable(true);
         mWelcomeTv.requestFocus();
-        YoYo.with(Techniques.RubberBand)
-                .duration(800)
-                .repeatMode(Animation.REVERSE)
-                .repeat(Integer.MAX_VALUE)
-                .playOn(findViewById(R.id.sign_in_welcome_tv));
         mPresenter = new SignInPresenter(this);
+        AnimUtil.slideInFromUp(mImageIv,this);
+        mPwdEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    AnimUtil.slideOutFromUp(mImageIv,SignInActivity.this);
+                }else {
+                    AnimUtil.slideInFromUp(mImageIv,SignInActivity.this);
+                }
+            }
+        });
+        mNameOrEmailEt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+            }
+        });
     }
 
     private void findViews() {
+        mImageIv = findViewById(R.id.sign_in_image_iv);
         mNameOrEmailEt = findViewById(R.id.sign_in_name_email_et);
         mPwdEt = findViewById(R.id.sign_in_pwd_et);
         mWelcomeTv = findViewById(R.id.sign_in_welcome_tv);
@@ -84,7 +95,7 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
     public void onSignClick(View view) {
         String nameOrEmail = mNameOrEmailEt.getText().toString();
         String pwd = mPwdEt.getText().toString();
-        if (nameOrEmail != null && pwd != null) {
+        if (nameOrEmail != null && pwd != null && !nameOrEmail.equals("") && !pwd.equals("")) {
             mPresenter.signIn(nameOrEmail,pwd);
         }else {
             Toasty.error(this,getString(R.string.toast_sign_in_error), Toast.LENGTH_SHORT,true).show();
