@@ -27,6 +27,7 @@ public class CartoonApplication extends Application {
         initToasty();
     }
 
+
     private void initAVS() {
         AVOSCloud.initialize(this,"CerxnIvmC3ETvKnKnyhtBJUn-gzGzoHsz","3DuTawa4tHmnxE14uAolpWJO");
     }

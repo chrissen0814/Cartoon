@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.chrissen.cartoon.activity.BookNoteActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/book_note_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="@string/book_note_save"
+            android:textColor="@android:color/white"
+            android:padding="4dp"
+            android:layout_marginRight="12dp"
+            android:layout_gravity="right"
+            android:clickable="true"
+            android:onClick="onSaveClick"/>
+    </android.support.v7.widget.Toolbar>
+
+    <com.chrissen.cartoon.util.view.LimitEditText
+        android:id="@+id/book_note_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/book_note_toolbar"
+        android:paddingLeft="12dp"
+        android:paddingTop="12dp"
+        android:background="@null"
+        android:hint="@string/book_note_hint"
+        android:maxLength="200"/>
+
+</android.support.constraint.ConstraintLayout>

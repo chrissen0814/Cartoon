@@ -46,7 +46,6 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     @Override
     public void onEmailRegistered() {
         Toasty.error(this,getString(R.string.toast_register_email_registered), Toast.LENGTH_SHORT,true).show();
-        finish();
     }
 
     @Override

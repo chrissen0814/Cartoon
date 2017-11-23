@@ -21,6 +21,27 @@
         android:textSize="14sp"/>
 
     <TextView
+        android:id="@+id/bottom_dialog_detail_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableLeft="@drawable/icon_detail"
+        android:drawablePadding="16dp"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:text="详情"
+        android:textColor="#666666"
+        android:textSize="14sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
         android:id="@+id/bottom_dialog_delete_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

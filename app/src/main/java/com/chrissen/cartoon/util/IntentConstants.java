@@ -16,4 +16,8 @@ public class IntentConstants {
 
     public static final String CHAPTER_NAME = "chapter_name";
 
+    public static final String CHAPTER_LIST = "chapter_list";
+
+    public static final String FROM_DETAIL = "from_detail";
+
 }

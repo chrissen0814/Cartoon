@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chrissen.cartoon.R;
+import com.chrissen.cartoon.activity.BookDetailActivity;
+import com.chrissen.cartoon.activity.BookNoteActivity;
 import com.chrissen.cartoon.activity.ChapterActivity;
 import com.chrissen.cartoon.dao.greendao.Book;
 import com.chrissen.cartoon.dao.manager.BookDaoManager;
@@ -29,7 +31,10 @@ import es.dmoral.toasty.Toasty;
  * Created by chris on 2017/11/17.
  */
 
-public class DbBookAdapter extends RecyclerView.Adapter<DbBookAdapter.DbBookViewHolder> {
+public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final int VIEW_EMPTY = 0;
+    private static final int VIEW_ITEM = 1;
 
     private Context mContext;
     private List<Book> mBookList;
@@ -45,38 +50,47 @@ public class DbBookAdapter extends RecyclerView.Adapter<DbBookAdapter.DbBookView
 
 
     @Override
-    public DbBookViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_db_book,parent,false);
-        return new DbBookViewHolder(view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == VIEW_EMPTY) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.layout_empty_view,parent,false);
+            return new EmptyViewHolder(view);
+        }else {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_db_book,parent,false);
+            return new DbBookViewHolder(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(final DbBookViewHolder holder, final int position) {
-        int rowWidth = ScreenUtil.getScreenWidth()/spanCount;
-        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) holder.coverIv.getLayoutParams();
-        lp.width = rowWidth;
-        holder.coverIv.setLayoutParams(lp);
-        final Book book = mBookList.get(position);
-        ImageUtil.loadImageByUrl(book.getImageId(),mContext,holder.coverIv);
-        holder.nameTv.setText(book.getBookName());
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, ChapterActivity.class);
-                intent.putExtra(IntentConstants.BOOK_NAME,book.getBookName());
-                intent.putExtra(IntentConstants.BOOK,book);
-                mContext.startActivity(intent);
-            }
-        });
-        holder.layout.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                clickedPos = holder.getAdapterPosition();
-                showOrHideDialog(true);
-                return true;
-            }
-        });
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        if (holder instanceof DbBookViewHolder) {
+            DbBookViewHolder dbBookViewHolder = (DbBookViewHolder) holder;
+            int rowWidth = ScreenUtil.getScreenWidth()/spanCount;
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) dbBookViewHolder.coverIv.getLayoutParams();
+            lp.width = rowWidth;
+            dbBookViewHolder.coverIv.setLayoutParams(lp);
+            final Book book = mBookList.get(position);
+            ImageUtil.loadImageByUrl(book.getImageId(),mContext,dbBookViewHolder.coverIv);
+            dbBookViewHolder.nameTv.setText(book.getBookName());
+            dbBookViewHolder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, ChapterActivity.class);
+                    intent.putExtra(IntentConstants.BOOK_NAME,book.getBookName());
+                    intent.putExtra(IntentConstants.BOOK,book);
+                    mContext.startActivity(intent);
+                }
+            });
+            dbBookViewHolder.layout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    clickedPos = holder.getAdapterPosition();
+                    showOrHideDialog(true);
+                    return true;
+                }
+            });
+        }
+
     }
 
     private void initDialog() {
@@ -84,10 +98,23 @@ public class DbBookAdapter extends RecyclerView.Adapter<DbBookAdapter.DbBookView
         View contentView = LayoutInflater.from(mContext).inflate(R.layout.dialog_book_edit, null);
         TextView addNoteTv = contentView.findViewById(R.id.bottom_dialog_add_note_tv);
         TextView deleteTv = contentView.findViewById(R.id.bottom_dialog_delete_tv);
+        TextView detailTv = contentView.findViewById(R.id.bottom_dialog_detail_tv);
         addNoteTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(mContext, BookNoteActivity.class);
+                intent.putExtra(IntentConstants.BOOK,mBookList.get(clickedPos));
+                mContext.startActivity(intent);
+                showOrHideDialog(false);
+            }
+        });
+        detailTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, BookDetailActivity.class);
+                intent.putExtra(IntentConstants.BOOK,mBookList.get(clickedPos));
+                mContext.startActivity(intent);
+                showOrHideDialog(false);
             }
         });
         deleteTv.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +137,10 @@ public class DbBookAdapter extends RecyclerView.Adapter<DbBookAdapter.DbBookView
         mBottomDialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
     }
 
+    /**
+     *
+     * @param flag true:show false:hide
+     */
     private void showOrHideDialog(boolean flag) {
         if (flag) {
             mBottomDialog.show();
@@ -120,7 +151,21 @@ public class DbBookAdapter extends RecyclerView.Adapter<DbBookAdapter.DbBookView
 
     @Override
     public int getItemCount() {
-        return mBookList.size();
+        if (mBookList.size() == 0) {
+            return 1;
+        }else {
+            return mBookList.size();
+        }
+    }
+
+
+    @Override
+    public int getItemViewType(int position) {
+        if (mBookList.size() == 0) {
+            return VIEW_EMPTY;
+        }else {
+            return VIEW_ITEM;
+        }
     }
 
     class DbBookViewHolder extends RecyclerView.ViewHolder {
@@ -133,6 +178,13 @@ public class DbBookAdapter extends RecyclerView.Adapter<DbBookAdapter.DbBookView
             layout = itemView;
             coverIv = itemView.findViewById(R.id.dbbook_cover_iv);
             nameTv = itemView.findViewById(R.id.dbbook_name_tv);
+        }
+    }
+
+    class EmptyViewHolder extends RecyclerView.ViewHolder {
+
+        public EmptyViewHolder(View itemView) {
+            super(itemView);
         }
     }
 

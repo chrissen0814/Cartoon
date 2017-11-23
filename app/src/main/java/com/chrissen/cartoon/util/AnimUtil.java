@@ -77,6 +77,15 @@ public class AnimUtil {
         showOrHideView(v, animSlideInRight, R.anim.slide_in_from_right, true, ctx, null);
     }
 
+
+    public static void slideInFromLeft(View v , Context ctx){
+        showOrHideView(v,animSlideInLeft,R.anim.in_from_left,true,ctx,null);
+    }
+
+    public static void slideOutToLeft(View v , Context ctx){
+        showOrHideView(v,animSlideToLeft,R.anim.slide_out_from_left,false,ctx,null);
+    }
+
     /**
      * 缩小淡入
      */
@@ -166,4 +175,5 @@ public class AnimUtil {
 
     private static Animation animFadeIn, animFadeOut, animSlideInBottom, animSlideOutBottom, animSlideInUp, animSlideOutUp, animSlideOutRight, animSlideInRight, animScaleIn;
     private static Animation animShrinkFadeIn, animMagnifyFadeOut, animMagnifyDigitalFadeout, animaRotate, animRotateArrowRegular, animRotateArrowReverse;
+    private static Animation animSlideInLeft , animSlideToLeft;
 }

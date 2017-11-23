@@ -14,7 +14,6 @@ import com.chrissen.cartoon.module.view.BookChapterView;
 import com.chrissen.cartoon.util.IntentConstants;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ChapterActivity extends AppCompatActivity implements BookChapterView {
 
@@ -22,7 +21,7 @@ public class ChapterActivity extends AppCompatActivity implements BookChapterVie
 
     private RecyclerView mRecyclerView;
     private ChapterAdapter mAdapter;
-    private List<ChapterBean.Chapter> mChapterList = new ArrayList<>();
+    private ArrayList<ChapterBean.Chapter> mChapterList = new ArrayList<>();
     private String comicName;
     private Book mBook;
 

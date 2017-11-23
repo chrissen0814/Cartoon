@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chrissen.cartoon.R;
-import com.chrissen.cartoon.adapter.list.ListAdapter;
 import com.chrissen.cartoon.bean.ChapterBean;
 import com.chrissen.cartoon.dao.greendao.Book;
 import com.chrissen.cartoon.module.presenter.chapter.ChapterPresenter;
@@ -73,9 +71,7 @@ public class ListDialog extends DialogFragment implements BookChapterView {
 
     @Override
     public void onShowSuccess(ChapterBean obj) {
-        ListAdapter adapter = new ListAdapter(getContext(),mBook,mComicName,mChapterId ,obj.getChapterList());
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setAdapter(adapter);
+
     }
 
     @Override

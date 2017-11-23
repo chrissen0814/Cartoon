@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chrissen.cartoon.R;
+import com.chrissen.cartoon.activity.ContentActivity;
 import com.chrissen.cartoon.bean.ContentBean;
 import com.chrissen.cartoon.util.ImageUtil;
 import com.chrissen.cartoon.util.view.PinchImageView;
@@ -43,6 +44,12 @@ public class ContentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_content,container,false);
         mImageView = view.findViewById(R.id.content_image_iv);
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((ContentActivity)getActivity()).setTopAndBottomBarVisibility();
+            }
+        });
         ImageUtil.loadImageByUrl(mImage.getImageUrl(),getContext(),mImageView);
         return view;
     }

@@ -15,7 +15,7 @@ import com.chrissen.cartoon.bean.ChapterBean;
 import com.chrissen.cartoon.dao.greendao.Book;
 import com.chrissen.cartoon.util.IntentConstants;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by chris on 2017/11/18.
@@ -25,12 +25,12 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
 
     private Context mContext;
     private String mComicName;
-    private List<ChapterBean.Chapter> mChapterList;
+    private ArrayList<ChapterBean.Chapter> mChapterList;
     private Book mBook;
 
     private int pos = -1;
 
-    public ChapterAdapter(Context context, Book book , String comicName, List<ChapterBean.Chapter> chapterList) {
+    public ChapterAdapter(Context context, Book book , String comicName, ArrayList<ChapterBean.Chapter> chapterList) {
         mContext = context;
         mBook = book;
         mComicName = comicName;
@@ -60,6 +60,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
                 intent.putExtra(IntentConstants.CHAPTER_ID,chapter.getId());
                 intent.putExtra(IntentConstants.BOOK,mBook);
                 intent.putExtra(IntentConstants.CHAPTER_NAME,chapter.getName());
+                intent.putExtra(IntentConstants.CHAPTER_LIST,mChapterList);
                 mContext.startActivity(intent);
             }
         });

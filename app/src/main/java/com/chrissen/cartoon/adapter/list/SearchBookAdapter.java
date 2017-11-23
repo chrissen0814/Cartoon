@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -22,10 +23,17 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.bean.BookBean;
+import com.chrissen.cartoon.dao.greendao.Book;
+import com.chrissen.cartoon.dao.manager.BookDaoManager;
+import com.chrissen.cartoon.util.AnimUtil;
 import com.chrissen.cartoon.util.ImageUtil;
 import com.chrissen.cartoon.util.ScreenUtil;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * Created by chris on 2017/11/21.
@@ -51,6 +59,7 @@ public class SearchBookAdapter extends RecyclerView.Adapter<SearchBookAdapter.Se
 
     @Override
     public void onBindViewHolder(final SearchBookViewHodler holder, int position) {
+        final BookDaoManager bookDaoManager = new BookDaoManager();
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) holder.mImageIv.getLayoutParams();
         LinearLayout.LayoutParams lps = (LinearLayout.LayoutParams) holder.mNameTv.getLayoutParams();
         int rowWidth = ScreenUtil.getScreenWidth() / mSpanCount;
@@ -58,9 +67,34 @@ public class SearchBookAdapter extends RecyclerView.Adapter<SearchBookAdapter.Se
         lps.width = rowWidth;
         holder.mImageIv.setLayoutParams(lp);
         holder.mNameTv.setLayoutParams(lps);
-        BookBean.Book book = mBookList.get(position);
+        final BookBean.Book book = mBookList.get(position);
         holder.mNameTv.setText(book.getName());
-
+        final boolean collected = bookDaoManager.judgeExist(book.getType(),book.getName(),book.getArea());
+        if (collected) {
+            holder.mBookmarkIv.setVisibility(View.VISIBLE);
+        }else {
+            holder.mBookmarkIv.setVisibility(View.INVISIBLE);
+        }
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YoYo.with(Techniques.Shake)
+                        .duration(500)
+                        .playOn(v);
+                if (holder.mBookmarkIv.getVisibility() == View.VISIBLE) {
+                    Book savedBook = bookDaoManager.queryBookByBean(book);
+                    if (savedBook != null) {
+                        AnimUtil.slideOutFromUp(holder.mBookmarkIv,mContext);
+                        bookDaoManager.deleteBook(savedBook);
+                        Toasty.success(mContext,mContext.getString(R.string.toast_search_delete), Toast.LENGTH_SHORT,false).show();
+                    }
+                }else {
+                    AnimUtil.slideInFromUp(holder.mBookmarkIv,mContext);
+                    bookDaoManager.addBook(book);
+                    Toasty.success(mContext,mContext.getString(R.string.toast_search_add),Toast.LENGTH_SHORT,false).show();
+                }
+            }
+        });
         Glide.with(mContext).load(book.getCoverImg())
                 .listener(new RequestListener<Drawable>() {
                     @Override
@@ -104,6 +138,7 @@ public class SearchBookAdapter extends RecyclerView.Adapter<SearchBookAdapter.Se
         private LinearLayout mLayout;
         private ImageView mImageIv;
         private TextView mNameTv;
+        private ImageView mBookmarkIv;
 
         public SearchBookViewHodler(View itemView) {
             super(itemView);
@@ -111,6 +146,7 @@ public class SearchBookAdapter extends RecyclerView.Adapter<SearchBookAdapter.Se
             mLayout = itemView.findViewById(R.id.search_book_ll);
             mImageIv = itemView.findViewById(R.id.search_book_image_iv);
             mNameTv = itemView.findViewById(R.id.search_book_name_tv);
+            mBookmarkIv = itemView.findViewById(R.id.search_book_mark_iv);
         }
     }
 

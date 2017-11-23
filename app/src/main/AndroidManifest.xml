@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 
     <application
         android:name=".CartoonApplication"
@@ -36,6 +37,10 @@
         <activity android:name=".activity.user.UserInfoActivity">
         </activity>
         <activity android:name=".activity.system.SettingActivity">
+        </activity>
+        <activity android:name=".activity.BookNoteActivity">
+        </activity>
+        <activity android:name=".activity.BookDetailActivity">
         </activity>
     </application>
 

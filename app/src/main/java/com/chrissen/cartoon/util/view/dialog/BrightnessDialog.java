@@ -20,23 +20,11 @@ import com.chrissen.cartoon.util.SystemUtil;
 
 public class BrightnessDialog extends DialogFragment {
 
-    private static final String DEFAULT_BRIGHTNESS = "default_brightness";
-
     private SeekBar mSeekBar;
-    private int mDefaultBrightness , mNowBrightness;
 
-    public static BrightnessDialog newInstance(int defaultBightness){
+    public static BrightnessDialog newInstance(){
         BrightnessDialog dialog = new BrightnessDialog();
-        Bundle bundle = new Bundle();
-        bundle.putInt(DEFAULT_BRIGHTNESS,defaultBightness);
-        dialog.setArguments(bundle);
         return dialog;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mDefaultBrightness = getArguments().getInt(DEFAULT_BRIGHTNESS);
     }
 
     @Nullable
@@ -51,13 +39,25 @@ public class BrightnessDialog extends DialogFragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        int screenBrightness = SystemUtil.getActivityBrightness(getActivity());
+        if (screenBrightness == -255) {
+            mSeekBar.setProgress(SystemUtil.getScreenBrightness(getActivity()));
+        }else {
+            mSeekBar.setProgress(SystemUtil.getActivityBrightness(getActivity()));
+        }
+    }
+
     private void initViews(View view) {
         mSeekBar = view.findViewById(R.id.brightness_seekbar);
-        mSeekBar.setProgress(mDefaultBrightness);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                mNowBrightness = progress;
+                if (SystemUtil.isAutoBrightness()) {
+                    SystemUtil.stopAutoBrightness(getActivity());
+                }
                 SystemUtil.setBrightness(getActivity(),progress);
             }
 

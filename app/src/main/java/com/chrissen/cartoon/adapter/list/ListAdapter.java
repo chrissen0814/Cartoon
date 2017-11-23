@@ -12,7 +12,7 @@ import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.bean.ChapterBean;
 import com.chrissen.cartoon.dao.greendao.Book;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by chris on 2017/11/22.
@@ -22,12 +22,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ChapterViewHol
 
     private Context mContext;
     private String mComicName , mChapterId;
-    private List<ChapterBean.Chapter> mChapterList;
+    private ArrayList<ChapterBean.Chapter> mChapterList;
     private Book mBook;
 
     private int pos = -1;
 
-    public ListAdapter(Context context, Book book , String comicName,String chapterId , List<ChapterBean.Chapter> chapterList) {
+    public ListAdapter(Context context, Book book , String comicName,String chapterId , ArrayList<ChapterBean.Chapter> chapterList) {
         mContext = context;
         mBook = book;
         mComicName = comicName;

@@ -76,8 +76,18 @@
     <string name="toast_register_pwd_not_same">密码不正确，请检查</string>
     <string name="toast_register_success">注册成功</string>
     <string name="toast_search_et_null">请输入书名</string>
+    <string name="toast_search_add">已添加至书库</string>
+    <string name="toast_search_delete">已从书库删除</string>
 
     <!--content-->
     <string name="content_brightness">亮度</string>
+
+    <!--book_note-->
+    <string name="book_note_hint">记点东西吧~</string>
+    <string name="book_note_save">保存</string>
+    <string name="book_note_none">写点东西后才能保存哦~</string>
+    <string name="book_note_save_success">保存成功</string>
+
+    <string name="book_none">还没有东西呢~</string>
 
 </resources>

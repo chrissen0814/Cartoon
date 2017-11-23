@@ -4,21 +4,26 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.chrissen.cartoon.R;
+import com.chrissen.cartoon.adapter.list.ListAdapter;
 import com.chrissen.cartoon.adapter.pager.ContentPagerAdapter;
+import com.chrissen.cartoon.bean.ChapterBean;
 import com.chrissen.cartoon.bean.ContentBean;
 import com.chrissen.cartoon.dao.greendao.Book;
 import com.chrissen.cartoon.dao.manager.BookDaoManager;
 import com.chrissen.cartoon.fragment.ContentFragment;
 import com.chrissen.cartoon.module.presenter.content.ContentPresenter;
 import com.chrissen.cartoon.module.view.BookContentView;
+import com.chrissen.cartoon.util.AnimUtil;
 import com.chrissen.cartoon.util.IntentConstants;
 import com.chrissen.cartoon.util.SystemUtil;
 import com.chrissen.cartoon.util.view.dialog.BrightnessDialog;
-import com.chrissen.cartoon.util.view.dialog.ListDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +35,10 @@ public class ContentActivity extends AppCompatActivity implements BookContentVie
     private ViewPager mViewPager;
     private TextView mTitleTv , mIndexTv;
 
+    private FrameLayout mTopFL , mBottomFl;
+    private FrameLayout mListContentFl , mBlankFl;
+    private RecyclerView mListRv;
+
     private ContentPagerAdapter mAdapter;
     private List<Fragment> mFragmentList = new ArrayList<>();
 
@@ -39,6 +48,7 @@ public class ContentActivity extends AppCompatActivity implements BookContentVie
     private String mChapterId;
     private Book mBook;
     private String mChapterName;
+    private ArrayList<ChapterBean.Chapter> mChapterArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +63,21 @@ public class ContentActivity extends AppCompatActivity implements BookContentVie
         mChapterId = getIntent().getStringExtra(IntentConstants.CHAPTER_ID);
         mBook = (Book) getIntent().getSerializableExtra(IntentConstants.BOOK);
         mChapterName = getIntent().getStringExtra(IntentConstants.CHAPTER_NAME);
+        mChapterArrayList = (ArrayList<ChapterBean.Chapter>) getIntent().getSerializableExtra(IntentConstants.CHAPTER_LIST);
         mPresenter = new ContentPresenter(this);
         mPresenter.getContent(mComicName,Integer.parseInt(mChapterId));
         mTitleTv.setText(mComicName);
     }
 
     private void initViews() {
+        mTopFL = findViewById(R.id.content_top_bar_fl);
+        mBottomFl = findViewById(R.id.content_bottom_bar_fl);
         mViewPager = findViewById(R.id.content_vp);
         mTitleTv = findViewById(R.id.content_title_tv);
         mIndexTv = findViewById(R.id.content_index_tv);
+        mListRv = findViewById(R.id.content_list_rv);
+        mListContentFl = findViewById(R.id.list_layout_fl);
+        mBlankFl = findViewById(R.id.content_list_blank_fl);
     }
 
     @Override
@@ -112,19 +128,41 @@ public class ContentActivity extends AppCompatActivity implements BookContentVie
         mBook.setChapterName(mChapterName);
         mBook.setImageIndex(mViewPager.getCurrentItem());
         new BookDaoManager().updateBook(mBook);
+        SystemUtil.startAutoBrightness(this);
+    }
+
+    public void setTopAndBottomBarVisibility(){
+        if (mTopFL.getVisibility() == View.VISIBLE || mBottomFl.getVisibility() == View.VISIBLE) {
+            AnimUtil.slideOutFromUp(mTopFL,this);
+            AnimUtil.slideOutFromBottom(mBottomFl,this);
+        }else {
+            AnimUtil.slideInFromUp(mTopFL,this);
+            AnimUtil.slideInFromBottom(mBottomFl,this);
+        }
     }
 
 
     public void onListClick(View view) {
-        ListDialog listDialog = ListDialog.newInstance(mBook,mComicName,mChapterId);
-        listDialog.show(getSupportFragmentManager(),null);
+//        ListDialog listDialog = ListDialog.newInstance(mBook,mComicName,mChapterId);
+//        listDialog.show(getSupportFragmentManager(),null);
+        ListAdapter listAdapter = new ListAdapter(this,mBook,mComicName,mChapterId,mChapterArrayList);
+        mListRv.setLayoutManager(new LinearLayoutManager(this));
+        mListRv.setAdapter(listAdapter);
+        AnimUtil.slideInFromLeft(mListContentFl,this);
+        AnimUtil.fadeIn(mBlankFl,this);
     }
 
     public void onTimerClick(View view) {
     }
 
     public void onBrightnessClick(View view) {
-        BrightnessDialog brightnessDialog = BrightnessDialog.newInstance(SystemUtil.getScreenBrightness(this));
+        BrightnessDialog brightnessDialog = BrightnessDialog.newInstance();
         brightnessDialog.show(getSupportFragmentManager(),null);
+    }
+
+
+    public void onBlankClick(View view) {
+        AnimUtil.slideOutToLeft(mListContentFl,this);
+        AnimUtil.fadeOut(mBlankFl,this);
     }
 }

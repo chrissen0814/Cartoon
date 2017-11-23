@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6A4C9C</color>
-    <color name="colorPrimaryDark">#6A4C9C</color>
-    <color name="colorAccent">#6A4C9C</color>
+    <color name="colorPrimary">#e16b8c</color>
+    <color name="colorPrimaryDark">#e16b8c</color>
+    <color name="colorAccent">#e16b8c</color>
 
     <!--书完结状态-->
     <color name="book_finished">#4CAF50</color>
     <color name="book_unfinished">#F44336</color>
 
     <!--toastColor-->
-    <color name="toast_success">#6A4C9C</color>
-    <color name="toast_error">#CB1B45</color>
+    <color name="toast_success">#e16b8c</color>
+    <color name="toast_error">#6d2e5b</color>
     <color name="toast_warning"></color>
 
     <!--content_bar-->

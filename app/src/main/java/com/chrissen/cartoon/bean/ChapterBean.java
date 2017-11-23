@@ -1,12 +1,13 @@
 package com.chrissen.cartoon.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by chris on 2017/11/16.
  */
 
-public class ChapterBean {
+public class ChapterBean implements Serializable {
 
     private int total;
     private int limit;
@@ -49,7 +50,7 @@ public class ChapterBean {
         this.chapterList = chapterList;
     }
 
-    public static class Chapter{
+    public static class Chapter implements Serializable{
         private String name;
         private String id;
 

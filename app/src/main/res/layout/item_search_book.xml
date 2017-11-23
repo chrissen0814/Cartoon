@@ -4,31 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="250dp"
+    android:foreground="?android:attr/selectableItemBackground"
     android:layout_margin="8dp">
 
-    <LinearLayout
-        android:id="@+id/search_book_ll"
+    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/search_book_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/search_book_image_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/search_book_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:maxLines="1"
+                android:padding="12dp"
+                android:textColor="@android:color/white"
+                tools:text="零下一度"/>
+
+        </LinearLayout>
 
         <ImageView
-            android:id="@+id/search_book_image_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:scaleType="centerCrop"/>
-
-        <TextView
-            android:id="@+id/search_book_name_tv"
+            android:id="@+id/search_book_mark_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:maxLines="1"
-            android:padding="12dp"
-            android:textColor="@android:color/white"
-            tools:text="零下一度"/>
+            android:src="@drawable/icon_bookmark"
+            android:visibility="invisible"/>
 
-    </LinearLayout>
+    </FrameLayout>
+
+
 </android.support.v7.widget.CardView>

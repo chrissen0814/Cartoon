@@ -63,4 +63,6 @@ dependencies {
     //toast
     compile 'com.github.GrenderG:Toasty:1.2.5'
     implementation 'com.android.support:palette-v7:27.0.1'
+    //like view
+    compile 'com.github.jd-alexander:LikeButton:0.2.3'
 }
