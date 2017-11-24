@@ -23,7 +23,7 @@ public class Book implements Serializable {
     private String chapterId;
     private String chapterName;
     private String imageId;
-    private int imageIndex;
+    private long imageIndex;
     private String type;
     private String area;
     private boolean finish;
@@ -35,9 +35,9 @@ public class Book implements Serializable {
 
 
 
-    @Generated(hash = 1354506331)
+    @Generated(hash = 1866767926)
     public Book(Long id, String objectId, String userEmail, String bookName,
-            String chapterId, String chapterName, String imageId, int imageIndex,
+            String chapterId, String chapterName, String imageId, long imageIndex,
             String type, String area, boolean finish, String lastUpdate,
             long addedTime, long updatedTime, String comment) {
         this.id = id;
@@ -172,11 +172,11 @@ public class Book implements Serializable {
         this.updatedTime = updatedTime;
     }
 
-    public int getImageIndex() {
+    public long getImageIndex() {
         return imageIndex;
     }
 
-    public void setImageIndex(int imageIndex) {
+    public void setImageIndex(long imageIndex) {
         this.imageIndex = imageIndex;
     }
 

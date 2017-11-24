@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVUser;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.bean.BookBean;
 import com.chrissen.cartoon.dao.greendao.Book;
@@ -72,13 +73,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                         holder.collectionIv.setImageResource(R.drawable.icon_collection_normal);
                         holder.collectionIv.setTag("0");
                         bookDaoManager.deleteBook(savedBook);
-                        BookNetDaoManager.deleteBook(savedBook);
+                        if (AVUser.getCurrentUser() != null) {
+                            BookNetDaoManager.deleteBook(savedBook);
+                        }
                     }
                 }else {
                     holder.collectionIv.setImageResource(R.drawable.icon_collection_selected);
                     holder.collectionIv.setTag("1");
                     bookDaoManager.addBook(book);
-                    BookNetDaoManager.saveBook(bookDaoManager.queryBookByBean(book),null);
+                    if (AVUser.getCurrentUser() != null) {
+                        BookNetDaoManager.saveBook(bookDaoManager.queryBookByBean(book),null);
+                    }
 
                 }
                 YoYo.with(Techniques.Shake)

@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVUser;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -25,6 +26,7 @@ import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.bean.BookBean;
 import com.chrissen.cartoon.dao.greendao.Book;
 import com.chrissen.cartoon.dao.manager.BookDaoManager;
+import com.chrissen.cartoon.dao.manager.BookNetDaoManager;
 import com.chrissen.cartoon.util.AnimUtil;
 import com.chrissen.cartoon.util.ImageUtil;
 import com.chrissen.cartoon.util.ScreenUtil;
@@ -85,13 +87,19 @@ public class SearchBookAdapter extends RecyclerView.Adapter<SearchBookAdapter.Se
                     Book savedBook = bookDaoManager.queryBookByBean(book);
                     if (savedBook != null) {
                         AnimUtil.slideOutFromUp(holder.mBookmarkIv,mContext);
+                        if (AVUser.getCurrentUser() != null) {
+                            BookNetDaoManager.deleteBook(savedBook);
+                        }
                         bookDaoManager.deleteBook(savedBook);
                         Toasty.success(mContext,mContext.getString(R.string.toast_search_delete), Toast.LENGTH_SHORT,false).show();
                     }
                 }else {
                     AnimUtil.slideInFromUp(holder.mBookmarkIv,mContext);
-                    bookDaoManager.addBook(book);
                     Toasty.success(mContext,mContext.getString(R.string.toast_search_add),Toast.LENGTH_SHORT,false).show();
+                    bookDaoManager.addBook(book);
+                    if (AVUser.getCurrentUser() != null) {
+                        BookNetDaoManager.saveBook(bookDaoManager.queryBookByBean(book),null);
+                    }
                 }
             }
         });

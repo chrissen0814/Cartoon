@@ -3,7 +3,7 @@ apply plugin: 'org.greenrobot.greendao'
 
 
 greendao {
-    schemaVersion 9
+    schemaVersion 10
     daoPackage 'com.chrissen.cartoon.dao.greendao'
     targetGenDir 'src/main/java'
 }

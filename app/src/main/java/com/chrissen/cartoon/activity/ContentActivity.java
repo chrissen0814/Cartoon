@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVUser;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.adapter.list.ListAdapter;
 import com.chrissen.cartoon.adapter.pager.ContentPagerAdapter;
@@ -17,6 +18,7 @@ import com.chrissen.cartoon.bean.ChapterBean;
 import com.chrissen.cartoon.bean.ContentBean;
 import com.chrissen.cartoon.dao.greendao.Book;
 import com.chrissen.cartoon.dao.manager.BookDaoManager;
+import com.chrissen.cartoon.dao.manager.BookNetDaoManager;
 import com.chrissen.cartoon.fragment.ContentFragment;
 import com.chrissen.cartoon.module.presenter.content.ContentPresenter;
 import com.chrissen.cartoon.module.view.BookContentView;
@@ -83,7 +85,7 @@ public class ContentActivity extends AppCompatActivity implements BookContentVie
     @Override
     public void onShowSuccess(ContentBean obj) {
         counts = obj.getImageList().size();
-        int dbIndex = mBook.getImageIndex() + 1;
+        long dbIndex = mBook.getImageIndex() + 1;
         String index = dbIndex + "/" + counts;
         mIndexTv.setText(index);
         for (int i = 0; i < obj.getImageList().size(); i++) {
@@ -93,7 +95,7 @@ public class ContentActivity extends AppCompatActivity implements BookContentVie
         mAdapter = new ContentPagerAdapter(getSupportFragmentManager(),mFragmentList);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(3);
-        mViewPager.setCurrentItem(Integer.valueOf(mBook.getImageIndex()),false);
+        mViewPager.setCurrentItem(Integer.valueOf((int) mBook.getImageIndex()),false);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -128,6 +130,9 @@ public class ContentActivity extends AppCompatActivity implements BookContentVie
         mBook.setChapterName(mChapterName);
         mBook.setImageIndex(mViewPager.getCurrentItem());
         new BookDaoManager().updateBook(mBook);
+        if (AVUser.getCurrentUser() != null) {
+            BookNetDaoManager.updateBook(new BookDaoManager().queryBookById(mBook.getId()));
+        }
         SystemUtil.startAutoBrightness(this);
     }
 

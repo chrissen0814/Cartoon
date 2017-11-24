@@ -84,5 +84,9 @@ public class BookDaoManager {
         mBookDao.insert(book);
     }
 
+    public Book queryBookById(Long id){
+        return mBookDao.load(id);
+    }
+
 
 }

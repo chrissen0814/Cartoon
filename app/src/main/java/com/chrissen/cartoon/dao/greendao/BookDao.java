@@ -29,7 +29,7 @@ public class BookDao extends AbstractDao<Book, Long> {
         public final static Property ChapterId = new Property(4, String.class, "chapterId", false, "CHAPTER_ID");
         public final static Property ChapterName = new Property(5, String.class, "chapterName", false, "CHAPTER_NAME");
         public final static Property ImageId = new Property(6, String.class, "imageId", false, "IMAGE_ID");
-        public final static Property ImageIndex = new Property(7, int.class, "imageIndex", false, "IMAGE_INDEX");
+        public final static Property ImageIndex = new Property(7, long.class, "imageIndex", false, "IMAGE_INDEX");
         public final static Property Type = new Property(8, String.class, "type", false, "TYPE");
         public final static Property Area = new Property(9, String.class, "area", false, "AREA");
         public final static Property Finish = new Property(10, boolean.class, "finish", false, "FINISH");
@@ -218,7 +218,7 @@ public class BookDao extends AbstractDao<Book, Long> {
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // chapterId
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // chapterName
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // imageId
-            cursor.getInt(offset + 7), // imageIndex
+            cursor.getLong(offset + 7), // imageIndex
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // type
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // area
             cursor.getShort(offset + 10) != 0, // finish
@@ -239,7 +239,7 @@ public class BookDao extends AbstractDao<Book, Long> {
         entity.setChapterId(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setChapterName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setImageId(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setImageIndex(cursor.getInt(offset + 7));
+        entity.setImageIndex(cursor.getLong(offset + 7));
         entity.setType(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setArea(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setFinish(cursor.getShort(offset + 10) != 0);

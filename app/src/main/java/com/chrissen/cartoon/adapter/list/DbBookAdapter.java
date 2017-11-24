@@ -14,12 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVUser;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.activity.BookDetailActivity;
 import com.chrissen.cartoon.activity.BookNoteActivity;
 import com.chrissen.cartoon.activity.ChapterActivity;
 import com.chrissen.cartoon.dao.greendao.Book;
 import com.chrissen.cartoon.dao.manager.BookDaoManager;
+import com.chrissen.cartoon.dao.manager.BookNetDaoManager;
 import com.chrissen.cartoon.util.ImageUtil;
 import com.chrissen.cartoon.util.IntentConstants;
 import com.chrissen.cartoon.util.ScreenUtil;
@@ -127,11 +129,14 @@ public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         deleteTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new BookDaoManager().deleteBook(mBookList.get(clickedPos));
-                mBookList.remove(clickedPos);
                 notifyItemRemoved(clickedPos);
                 showOrHideDialog(false);
                 Toasty.success(mContext,"删除成功", Toast.LENGTH_SHORT,true).show();
+                if (AVUser.getCurrentUser() != null) {
+                    BookNetDaoManager.deleteBook(mBookList.get(clickedPos));
+                }
+                new BookDaoManager().deleteBook(mBookList.get(clickedPos));
+                mBookList.remove(clickedPos);
             }
         });
         mBottomDialog.setContentView(contentView);

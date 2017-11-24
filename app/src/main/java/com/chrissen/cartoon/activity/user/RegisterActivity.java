@@ -52,6 +52,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     public void onShowSuccess(Object obj) {
         Toasty.success(this,getString(R.string.toast_register_success), Toast.LENGTH_SHORT,true).show();
         setResult(RESULT_OK);
+        finish();
     }
 
     @Override

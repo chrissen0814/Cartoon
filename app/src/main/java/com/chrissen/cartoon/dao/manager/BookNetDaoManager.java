@@ -1,12 +1,12 @@
 package com.chrissen.cartoon.dao.manager;
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.chrissen.cartoon.dao.greendao.Book;
 
@@ -38,10 +38,11 @@ public class BookNetDaoManager {
     private static final String CHAPTER_ID = "chapterId";
     private static final String IMAGE_INDEX = "imageIndex";
     private static final String COMMENT = "comment";
+    private static final String USER = "user";
 
     public static void saveBook(final Book book , final Handler handler){
         final AVObject avObject = new AVObject(CLASS_NAME);
-        avObject.put(BOOK_ID,AVUser.getCurrentUser().getObjectId());
+        avObject.put(USER, AVUser.getCurrentUser());
         avObject.put(ID,book.getId());
         avObject.put(NAME,book.getBookName());
         avObject.put(COVER_ID,book.getImageId());
@@ -60,7 +61,10 @@ public class BookNetDaoManager {
         avObject.saveInBackground(new SaveCallback() {
             @Override
             public void done(AVException e) {
-
+                if (e == null) {
+                    book.setObjectId(avObject.getObjectId());
+                    new BookDaoManager().updateBook(book);
+                }
             }
         });
     }
@@ -124,17 +128,17 @@ public class BookNetDaoManager {
         avObject.put(IMAGE_INDEX,book.getImageIndex());
         avObject.put(UPDATED_TIME,book.getUpdatedTime());
         avObject.put(COMMENT,book.getComment());
-        avObject.saveInBackground();
+        avObject.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(AVException e) {
+                Log.d("sssss",e.toString());
+            }
+        });
     }
 
     public static void deleteBook(Book book){
         AVObject avObject = AVObject.createWithoutData(CLASS_NAME,book.getObjectId());
-        avObject.fetchInBackground(new GetCallback<AVObject>() {
-            @Override
-            public void done(AVObject avObject, AVException e) {
-                avObject.deleteInBackground();
-            }
-        });
+        avObject.deleteInBackground();
     }
 
 
