@@ -3,7 +3,7 @@ apply plugin: 'org.greenrobot.greendao'
 
 
 greendao {
-    schemaVersion 8
+    schemaVersion 9
     daoPackage 'com.chrissen.cartoon.dao.greendao'
     targetGenDir 'src/main/java'
 }
@@ -18,6 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -25,6 +26,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
 }
 
 dependencies {

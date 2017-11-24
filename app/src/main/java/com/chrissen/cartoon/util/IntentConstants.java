@@ -20,4 +20,6 @@ public class IntentConstants {
 
     public static final String FROM_DETAIL = "from_detail";
 
+    public static final String BOOK_NOTE = "book_note";
+
 }

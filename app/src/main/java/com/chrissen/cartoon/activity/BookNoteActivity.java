@@ -1,5 +1,6 @@
 package com.chrissen.cartoon.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -50,14 +51,18 @@ public class BookNoteActivity extends AppCompatActivity {
             mBook.setComment(note);
             new BookDaoManager().updateBook(mBook);
             Toasty.success(this,getString(R.string.book_note_save_success),Toast.LENGTH_SHORT,true).show();
-            if (fromDetail) {
-                setResult(RESULT_OK);
-            }
-            finish();
         }
     }
 
     public void onSaveClick(View view) {
         saveNote();
+        if (fromDetail) {
+            Intent intent = new Intent();
+            intent.putExtra(IntentConstants.BOOK_NOTE,mNoteEt.getText().toString());
+            setResult(RESULT_OK,intent);
+            finish();
+        }else {
+            finish();
+        }
     }
 }

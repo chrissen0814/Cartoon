@@ -7,11 +7,11 @@
     android:layout_height="match_parent"
     tools:context="com.chrissen.cartoon.activity.user.ForgetPwdActivity">
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/forget_back_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_back"
+        app:srcCompat="@drawable/icon_back"
         android:padding="6dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

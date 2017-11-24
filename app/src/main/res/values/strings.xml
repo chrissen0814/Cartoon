@@ -88,6 +88,7 @@
     <string name="book_note_none">写点东西后才能保存哦~</string>
     <string name="book_note_save_success">保存成功</string>
 
-    <string name="book_none">还没有东西呢~</string>
+    <string name="book_none">还没有漫画书呢~\n去添加点吧</string>
+    <string name="book_add">去添加点吧</string>
 
 </resources>

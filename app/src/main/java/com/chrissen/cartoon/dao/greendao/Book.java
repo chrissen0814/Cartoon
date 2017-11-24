@@ -17,6 +17,7 @@ public class Book implements Serializable {
 
     @Id(autoincrement = true)
     private Long id;
+    private String objectId;
     private String userEmail;
     private String bookName;
     private String chapterId;
@@ -34,12 +35,13 @@ public class Book implements Serializable {
 
 
 
-    @Generated(hash = 987431554)
-    public Book(Long id, String userEmail, String bookName, String chapterId,
-            String chapterName, String imageId, int imageIndex, String type,
-            String area, boolean finish, String lastUpdate, long addedTime,
-            long updatedTime, String comment) {
+    @Generated(hash = 1354506331)
+    public Book(Long id, String objectId, String userEmail, String bookName,
+            String chapterId, String chapterName, String imageId, int imageIndex,
+            String type, String area, boolean finish, String lastUpdate,
+            long addedTime, long updatedTime, String comment) {
         this.id = id;
+        this.objectId = objectId;
         this.userEmail = userEmail;
         this.bookName = bookName;
         this.chapterId = chapterId;
@@ -176,5 +178,13 @@ public class Book implements Serializable {
 
     public void setImageIndex(int imageIndex) {
         this.imageIndex = imageIndex;
+    }
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 }

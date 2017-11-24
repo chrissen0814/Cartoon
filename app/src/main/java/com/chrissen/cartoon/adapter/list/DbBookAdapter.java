@@ -3,6 +3,7 @@ package com.chrissen.cartoon.adapter.list;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -42,9 +43,9 @@ public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private Dialog mBottomDialog;
     private int clickedPos;
 
-    public DbBookAdapter(Context context) {
+    public DbBookAdapter(Context context, List<Book> bookList) {
         mContext = context;
-        mBookList = new BookDaoManager().queryAllBook();
+        mBookList = bookList;
         initDialog();
     }
 
@@ -89,6 +90,12 @@ public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     return true;
                 }
             });
+        }else if(holder instanceof EmptyViewHolder){
+            EmptyViewHolder emptyViewHolder = (EmptyViewHolder) holder;
+            ConstraintLayout.LayoutParams lps = (ConstraintLayout.LayoutParams) emptyViewHolder.mEmptyImageIv.getLayoutParams();
+            lps.width = ScreenUtil.getScreenWidth();
+            emptyViewHolder.mEmptyImageIv.setLayoutParams(lps);
+            emptyViewHolder.layout.setMinimumWidth(ScreenUtil.getScreenWidth());
         }
 
     }
@@ -182,9 +189,12 @@ public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     class EmptyViewHolder extends RecyclerView.ViewHolder {
-
+        private ImageView mEmptyImageIv;
+        private View layout;
         public EmptyViewHolder(View itemView) {
             super(itemView);
+            layout = itemView;
+            mEmptyImageIv = itemView.findViewById(R.id.empty_image_iv);
         }
     }
 

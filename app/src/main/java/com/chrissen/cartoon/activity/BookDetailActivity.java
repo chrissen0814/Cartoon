@@ -83,9 +83,10 @@ public class BookDetailActivity extends AppCompatActivity {
         switch (requestCode){
             case BOOK_ADD_COMMENT:
                 if (resultCode == RESULT_OK) {
-                    String comment = mBook.getComment();
+                    String comment = data.getStringExtra(IntentConstants.BOOK_NOTE);
                     if (comment != null && !comment.equals(" ")) {
                         mAddCommentIv.setVisibility(View.GONE);
+                        mCommentTv.setVisibility(View.VISIBLE);
                         mCommentTv.setText(comment);
                     }
                 }

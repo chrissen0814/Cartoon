@@ -49,7 +49,9 @@ public class BookDaoManager {
     }
 
     public List<Book> queryAllBook(){
-        return mBookDao.loadAll();
+        QueryBuilder builder = mBookDao.queryBuilder();
+        builder.orderDesc(BookDao.Properties.UpdatedTime);
+        return builder.list();
     }
 
     public Book queryBookByBean(BookBean.Book bookBean){
@@ -76,6 +78,10 @@ public class BookDaoManager {
             return false;
         }
 
+    }
+
+    public void saveBook(Book book){
+        mBookDao.insert(book);
     }
 
 
