@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.adapter.list.SearchBookAdapter;
 import com.chrissen.cartoon.bean.BookBean;
@@ -37,6 +38,8 @@ import es.dmoral.toasty.Toasty;
  */
 
 public class SearchFragment extends Fragment implements SearchView {
+
+    private static final String FRAGMENT_NAME = "SearchFragment";
 
     private EditText mEditText;
     private ImageView mImageView;
@@ -147,5 +150,17 @@ public class SearchFragment extends Fragment implements SearchView {
     @Override
     public void onShowError(String errorMsg) {
         Toasty.error(getContext(),errorMsg,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AVAnalytics.onFragmentStart(FRAGMENT_NAME);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd(FRAGMENT_NAME);
     }
 }

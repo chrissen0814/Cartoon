@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.adapter.pager.TypePagerAdapter;
 
@@ -21,6 +22,8 @@ import java.util.List;
  */
 
 public class TypeFragment extends Fragment {
+
+    private static final String FRAGMENT_NAME = "TypeFragment";
 
     private String[] mTypes;
     private TabLayout mTabLayout;
@@ -59,4 +62,15 @@ public class TypeFragment extends Fragment {
         mViewPager.setOffscreenPageLimit(mTypes.length);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        AVAnalytics.onFragmentStart(FRAGMENT_NAME);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd(FRAGMENT_NAME);
+    }
 }

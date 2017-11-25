@@ -27,13 +27,14 @@
             android:textColorHint="#aaa"
             android:hint="输入漫画书名"/>
 
-        <ImageView
+        <android.support.v7.widget.AppCompatImageView
             android:id="@+id/search_search_iv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/icon_search"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/icon_search"
+            android:layout_marginRight="12dp"
+            android:padding="10dp"
             android:tint="#aaa"
             android:clickable="true"/>
 

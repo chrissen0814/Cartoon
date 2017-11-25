@@ -65,11 +65,13 @@
             android:id="@+id/book_collection_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
             app:srcCompat="@drawable/icon_collection_normal"
             android:tag="0"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/item_book_cover_iv"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="11dp"
+            android:padding="5dp"
             android:clickable="true"/>
 
     </android.support.constraint.ConstraintLayout>

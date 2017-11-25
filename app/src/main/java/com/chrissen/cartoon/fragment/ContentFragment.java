@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.activity.ContentActivity;
 import com.chrissen.cartoon.bean.ContentBean;
@@ -54,6 +55,15 @@ public class ContentFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        AVAnalytics.onFragmentStart("ContentFragment");
+    }
 
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd("ContentFragment");
+    }
 }

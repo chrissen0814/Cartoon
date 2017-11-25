@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".CartoonApplication"
@@ -17,6 +19,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data android:name="Channel ID" android:value="Coolapk"/>
+
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -36,12 +41,16 @@
         </activity>
         <activity android:name=".activity.user.UserInfoActivity">
         </activity>
-        <activity android:name=".activity.system.SettingActivity">
-        </activity>
         <activity android:name=".activity.BookNoteActivity">
         </activity>
         <activity android:name=".activity.BookDetailActivity">
         </activity>
+
+        <!--反馈-->
+        <activity
+            android:name="com.avos.avoscloud.feedback.ThreadActivity" >
+        </activity>
+
     </application>
 
 </manifest>

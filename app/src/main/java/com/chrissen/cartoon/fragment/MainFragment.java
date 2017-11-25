@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.adapter.list.DbBookAdapter;
 import com.chrissen.cartoon.dao.greendao.Book;
@@ -23,6 +24,8 @@ import java.util.List;
  */
 
 public class MainFragment extends Fragment {
+
+    private static final String FRAGMENT_NAME = "MainFragment";
 
     private RecyclerView mRecyclerView;
     private DbBookAdapter mAdapter;
@@ -63,4 +66,15 @@ public class MainFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        AVAnalytics.onFragmentStart(FRAGMENT_NAME);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd(FRAGMENT_NAME);
+    }
 }

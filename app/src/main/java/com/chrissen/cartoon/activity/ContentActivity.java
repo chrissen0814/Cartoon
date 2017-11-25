@@ -95,7 +95,9 @@ public class ContentActivity extends AppCompatActivity implements BookContentVie
         mAdapter = new ContentPagerAdapter(getSupportFragmentManager(),mFragmentList);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOffscreenPageLimit(3);
-        mViewPager.setCurrentItem(Integer.valueOf((int) mBook.getImageIndex()),false);
+        if (mChapterId.equals(mBook.getChapterId())) {
+            mViewPager.setCurrentItem(Integer.valueOf((int) mBook.getImageIndex()),false);
+        }
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

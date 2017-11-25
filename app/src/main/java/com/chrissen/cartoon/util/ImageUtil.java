@@ -28,6 +28,7 @@ public class ImageUtil {
             .transform(new MultiTransformation<Bitmap>(new BlurTransformation(15,3),new BrightnessFilterTransformation(-0.3f)))
             .diskCacheStrategy(DiskCacheStrategy.NONE);
 
+
     public static void loadImageByUrl(String url , Context context , ImageView imageView){
         Glide.with(context).load(url).into(imageView);
     }

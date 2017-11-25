@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVOSCloud;
 import com.chrissen.cartoon.dao.GreendaoManager;
 
@@ -30,6 +31,7 @@ public class CartoonApplication extends Application {
 
     private void initAVS() {
         AVOSCloud.initialize(this,"CerxnIvmC3ETvKnKnyhtBJUn-gzGzoHsz","3DuTawa4tHmnxE14uAolpWJO");
+        AVAnalytics.enableCrashReport(this,true);
     }
 
     private void initToasty() {

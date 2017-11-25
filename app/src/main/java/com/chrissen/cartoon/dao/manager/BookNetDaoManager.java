@@ -1,7 +1,6 @@
 package com.chrissen.cartoon.dao.manager;
 
 import android.os.Handler;
-import android.util.Log;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
@@ -128,12 +127,7 @@ public class BookNetDaoManager {
         avObject.put(IMAGE_INDEX,book.getImageIndex());
         avObject.put(UPDATED_TIME,book.getUpdatedTime());
         avObject.put(COMMENT,book.getComment());
-        avObject.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(AVException e) {
-                Log.d("sssss",e.toString());
-            }
-        });
+        avObject.saveInBackground();
     }
 
     public static void deleteBook(Book book){

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.adapter.list.BookAdapter;
 import com.chrissen.cartoon.bean.BookBean;
@@ -27,6 +28,9 @@ import java.util.List;
  */
 
 public class BookFragment extends Fragment implements BookListView {
+
+    private static final String FRAGMENT_NAME = "BookFragment";
+
     private static final int ALL = -1;
     private static final String BOOK_TYPE = "book_type";
 
@@ -107,5 +111,17 @@ public class BookFragment extends Fragment implements BookListView {
     @Override
     public void onShowError(String errorMsg) {
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AVAnalytics.onFragmentStart(FRAGMENT_NAME);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd(FRAGMENT_NAME);
     }
 }
