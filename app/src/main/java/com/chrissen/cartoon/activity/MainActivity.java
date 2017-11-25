@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
         setContentView(R.layout.activity_main);
         findViews();
         initDrawer();
-
     }
 
 

@@ -3,7 +3,6 @@ package com.chrissen.cartoon.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -30,7 +29,7 @@ import com.chrissen.cartoon.util.view.dialog.BrightnessDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContentActivity extends AppCompatActivity implements BookContentView {
+public class ContentAbstractActivity extends BaseAbstractActivity implements BookContentView {
 
     private ContentPresenter mPresenter;
 
@@ -60,7 +59,7 @@ public class ContentActivity extends AppCompatActivity implements BookContentVie
         initParams();
     }
 
-    private void initParams() {
+    protected void initParams() {
         mComicName = getIntent().getStringExtra(IntentConstants.BOOK_NAME);
         mChapterId = getIntent().getStringExtra(IntentConstants.CHAPTER_ID);
         mBook = (Book) getIntent().getSerializableExtra(IntentConstants.BOOK);
@@ -71,7 +70,7 @@ public class ContentActivity extends AppCompatActivity implements BookContentVie
         mTitleTv.setText(mComicName);
     }
 
-    private void initViews() {
+    protected void initViews() {
         mTopFL = findViewById(R.id.content_top_bar_fl);
         mBottomFl = findViewById(R.id.content_bottom_bar_fl);
         mViewPager = findViewById(R.id.content_vp);
@@ -172,4 +171,5 @@ public class ContentActivity extends AppCompatActivity implements BookContentVie
         AnimUtil.slideOutToLeft(mListContentFl,this);
         AnimUtil.fadeOut(mBlankFl,this);
     }
+
 }

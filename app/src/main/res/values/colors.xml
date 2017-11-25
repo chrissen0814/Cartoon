@@ -9,8 +9,9 @@
     <color name="book_unfinished">#F44336</color>
 
     <!--toastColor-->
-    <color name="toast_success">#e16b8c</color>
-    <color name="toast_error">#6d2e5b</color>
+    <color name="toast_success">#FFFFFF</color>
+    <color name="toast_error">#DB4D6D</color>
+    <color name="toast_warn">#F9BF45</color>
     <color name="toast_warning"></color>
 
     <!--content_bar-->

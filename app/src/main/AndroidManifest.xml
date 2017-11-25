@@ -8,8 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:name=".CartoonApplication"
@@ -19,38 +19,70 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="Channel ID"
+            android:value="Coolapk"/>
 
-        <meta-data android:name="Channel ID" android:value="Coolapk"/>
-
-        <activity android:name=".activity.MainActivity">
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ChapterActivity">
-        </activity>
-        <activity android:name=".activity.ContentActivity">
-        </activity>
-        <activity android:name=".activity.user.SignInActivity">
-        </activity>
-        <activity android:name=".activity.user.RegisterActivity">
-        </activity>
-        <activity android:name=".activity.user.ForgetPwdActivity">
-        </activity>
-        <activity android:name=".activity.user.UserInfoActivity">
-        </activity>
-        <activity android:name=".activity.BookNoteActivity">
-        </activity>
-        <activity android:name=".activity.BookDetailActivity">
-        </activity>
-
-        <!--反馈-->
+        <!-- Book -->
         <activity
-            android:name="com.avos.avoscloud.feedback.ThreadActivity" >
+            android:name=".activity.ChapterActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.ContentAbstractActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.BookNoteActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.BookDetailAbstractActivity"
+            android:screenOrientation="portrait">
         </activity>
 
+        <!-- User -->
+        <activity
+            android:name=".activity.user.SignInActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.user.RegisterActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.user.ForgetPwdActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.user.UserInfoActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <!-- feedback -->
+        <activity android:name="com.avos.avoscloud.feedback.ThreadActivity">
+        </activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.chrissen.cartoon.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/lc_fileprovider_path"/>
+        </provider>
+
+        <activity android:name=".activity.system.FeedbackActivity">
+        </activity>
     </application>
 
 </manifest>

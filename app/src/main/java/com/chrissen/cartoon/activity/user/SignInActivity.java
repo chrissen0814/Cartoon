@@ -2,7 +2,6 @@ package com.chrissen.cartoon.activity.user;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
@@ -11,13 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chrissen.cartoon.R;
+import com.chrissen.cartoon.activity.BaseAbstractActivity;
 import com.chrissen.cartoon.module.presenter.user.SignInPresenter;
 import com.chrissen.cartoon.module.view.SignInView;
 import com.chrissen.cartoon.util.AnimUtil;
 
 import es.dmoral.toasty.Toasty;
 
-public class SignInActivity extends AppCompatActivity implements SignInView {
+public class SignInActivity extends BaseAbstractActivity implements SignInView {
     private static final int REGISTER_CODE = 20;
     private static final int FORGET_PWD = 21;
 
@@ -31,11 +31,20 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        findViews();
+        initViews();
         initParams();
     }
 
-    private void initParams() {
+    @Override
+    protected void initViews() {
+        mImageIv = findViewById(R.id.sign_in_image_iv);
+        mNameOrEmailEt = findViewById(R.id.sign_in_name_email_et);
+        mPwdEt = findViewById(R.id.sign_in_pwd_et);
+        mWelcomeTv = findViewById(R.id.sign_in_welcome_tv);
+        mLockIv = findViewById(R.id.sign_in_lock_iv);
+    }
+
+    protected void initParams() {
         mWelcomeTv.setFocusable(true);
         mWelcomeTv.requestFocus();
         mPresenter = new SignInPresenter(this);
@@ -56,14 +65,6 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
 
             }
         });
-    }
-
-    private void findViews() {
-        mImageIv = findViewById(R.id.sign_in_image_iv);
-        mNameOrEmailEt = findViewById(R.id.sign_in_name_email_et);
-        mPwdEt = findViewById(R.id.sign_in_pwd_et);
-        mWelcomeTv = findViewById(R.id.sign_in_welcome_tv);
-        mLockIv = findViewById(R.id.sign_in_lock_iv);
     }
 
     @Override

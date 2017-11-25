@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.avos.avoscloud.AVUser;
 import com.chrissen.cartoon.R;
-import com.chrissen.cartoon.activity.BookDetailActivity;
+import com.chrissen.cartoon.activity.BookDetailAbstractActivity;
 import com.chrissen.cartoon.activity.BookNoteActivity;
 import com.chrissen.cartoon.activity.ChapterActivity;
 import com.chrissen.cartoon.dao.greendao.Book;
@@ -120,7 +120,7 @@ public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         detailTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, BookDetailActivity.class);
+                Intent intent = new Intent(mContext, BookDetailAbstractActivity.class);
                 intent.putExtra(IntentConstants.BOOK,mBookList.get(clickedPos));
                 mContext.startActivity(intent);
                 showOrHideDialog(false);

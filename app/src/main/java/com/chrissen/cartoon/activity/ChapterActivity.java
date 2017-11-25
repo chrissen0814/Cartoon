@@ -1,7 +1,6 @@
 package com.chrissen.cartoon.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -15,7 +14,7 @@ import com.chrissen.cartoon.util.IntentConstants;
 
 import java.util.ArrayList;
 
-public class ChapterActivity extends AppCompatActivity implements BookChapterView {
+public class ChapterActivity extends BaseAbstractActivity implements BookChapterView {
 
     private ChapterPresenter mPresenter;
 
@@ -29,12 +28,8 @@ public class ChapterActivity extends AppCompatActivity implements BookChapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chapter);
-        comicName = getIntent().getStringExtra(IntentConstants.BOOK_NAME);
-        mBook = (Book) getIntent().getSerializableExtra(IntentConstants.BOOK);
-        mRecyclerView = findViewById(R.id.chapter_rv);
-        mAdapter = new ChapterAdapter(this,mBook,comicName,mChapterList);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mAdapter);
+        initViews();
+        initParams();
     }
 
 
@@ -68,5 +63,19 @@ public class ChapterActivity extends AppCompatActivity implements BookChapterVie
     @Override
     public void onShowError(String errorMsg) {
 
+    }
+
+    @Override
+    protected void initViews() {
+        mRecyclerView = findViewById(R.id.chapter_rv);
+    }
+
+    @Override
+    protected void initParams() {
+        comicName = getIntent().getStringExtra(IntentConstants.BOOK_NAME);
+        mBook = (Book) getIntent().getSerializableExtra(IntentConstants.BOOK);
+        mAdapter = new ChapterAdapter(this,mBook,comicName,mChapterList);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

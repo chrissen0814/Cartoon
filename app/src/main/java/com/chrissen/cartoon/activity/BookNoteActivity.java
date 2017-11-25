@@ -2,7 +2,6 @@ package com.chrissen.cartoon.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
@@ -15,7 +14,7 @@ import com.chrissen.cartoon.util.IntentConstants;
 
 import es.dmoral.toasty.Toasty;
 
-public class BookNoteActivity extends AppCompatActivity {
+public class BookNoteActivity extends BaseAbstractActivity {
 
     private Toolbar mToolbar;
     private EditText mNoteEt;
@@ -31,13 +30,13 @@ public class BookNoteActivity extends AppCompatActivity {
         initParams();
     }
 
-    private void initParams() {
+    protected void initParams() {
         mBook = (Book) getIntent().getSerializableExtra(IntentConstants.BOOK);
         fromDetail = getIntent().getBooleanExtra(IntentConstants.FROM_DETAIL,false);
         mToolbar.setTitle(mBook.getBookName());
     }
 
-    private void initViews() {
+    protected void initViews() {
         mToolbar = findViewById(R.id.book_note_toolbar);
         mNoteEt = findViewById(R.id.book_note_et);
     }

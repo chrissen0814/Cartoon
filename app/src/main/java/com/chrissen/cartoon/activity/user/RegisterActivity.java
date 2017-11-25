@@ -1,19 +1,19 @@
 package com.chrissen.cartoon.activity.user;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.chrissen.cartoon.R;
+import com.chrissen.cartoon.activity.BaseAbstractActivity;
 import com.chrissen.cartoon.module.presenter.user.RegisterPresenter;
 import com.chrissen.cartoon.module.view.RegisterView;
 import com.chrissen.cartoon.util.TextHelper;
 
 import es.dmoral.toasty.Toasty;
 
-public class RegisterActivity extends AppCompatActivity implements RegisterView {
+public class RegisterActivity extends BaseAbstractActivity implements RegisterView {
 
     private RegisterPresenter mPresenter;
 
@@ -23,20 +23,22 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        findViews();
+        initViews();
         initParams();
     }
 
-    private void initParams() {
-        mPresenter = new RegisterPresenter(this);
-    }
-
-    private void findViews() {
+    @Override
+    protected void initViews() {
         mNameEt = findViewById(R.id.register_name_et);
         mEmailEt = findViewById(R.id.register_email_et);
         mPwdEt = findViewById(R.id.register_pwd_et);
         mConfirmPwdEt = findViewById(R.id.register_pwd_confirm_et);
     }
+
+    protected void initParams() {
+        mPresenter = new RegisterPresenter(this);
+    }
+
 
     @Override
     public void onSameName() {

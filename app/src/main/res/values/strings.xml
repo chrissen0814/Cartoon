@@ -91,4 +91,15 @@
     <string name="book_none">还没有漫画书呢~\n去添加点吧</string>
     <string name="book_add">去添加点吧</string>
 
+    <!--about-->
+    <string name="about_advise">意见反馈</string>
+    <string name="about_advise_intro">帮助我们更好的成长</string>
+    <string name="about_advise_no_user">登录后才能反馈意见哦~</string>
+    <string name="about_protocol">开源协议</string>
+    <string name="about_protocol_intro">感谢开源世界</string>
+
+    <!--feedback-->
+    <string name="feedback_title">反馈&#38;闲聊</string>
+    <string name="feedback_send">发送</string>
+
 </resources>
