@@ -98,6 +98,9 @@
     <string name="about_protocol">开源协议</string>
     <string name="about_protocol_intro">感谢开源世界</string>
     <string name="about_icon_designer_link">https://weibo.com/u/5447517178</string>
+    <string name="about_project_name">了解项目</string>
+    <string name="about_project_tip_text">欢迎star和pull requests</string>
+    <string name="project_location">https://github.com/chrissen0814/Cartoon</string>
 
     <!--feedback-->
     <string name="feedback_title">反馈&#38;闲聊</string>

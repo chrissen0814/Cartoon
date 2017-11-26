@@ -30,7 +30,7 @@ import es.dmoral.toasty.Toasty;
 
 public class AboutFragment extends Fragment {
 
-    private CardView mAdviseCv , mProtocolCv;
+    private CardView mAdviseCv , mProtocolCv , mProjectCv;
     private ImageView mDeveloperIv , mIconDesIv;
     private TextView mDevLinkTv , mIconDesLinkTv;
 
@@ -53,6 +53,7 @@ public class AboutFragment extends Fragment {
     private void initView(View view) {
         mAdviseCv = view.findViewById(R.id.about_advise_cv);
         mProtocolCv = view.findViewById(R.id.about_protocol_cv);
+        mProjectCv = view.findViewById(R.id.about_project_cv);
         mDeveloperIv = view.findViewById(R.id.about_developer_iv);
         mIconDesIv = view.findViewById(R.id.about_icon_author_iv);
         mDevLinkTv = view.findViewById(R.id.about_dev_link_tv);
@@ -101,6 +102,15 @@ public class AboutFragment extends Fragment {
                         .withActivityTitle(getString(R.string.about_protocol_intro))
                         //start the activity
                         .start(getActivity());
+            }
+        });
+        mProjectCv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BaseAbstractActivity)getActivity()).putBindClick(v);
+                Uri uri = Uri.parse(getString(R.string.project_location));
+                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent);
             }
         });
     }
