@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cartoon</string>
+    <string name="app_name">猫漫</string>
 
     <string name="default_header_text">因为遇见你\n我才知道我也能拥有美丽的记忆</string>
 
@@ -97,6 +97,7 @@
     <string name="about_advise_no_user">登录后才能反馈意见哦~</string>
     <string name="about_protocol">开源协议</string>
     <string name="about_protocol_intro">感谢开源世界</string>
+    <string name="about_icon_designer_link">https://weibo.com/u/5447517178</string>
 
     <!--feedback-->
     <string name="feedback_title">反馈&#38;闲聊</string>

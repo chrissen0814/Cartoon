@@ -28,6 +28,9 @@ public class ImageUtil {
             .transform(new MultiTransformation<Bitmap>(new BlurTransformation(15,3),new BrightnessFilterTransformation(-0.3f)))
             .diskCacheStrategy(DiskCacheStrategy.NONE);
 
+    private static RequestOptions sCircleOptions = new RequestOptions()
+            .circleCrop();
+
 
     public static void loadImageByUrl(String url , Context context , ImageView imageView){
         Glide.with(context).load(url).into(imageView);
@@ -44,6 +47,10 @@ public class ImageUtil {
         Glide.with(context).load(file)
                 .apply(mOptions)
                 .into(imageView);
+    }
+
+    public static void loadCircleImageByRes(int resId , Context context , ImageView imageView){
+        Glide.with(context).load(resId).apply(sCircleOptions).into(imageView);
     }
 
     public static int getIntFromColor(int Red, int Green, int Blue){
