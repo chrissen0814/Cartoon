@@ -6,13 +6,16 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.chrissen.cartoon.dao.greendao.Book;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -71,53 +74,67 @@ public class BookNetDaoManager {
 
     public static void copyBookToDB(){
         AVQuery<AVObject> avQuery = new AVQuery<>(CLASS_NAME);
-        try {
-           List<AVObject> objectList = avQuery.find();
-            io.reactivex.Observable.fromIterable(objectList)
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(new Observer<AVObject>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
+        avQuery.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (list != null && list.size() > 0) {
+                    io.reactivex.Observable.fromIterable(list)
+                            .subscribeOn(Schedulers.io())
+                            .filter(new Predicate<AVObject>() {
+                                @Override
+                                public boolean test(AVObject avObject) throws Exception {
+                                    List<Book> bookList = new BookDaoManager().queryAllBook();
+                                    for(Book book : bookList){
+                                        if (avObject.getObjectId().equals(book.getObjectId())) {
+                                            return false;
+                                        }
+                                    }
+                                    return true;
+                                }
+                            })
+                            .subscribe(new Observer<AVObject>() {
+                                @Override
+                                public void onSubscribe(Disposable d) {
 
-                        }
+                                }
 
-                        @Override
-                        public void onNext(AVObject value) {
-                            Book book = new Book();
-                            book.setId(value.getLong(ID));
-                            book.setObjectId(value.getString(AVObject.OBJECT_ID));
-                            book.setBookName(value.getString(NAME));
-                            book.setChapterId(value.getString(CHAPTER_ID));
-                            book.setChapterName(value.getString(CHAPTER_NAME));
-                            book.setImageId(value.getString(COVER_ID));
-                            book.setImageIndex(value.getInt(IMAGE_INDEX));
-                            book.setType(value.getString(TYPE));
-                            book.setArea(value.getString(AREA));
-                            book.setFinish(value.getBoolean(FINISH));
-                            book.setLastUpdate(value.getString(LAST_UPDATE));
-                            book.setAddedTime(value.getLong(ADDED_TIME));
-                            book.setUpdatedTime(value.getLong(UPDATED_TIME));
-                            book.setComment(value.getString(COMMENT));
-                            boolean exist = new BookDaoManager().judgeExist(book.getType(),book.getBookName(),book.getArea());
-                            if (!exist) {
-                                new BookDaoManager().saveBook(book);
-                            }
+                                @Override
+                                public void onNext(AVObject value) {
+                                    Book book = new Book();
+                                    book.setId(value.getLong(ID));
+                                    book.setObjectId(value.getString(AVObject.OBJECT_ID));
+                                    book.setBookName(value.getString(NAME));
+                                    book.setChapterId(value.getString(CHAPTER_ID));
+                                    book.setChapterName(value.getString(CHAPTER_NAME));
+                                    book.setImageId(value.getString(COVER_ID));
+                                    book.setImageIndex(value.getInt(IMAGE_INDEX));
+                                    book.setType(value.getString(TYPE));
+                                    book.setArea(value.getString(AREA));
+                                    book.setFinish(value.getBoolean(FINISH));
+                                    book.setLastUpdate(value.getString(LAST_UPDATE));
+                                    book.setAddedTime(value.getLong(ADDED_TIME));
+                                    book.setUpdatedTime(value.getLong(UPDATED_TIME));
+                                    book.setComment(value.getString(COMMENT));
+                                    boolean exist = new BookDaoManager().judgeExist(book.getType(),book.getBookName(),book.getArea());
+                                    if (!exist) {
+                                        new BookDaoManager().saveBook(book);
+                                    }
 
-                        }
+                                }
 
-                        @Override
-                        public void onError(Throwable e) {
+                                @Override
+                                public void onError(Throwable e) {
 
-                        }
+                                }
 
-                        @Override
-                        public void onComplete() {
+                                @Override
+                                public void onComplete() {
 
-                        }
-                    });
-        } catch (AVException e) {
-            e.printStackTrace();
-        }
+                                }
+                            });
+                }
+            }
+        });
     }
 
     public static void updateBook(Book book){
@@ -135,6 +152,33 @@ public class BookNetDaoManager {
         avObject.deleteInBackground();
     }
 
+    public static void copyDBToCloud(){
+        List<Book> bookList = new BookDaoManager().queryAllBook();
+        if (bookList != null && bookList.size() > 0) {
+            Observable.fromIterable(bookList)
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new Observer<Book>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
 
+                        }
+
+                        @Override
+                        public void onNext(Book value) {
+                            saveBook(value,null);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
+        }
+    }
 
 }

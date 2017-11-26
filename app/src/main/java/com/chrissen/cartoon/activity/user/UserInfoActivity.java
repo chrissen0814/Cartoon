@@ -42,11 +42,13 @@ public class UserInfoActivity extends BaseAbstractActivity {
     }
 
     public void onLogoutClick(View view) {
+        putBindClick(view);
         AVUser.logOut();
         finish();
     }
 
     public void onBackClick(View view) {
+        putBindClick(view);
         finish();
     }
 }

@@ -53,6 +53,7 @@ public class ForgetPwdActivity extends BaseAbstractActivity implements ForgetPwd
     }
 
     public void onPostClick(View view) {
+        putBindClick(view);
         String email = mEmailEt.getText().toString();
         boolean correct = TextHelper.isEmail(email);
         if (correct) {
@@ -63,6 +64,7 @@ public class ForgetPwdActivity extends BaseAbstractActivity implements ForgetPwd
     }
 
     public void onBackClick(View view) {
+        putBindClick(view);
         finish();
     }
 }

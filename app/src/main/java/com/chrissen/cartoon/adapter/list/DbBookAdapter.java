@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.avos.avoscloud.AVUser;
 import com.chrissen.cartoon.R;
+import com.chrissen.cartoon.activity.BaseAbstractActivity;
 import com.chrissen.cartoon.activity.BookDetailAbstractActivity;
 import com.chrissen.cartoon.activity.BookNoteActivity;
 import com.chrissen.cartoon.activity.ChapterActivity;
@@ -111,6 +112,7 @@ public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         addNoteTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((BaseAbstractActivity)mContext).putBindClick(v);
                 Intent intent = new Intent(mContext, BookNoteActivity.class);
                 intent.putExtra(IntentConstants.BOOK,mBookList.get(clickedPos));
                 mContext.startActivity(intent);
@@ -120,6 +122,7 @@ public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         detailTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((BaseAbstractActivity)mContext).putBindClick(v);
                 Intent intent = new Intent(mContext, BookDetailAbstractActivity.class);
                 intent.putExtra(IntentConstants.BOOK,mBookList.get(clickedPos));
                 mContext.startActivity(intent);
@@ -129,6 +132,7 @@ public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         deleteTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((BaseAbstractActivity)mContext).putBindClick(v);
                 notifyItemRemoved(clickedPos);
                 showOrHideDialog(false);
                 Toasty.success(mContext,"删除成功", Toast.LENGTH_SHORT,true).show();

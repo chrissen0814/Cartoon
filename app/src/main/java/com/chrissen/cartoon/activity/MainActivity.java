@@ -7,7 +7,6 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,6 +19,9 @@ import com.chrissen.cartoon.activity.user.SignInActivity;
 import com.chrissen.cartoon.activity.user.UserInfoActivity;
 import com.chrissen.cartoon.adapter.list.MenuAdapter;
 import com.chrissen.cartoon.bean.HitokotoBean;
+import com.chrissen.cartoon.dao.greendao.Book;
+import com.chrissen.cartoon.dao.manager.BookDaoManager;
+import com.chrissen.cartoon.dao.manager.BookNetDaoManager;
 import com.chrissen.cartoon.fragment.AboutFragment;
 import com.chrissen.cartoon.fragment.MainFragment;
 import com.chrissen.cartoon.fragment.SearchFragment;
@@ -33,12 +35,14 @@ import com.chrissen.cartoon.util.ImageUtil;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView;
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
 
-public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMenuClickListener{
+public class MainActivity extends BaseAbstractActivity implements DuoMenuView.OnMenuClickListener{
+    private static final int REQUEST_CODE_SIGN_IN = 2;
 
     private Toolbar mToolbar;
     private DuoDrawerLayout mDrawerLayout;
@@ -50,31 +54,41 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViews();
-        initDrawer();
+        initViews();
+        initParams();
     }
 
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        initView();
-        initAcg();
+    protected void initViews() {
+        mDrawerLayout = findViewById(R.id.main_duo_drawer_layout);
+        mMenuView = findViewById(R.id.main_duo_menu_view);
+        mToolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(mToolbar);
+        DuoDrawerToggle toggle = new DuoDrawerToggle(this,mDrawerLayout,mToolbar,R.string.navi_open,R.string.navi_close);
+        mDrawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+        mTitleList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.navi_title)));
+        mMenuAdapter = new MenuAdapter(mTitleList);
+        mMenuView.setAdapter(mMenuAdapter);
+        mMenuView.setOnMenuClickListener(this);
+        setTitle(mTitleList.get(0));
     }
 
-    private void initView() {
+    @Override
+    protected void initParams() {
         startFragment(new MainFragment(),false);
         mMenuAdapter.setViewSelected(0,true);
         setTitle(mTitleList.get(0));
         Button button = mMenuView.getFooterView().findViewById(R.id.footer_bt);
         initHitokoto();
+        initAcg();
         if (AVUser.getCurrentUser() != null) {
             button.setText(R.string.navi_user_info);
         }else {
             button.setText(R.string.navi_register_sign_in);
         }
     }
-
 
     private void initHitokoto(){
         final TextView textTv = mMenuView.getHeaderView().findViewById(R.id.header_text_tv);
@@ -101,18 +115,6 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
         }
     }
 
-    private void initDrawer() {
-        DuoDrawerToggle toggle = new DuoDrawerToggle(this,mDrawerLayout,mToolbar,R.string.navi_open,R.string.navi_close);
-        mDrawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
-        mTitleList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.navi_title)));
-        mMenuAdapter = new MenuAdapter(mTitleList);
-        mMenuView.setAdapter(mMenuAdapter);
-        mMenuView.setOnMenuClickListener(this);
-        setTitle(mTitleList.get(0));
-
-    }
-
     private void initAcg() {
         boolean acg = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("setting_navi_bg",false);
         ImageView imageView = mMenuView.findViewById(R.id.duo_view_menu_background);
@@ -132,21 +134,14 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
     }
 
 
-    private void findViews() {
-        mDrawerLayout = findViewById(R.id.main_duo_drawer_layout);
-        mMenuView = findViewById(R.id.main_duo_menu_view);
-        mToolbar = findViewById(R.id.main_toolbar);
-        setSupportActionBar(mToolbar);
-    }
-
-
     @Override
     public void onFooterClicked() {
         AVUser avUser = AVUser.getCurrentUser();
         if (avUser != null) {
             startActivity(new Intent(this, UserInfoActivity.class));
         }else {
-            startActivity(new Intent(this, SignInActivity.class));
+            Intent intent = new Intent(this,SignInActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_SIGN_IN);
         }
     }
 
@@ -190,6 +185,18 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
         }
         transaction.replace(R.id.main_container, fragment).commit();
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_SIGN_IN && resultCode == RESULT_OK){
+            BookNetDaoManager.copyBookToDB();
+            List<Book> bookList = new BookDaoManager().queryAllBook();
+            if (bookList != null && bookList.size() > 0) {
+                BookNetDaoManager.copyDBToCloud();
+            }
+        }
     }
 
 

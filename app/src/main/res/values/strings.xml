@@ -93,7 +93,7 @@
 
     <!--about-->
     <string name="about_advise">意见反馈</string>
-    <string name="about_advise_intro">帮助我们更好的成长</string>
+    <string name="about_advise_intro">提点意见又或调戏开发者</string>
     <string name="about_advise_no_user">登录后才能反馈意见哦~</string>
     <string name="about_protocol">开源协议</string>
     <string name="about_protocol_intro">感谢开源世界</string>

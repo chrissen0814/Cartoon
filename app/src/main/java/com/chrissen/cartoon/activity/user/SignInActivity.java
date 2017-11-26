@@ -11,9 +11,14 @@ import android.widget.Toast;
 
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.activity.BaseAbstractActivity;
+import com.chrissen.cartoon.dao.greendao.Book;
+import com.chrissen.cartoon.dao.manager.BookDaoManager;
+import com.chrissen.cartoon.dao.manager.BookNetDaoManager;
 import com.chrissen.cartoon.module.presenter.user.SignInPresenter;
 import com.chrissen.cartoon.module.view.SignInView;
 import com.chrissen.cartoon.util.AnimUtil;
+
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
@@ -85,6 +90,7 @@ public class SignInActivity extends BaseAbstractActivity implements SignInView {
     @Override
     public void onShowSuccess(Object obj) {
         Toasty.success(this,getString(R.string.toast_sign_in_success),Toast.LENGTH_SHORT,true).show();
+        setResult(RESULT_OK);
         finish();
     }
 
@@ -94,6 +100,7 @@ public class SignInActivity extends BaseAbstractActivity implements SignInView {
     }
 
     public void onSignClick(View view) {
+        putBindClick(view);
         String nameOrEmail = mNameOrEmailEt.getText().toString();
         String pwd = mPwdEt.getText().toString();
         if (nameOrEmail != null && pwd != null && !nameOrEmail.equals("") && !pwd.equals("")) {
@@ -104,11 +111,13 @@ public class SignInActivity extends BaseAbstractActivity implements SignInView {
     }
 
     public void onRegisterClick(View view) {
+        putBindClick(view);
         Intent intent = new Intent(this,RegisterActivity.class);
         startActivityForResult(intent , REGISTER_CODE);
     }
 
     public void onForgetPwdClick(View view) {
+        putBindClick(view);
         Intent intent = new Intent(this, ForgetPwdActivity.class);
         startActivityForResult(intent,FORGET_PWD);
     }
@@ -120,6 +129,10 @@ public class SignInActivity extends BaseAbstractActivity implements SignInView {
         switch (requestCode){
             case REGISTER_CODE:
                 if (resultCode == RESULT_OK) {
+                    List<Book> bookList = new BookDaoManager().queryAllBook();
+                    if (bookList != null && bookList.size() > 0) {
+                        BookNetDaoManager.copyDBToCloud();
+                    }
                     finish();
                 }
                 break;

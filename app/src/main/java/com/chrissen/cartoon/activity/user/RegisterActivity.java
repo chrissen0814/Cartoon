@@ -63,6 +63,7 @@ public class RegisterActivity extends BaseAbstractActivity implements RegisterVi
     }
 
     public void onSignInClick(View view) {
+        putBindClick(view);
         String name = mNameEt.getText().toString();
         String email = mEmailEt.getText().toString();
         String pwd = mPwdEt.getText().toString();
@@ -82,6 +83,7 @@ public class RegisterActivity extends BaseAbstractActivity implements RegisterVi
 
 
     public void onBackClick(View view) {
+        putBindClick(view);
         finish();
     }
 
