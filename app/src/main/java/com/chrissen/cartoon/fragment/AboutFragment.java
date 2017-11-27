@@ -90,6 +90,7 @@ public class AboutFragment extends Fragment {
                 }else {
                     Toasty.warning(getContext(),getString(R.string.about_advise_no_user), Toast.LENGTH_SHORT,true).show();
                 }
+                ((BaseAbstractActivity)getActivity()).resetClick();
             }
         });
         mProtocolCv.setOnClickListener(new View.OnClickListener() {

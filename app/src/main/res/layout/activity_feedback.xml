@@ -45,16 +45,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingLeft="8dp"
-            android:paddingRight="10dp"
-            android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/icon_image"
-            android:clickable="true"
-            android:onClick="onChooseImageClick"/>
-
         <EditText
             android:id="@+id/avoscloud_feedback_input"
             android:layout_width="0dp"

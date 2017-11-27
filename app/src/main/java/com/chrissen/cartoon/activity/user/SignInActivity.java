@@ -108,6 +108,7 @@ public class SignInActivity extends BaseAbstractActivity implements SignInView {
         }else {
             Toasty.error(this,getString(R.string.toast_sign_in_error), Toast.LENGTH_SHORT,true).show();
         }
+        resetClick();
     }
 
     public void onRegisterClick(View view) {

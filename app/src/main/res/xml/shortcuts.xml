@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:shortcutId="shortcuts_help"
+        android:enabled="true"
+        android:icon="@drawable/icon_short_cut_help"
+        android:shortcutShortLabel="@string/shortcuts_help"
+        android:shortcutLongLabel="@string/shortcuts_help">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.chrissen.cartoon"
+            android:targetClass="com.chrissen.cartoon.activity.system.FeedbackActivity" />
+    </shortcut>
+
+</shortcuts>

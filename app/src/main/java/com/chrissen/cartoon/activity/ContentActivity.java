@@ -29,7 +29,7 @@ import com.chrissen.cartoon.util.view.dialog.BrightnessDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContentAbstractActivity extends BaseAbstractActivity implements BookContentView {
+public class ContentActivity extends BaseAbstractActivity implements BookContentView {
 
     private ContentPresenter mPresenter;
 

@@ -28,9 +28,10 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <meta-data android:name="android.app.shortcuts"
+                       android:resource="@xml/shortcuts" />
         </activity>
         <!-- Book -->
         <activity
@@ -38,7 +39,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".activity.ContentAbstractActivity"
+            android:name=".activity.ContentActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
@@ -67,19 +68,6 @@
             android:name=".activity.user.UserInfoActivity"
             android:screenOrientation="portrait">
         </activity>
-        <!-- feedback -->
-        <activity android:name="com.avos.avoscloud.feedback.ThreadActivity">
-        </activity>
-
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.chrissen.cartoon.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/lc_fileprovider_path"/>
-        </provider>
 
         <activity android:name=".activity.system.FeedbackActivity">
         </activity>

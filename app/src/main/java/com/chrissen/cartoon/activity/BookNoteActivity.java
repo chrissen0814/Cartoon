@@ -54,6 +54,7 @@ public class BookNoteActivity extends BaseAbstractActivity {
     }
 
     public void onSaveClick(View view) {
+        putBindClick(view);
         saveNote();
         if (fromDetail) {
             Intent intent = new Intent();

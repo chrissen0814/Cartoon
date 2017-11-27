@@ -105,5 +105,6 @@
     <!--feedback-->
     <string name="feedback_title">反馈&#38;闲聊</string>
     <string name="feedback_send">发送</string>
+    <string name="shortcuts_help">联系开发者</string>
 
 </resources>

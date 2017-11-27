@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.avos.avoscloud.AVAnalytics;
 import com.chrissen.cartoon.R;
+import com.chrissen.cartoon.activity.BaseAbstractActivity;
 import com.chrissen.cartoon.adapter.list.SearchBookAdapter;
 import com.chrissen.cartoon.bean.BookBean;
 import com.chrissen.cartoon.module.presenter.search.SearchPresenter;
@@ -98,6 +99,7 @@ public class SearchFragment extends Fragment implements SearchView {
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((BaseAbstractActivity)getActivity()).putBindClick(v);
                 hideSoftKeyboard();
                 String bookName = mEditText.getText().toString();
                 if (bookName.equals("")) {
@@ -107,6 +109,7 @@ public class SearchFragment extends Fragment implements SearchView {
                     skipCounts = 0;
                     mPresenter.searchBook(bookName);
                 }
+                ((BaseAbstractActivity)getActivity()).resetClick();
             }
         });
 

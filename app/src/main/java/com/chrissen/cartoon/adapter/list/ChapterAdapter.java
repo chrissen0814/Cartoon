@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chrissen.cartoon.R;
-import com.chrissen.cartoon.activity.ContentAbstractActivity;
+import com.chrissen.cartoon.activity.ContentActivity;
 import com.chrissen.cartoon.bean.ChapterBean;
 import com.chrissen.cartoon.dao.greendao.Book;
 import com.chrissen.cartoon.util.IntentConstants;
@@ -55,7 +55,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ContentAbstractActivity.class);
+                Intent intent = new Intent(mContext, ContentActivity.class);
                 intent.putExtra(IntentConstants.BOOK_NAME,mComicName);
                 intent.putExtra(IntentConstants.CHAPTER_ID,chapter.getId());
                 intent.putExtra(IntentConstants.BOOK,mBook);

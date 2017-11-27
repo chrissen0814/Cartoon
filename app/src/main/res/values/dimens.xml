@@ -15,4 +15,6 @@
     <dimen name="back_margin_top">12dp</dimen>
     <dimen name="back_padding">6dp</dimen>
 
+    <dimen name="grid_expected_size">120dp</dimen>
+
 </resources>

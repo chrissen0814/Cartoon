@@ -141,6 +141,7 @@ public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 }
                 new BookDaoManager().deleteBook(mBookList.get(clickedPos));
                 mBookList.remove(clickedPos);
+                ((BaseAbstractActivity)mContext).resetClick();
             }
         });
         mBottomDialog.setContentView(contentView);

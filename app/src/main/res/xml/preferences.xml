@@ -27,7 +27,8 @@
             android:key="setting_wifi_download"
             android:title="Wifi下下载书籍"
             android:summaryOn="Wifi下自动下载书籍"
-            android:defaultValue="false"/>
+            android:defaultValue="false"
+            android:enabled="false"/>
 
     </PreferenceCategory>
 
