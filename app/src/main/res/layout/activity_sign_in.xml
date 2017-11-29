@@ -46,6 +46,7 @@
             android:id="@+id/sign_in_name_email_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:autofillHints="emailAddress|username"
             android:hint="@string/user_sign_in_name_email"/>
 
     </android.support.design.widget.TextInputLayout>
@@ -67,6 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            android:autofillHints="password"
             android:hint="@string/user_sign_in_pwd"/>
 
     </android.support.design.widget.TextInputLayout>
