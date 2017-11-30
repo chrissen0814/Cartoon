@@ -7,13 +7,12 @@
 ## 应用截图
 ![首页界面](https://github.com/chrissen0814/Cartoon/blob/master/screenshot/screenshot_main.png)
 ![分类界面](https://github.com/chrissen0814/Cartoon/blob/master/screenshot/screenshot_category.png)
-![搜索界面](https://github.com/chrissen0814/Cartoon/blob/master/screenshot/screenshot_search.png)
-![关于界面](https://github.com/chrissen0814/Cartoon/blob/master/screenshot/screenshot_about.png)
 ## 项目介绍
 + 网络请求框架：retrofit + rxJava
 + 数据库：greenDao
 + 图片加载：Glide
 + JSON数据解析: fastjson
++ 后端：LeanCloud
 ## 更新计划
 + 添加竖屏看漫画模式
 + 细化漫画分类
