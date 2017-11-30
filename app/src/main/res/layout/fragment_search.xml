@@ -24,7 +24,7 @@
             android:paddingLeft="@dimen/card_view_margin_left_right"
             android:background="@null"
             android:textColor="@android:color/white"
-            android:textColorHint="#aaa"
+            android:textColorHint="#7FFFFFFF"
             android:hint="输入漫画书名"/>
 
         <android.support.v7.widget.AppCompatImageView
@@ -32,10 +32,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:foreground="?android:attr/selectableItemBackground"
-            app:srcCompat="@drawable/icon_search"
+            app:srcCompat="@drawable/icon_search_default"
             android:layout_marginRight="12dp"
             android:padding="10dp"
-            android:tint="#aaa"
             android:clickable="true"/>
 
     </LinearLayout>

@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.chrissen.cartoon.R;
 
 import java.io.File;
 
@@ -31,9 +32,17 @@ public class ImageUtil {
     private static RequestOptions sCircleOptions = new RequestOptions()
             .circleCrop();
 
+    private static RequestOptions sPlaceholderOptions = new RequestOptions()
+            .centerInside()
+            .placeholder(R.drawable.placeholder_cat);
+
 
     public static void loadImageByUrl(String url , Context context , ImageView imageView){
         Glide.with(context).load(url).into(imageView);
+    }
+
+    public static void loadImageByUrlWithPlaceholder(String url , Context context , ImageView imageView){
+        Glide.with(context).load(url).apply(sPlaceholderOptions).into(imageView);
     }
 
 

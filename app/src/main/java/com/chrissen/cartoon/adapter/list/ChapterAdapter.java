@@ -44,7 +44,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
     }
 
     @Override
-    public void onBindViewHolder(ChapterViewHolder holder, int position) {
+    public void onBindViewHolder(final ChapterViewHolder holder, final int position) {
         if (pos == position) {
             holder.bookmarkIv.setVisibility(View.VISIBLE);
         }else {
@@ -61,6 +61,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
                 intent.putExtra(IntentConstants.BOOK,mBook);
                 intent.putExtra(IntentConstants.CHAPTER_NAME,chapter.getName());
                 intent.putExtra(IntentConstants.CHAPTER_LIST,mChapterList);
+                intent.putExtra(IntentConstants.CHAPTER_INDEX,holder.getAdapterPosition());
                 mContext.startActivity(intent);
             }
         });

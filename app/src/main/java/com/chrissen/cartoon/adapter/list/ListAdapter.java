@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.bean.ChapterBean;
-import com.chrissen.cartoon.dao.greendao.Book;
 
 import java.util.ArrayList;
 
@@ -20,16 +19,15 @@ import java.util.ArrayList;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ChapterViewHolder> {
 
+    private OnListItemClickListener mListener;
     private Context mContext;
     private String mComicName , mChapterId;
     private ArrayList<ChapterBean.Chapter> mChapterList;
-    private Book mBook;
 
-    private int pos = -1;
+    private int pos;
 
-    public ListAdapter(Context context, Book book , String comicName,String chapterId , ArrayList<ChapterBean.Chapter> chapterList) {
+    public ListAdapter(Context context , String comicName, String chapterId , ArrayList<ChapterBean.Chapter> chapterList) {
         mContext = context;
-        mBook = book;
         mComicName = comicName;
         mChapterList = chapterList;
         mChapterId = chapterId;
@@ -42,10 +40,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ChapterViewHol
     }
 
     @Override
-    public void onBindViewHolder(ChapterViewHolder holder, int position) {
+    public void onBindViewHolder(final ChapterViewHolder holder, int position) {
 
         final ChapterBean.Chapter chapter = mChapterList.get(position);
-        if (chapter.getId().equals(mChapterId)) {
+//        if (chapter.getId().equals(mChapterId)) {
+//            holder.dotIv.setVisibility(View.VISIBLE);
+//        }else {
+//            holder.dotIv.setVisibility(View.GONE);
+//        }
+        if(pos == position){
             holder.dotIv.setVisibility(View.VISIBLE);
         }else {
             holder.dotIv.setVisibility(View.GONE);
@@ -54,7 +57,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ChapterViewHol
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mListener.onListItemClick(v,holder.getAdapterPosition());
             }
         });
     }
@@ -77,6 +80,22 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ChapterViewHol
             nameTv = itemView.findViewById(R.id.chapter_list_name_tv);
             dotIv = itemView.findViewById(R.id.chapter_list_dot_iv);
         }
+    }
+
+    public interface OnListItemClickListener{
+        void onListItemClick(View view , int position);
+    }
+
+    public void setOnListItemClickListener(OnListItemClickListener listener){
+        mListener = listener;
+    }
+
+    public void setCurPos(int pos){
+        this.pos = pos;
+    }
+
+    public int getPos(){
+        return pos;
     }
 
 }

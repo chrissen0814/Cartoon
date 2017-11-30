@@ -22,4 +22,6 @@ public class IntentConstants {
 
     public static final String BOOK_NOTE = "book_note";
 
+    public static final String CHAPTER_INDEX = "chapter_index";
+
 }

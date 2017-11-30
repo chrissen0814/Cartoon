@@ -1,7 +1,6 @@
 package com.chrissen.cartoon.fragment;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -84,9 +83,9 @@ public class SearchFragment extends Fragment implements SearchView {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count > 0) {
-                    mImageView.setColorFilter(Color.WHITE);
+                    mImageView.setImageResource(R.drawable.icon_search);
                 }else {
-                    mImageView.setColorFilter(R.color.default_darker_gray);
+                    mImageView.setImageResource(R.drawable.icon_search_default);
                 }
             }
 

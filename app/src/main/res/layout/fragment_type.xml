@@ -11,7 +11,7 @@
         android:id="@+id/type_tab_layout"
         android:layout_width="0dp"
         app:tabSelectedTextColor="@android:color/white"
-        app:tabTextColor="#aaaa"
+        app:tabTextColor="#7FFFFFFF"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

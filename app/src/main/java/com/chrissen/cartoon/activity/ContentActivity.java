@@ -43,6 +43,9 @@ public class ContentActivity extends BaseAbstractActivity implements BookContent
     private ContentPagerAdapter mAdapter;
     private List<Fragment> mFragmentList = new ArrayList<>();
 
+    private ListAdapter mListAdapter;
+
+    private int mChapterIndex;
     private int counts;
 
     private String mComicName;
@@ -65,9 +68,12 @@ public class ContentActivity extends BaseAbstractActivity implements BookContent
         mBook = (Book) getIntent().getSerializableExtra(IntentConstants.BOOK);
         mChapterName = getIntent().getStringExtra(IntentConstants.CHAPTER_NAME);
         mChapterArrayList = (ArrayList<ChapterBean.Chapter>) getIntent().getSerializableExtra(IntentConstants.CHAPTER_LIST);
+        mChapterIndex = getIntent().getIntExtra(IntentConstants.CHAPTER_INDEX,0);
         mPresenter = new ContentPresenter(this);
         mPresenter.getContent(mComicName,Integer.parseInt(mChapterId));
         mTitleTv.setText(mComicName);
+        mListAdapter = new ListAdapter(this,mComicName,mChapterId,mChapterArrayList);
+        mListAdapter.setCurPos(mChapterIndex);
     }
 
     protected void initViews() {
@@ -83,6 +89,9 @@ public class ContentActivity extends BaseAbstractActivity implements BookContent
 
     @Override
     public void onShowSuccess(ContentBean obj) {
+        mAdapter = null;
+        mViewPager.setAdapter(null);
+        mFragmentList.clear();
         counts = obj.getImageList().size();
         long dbIndex = mBook.getImageIndex() + 1;
         String index = dbIndex + "/" + counts;
@@ -151,9 +160,19 @@ public class ContentActivity extends BaseAbstractActivity implements BookContent
     public void onListClick(View view) {
 //        ListDialog listDialog = ListDialog.newInstance(mBook,mComicName,mChapterId);
 //        listDialog.show(getSupportFragmentManager(),null);
-        ListAdapter listAdapter = new ListAdapter(this,mBook,mComicName,mChapterId,mChapterArrayList);
+
+        mListAdapter.setOnListItemClickListener(new ListAdapter.OnListItemClickListener() {
+            @Override
+            public void onListItemClick(View view, int position) {
+                mPresenter.getContent(mComicName,Integer.parseInt(mChapterArrayList.get(position).getId()));
+                AnimUtil.slideOutToLeft(mListContentFl,ContentActivity.this);
+                AnimUtil.fadeOut(mBlankFl,ContentActivity.this);
+                mListAdapter.setCurPos(position);
+                mListAdapter.notifyDataSetChanged();
+            }
+        });
         mListRv.setLayoutManager(new LinearLayoutManager(this));
-        mListRv.setAdapter(listAdapter);
+        mListRv.setAdapter(mListAdapter);
         AnimUtil.slideInFromLeft(mListContentFl,this);
         AnimUtil.fadeIn(mBlankFl,this);
     }

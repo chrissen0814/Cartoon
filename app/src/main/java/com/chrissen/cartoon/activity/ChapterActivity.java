@@ -29,13 +29,13 @@ public class ChapterActivity extends BaseAbstractActivity implements BookChapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chapter);
         initViews();
-        initParams();
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
+        initParams();
         mPresenter = new ChapterPresenter(this);
         mPresenter.getChapterList(comicName,0);
     }
