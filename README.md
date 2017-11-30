@@ -12,6 +12,7 @@
 + 数据库：greenDao
 + 图片加载：Glide
 + JSON数据解析: fastjson
++ 后端：LeanCloud
 ## 更新计划
 + 添加竖屏看漫画模式
 + 细化漫画分类
