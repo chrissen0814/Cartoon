@@ -5,10 +5,10 @@
 ## 更新日志
 支持Android 8.0 autofill特性
 ## 应用截图
-![image](http://github.com/chrissen0814/Cartoon/raw/master/screenshot/screenshot_main.png)
-![image](http://github.com/chrissen0814/Cartoon/raw/master/screenshot/screenshot_category.png)
-![image](http://github.com/chrissen0814/Cartoon/raw/master/screenshot/screenshot_search.png)
-![image](http://github.com/chrissen0814/Cartoon/raw/master/screenshot/screenshot_about.png)
+![首页界面](https://github.com/chrissen0814/Cartoon/blob/master/screenshot/screenshot_main.png)
+![分类界面](https://github.com/chrissen0814/Cartoon/blob/master/screenshot/screenshot_category.png)
+![搜索界面](https://github.com/chrissen0814/Cartoon/blob/master/screenshot/screenshot_search.png)
+![关于界面](https://github.com/chrissen0814/Cartoon/blob/master/screenshot/screenshot_about.png)
 ## 项目介绍
 + 网络请求框架：retrofit + rxJava
 + 数据库：greenDao
