@@ -15,8 +15,8 @@ android {
         applicationId "com.chrissen.cartoon"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
