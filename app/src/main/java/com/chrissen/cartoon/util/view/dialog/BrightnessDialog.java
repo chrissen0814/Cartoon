@@ -55,9 +55,9 @@ public class BrightnessDialog extends DialogFragment {
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (SystemUtil.isAutoBrightness()) {
-                    SystemUtil.stopAutoBrightness(getActivity());
-                }
+//                if (SystemUtil.isAutoBrightness()) {
+//                    SystemUtil.stopAutoBrightness(getActivity());
+//                }
                 SystemUtil.setBrightness(getActivity(),progress);
             }
 

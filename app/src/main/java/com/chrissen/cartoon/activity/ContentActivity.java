@@ -23,7 +23,6 @@ import com.chrissen.cartoon.module.presenter.content.ContentPresenter;
 import com.chrissen.cartoon.module.view.BookContentView;
 import com.chrissen.cartoon.util.AnimUtil;
 import com.chrissen.cartoon.util.IntentConstants;
-import com.chrissen.cartoon.util.SystemUtil;
 import com.chrissen.cartoon.util.view.dialog.BrightnessDialog;
 
 import java.util.ArrayList;
@@ -143,7 +142,11 @@ public class ContentActivity extends BaseAbstractActivity implements BookContent
         if (AVUser.getCurrentUser() != null) {
             BookNetDaoManager.updateBook(new BookDaoManager().queryBookById(mBook.getId()));
         }
-        SystemUtil.startAutoBrightness(this);
+//        if (SystemUtil.isAutoBrightness()) {
+//            SystemUtil.startAutoBrightness(this);
+//        }else {
+//            SystemUtil.stopAutoBrightness(this);
+//        }
     }
 
     public void setTopAndBottomBarVisibility(){
