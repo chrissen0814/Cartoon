@@ -15,8 +15,8 @@ android {
         applicationId "com.chrissen.cartoon"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 3
-        versionName "1.0.4"
+        versionCode 4
+        versionName "1.0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -53,6 +53,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     //glide
     compile 'jp.wasabeef:glide-transformations:3.0.1'
     // If you want to use the GPU Filters

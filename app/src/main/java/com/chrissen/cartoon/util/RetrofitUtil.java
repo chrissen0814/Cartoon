@@ -16,7 +16,6 @@ public class RetrofitUtil {
     private Retrofit mRetrofit;
     private static RetrofitUtil sRetrofitUtil;
 
-
     public static RetrofitUtil newInstance(){
         if (sRetrofitUtil == null) {
             synchronized (RetrofitUtil.class){
