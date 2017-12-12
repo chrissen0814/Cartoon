@@ -45,7 +45,7 @@ public class CartoonApplication extends Application {
         Toasty.Config.getInstance()
                 .setErrorColor(getResources().getColor(R.color.toast_error))
                 .setSuccessColor(getResources().getColor(R.color.toast_success))
-                .setTextColor(Color.BLACK)
+                .setTextColor(Color.WHITE)
                 .apply();
     }
 

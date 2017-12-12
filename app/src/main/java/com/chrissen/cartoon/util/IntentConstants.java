@@ -24,4 +24,6 @@ public class IntentConstants {
 
     public static final String CHAPTER_INDEX = "chapter_index";
 
+    public static final String FILE_PATH = "file_path";
+
 }

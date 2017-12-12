@@ -1,30 +1,20 @@
 package com.chrissen.cartoon.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.avos.avoscloud.AVAnalytics;
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.feedback.FeedbackAgent;
-import com.chrissen.cartoon.CartoonApplication;
 import com.chrissen.cartoon.R;
-import com.chrissen.cartoon.activity.system.FeedbackActivity;
-import com.chrissen.cartoon.adapter.list.DbBookAdapter;
-import com.chrissen.cartoon.dao.greendao.Book;
-import com.chrissen.cartoon.dao.manager.BookDaoManager;
-import com.chrissen.cartoon.util.AnimUtil;
+import com.chrissen.cartoon.adapter.pager.MainPagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,14 +25,18 @@ public class MainFragment extends Fragment {
 
     private static final String FRAGMENT_NAME = "MainFragment";
 
-    private CardView mNotificationCv;
-    private RecyclerView mRecyclerView;
-    private DbBookAdapter mAdapter;
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
+    private MainPagerAdapter mPagerAdapter;
+    private List<Fragment> mFragmentList;
+    private List<String> mTitleList;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFragmentList = new ArrayList<>();
+        mTitleList = new ArrayList<>();
     }
 
     @Nullable
@@ -55,47 +49,21 @@ public class MainFragment extends Fragment {
     }
 
     private void initParams() {
-        CartoonApplication.getFeedbackAgent().countUnreadFeedback(new FeedbackAgent.UnreadCountCallback() {
-            @Override
-            public void onUnreadCount(int i, AVException e) {
-                if (i > 0) {
-                    AnimUtil.slideInFromUp(mNotificationCv,getActivity());
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            AnimUtil.fadeOut(mNotificationCv,getActivity());
-                            mNotificationCv.setVisibility(View.GONE);
-                        }
-                    },8000);
-                }
-            }
-        });
+        mFragmentList.add(new CartoonFragment());
+        mFragmentList.add(new TxtFragment());
+        mTitleList.add("漫画");
+        mTitleList.add("文本");
+        mPagerAdapter = new MainPagerAdapter(getChildFragmentManager(),mFragmentList,mTitleList);
+        mViewPager.setAdapter(mPagerAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+
     }
 
     private void findViews(View view) {
-        mRecyclerView = view.findViewById(R.id.main_rv);
-        mNotificationCv = view.findViewById(R.id.main_notification_cv);
-        mNotificationCv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().startActivity(new Intent(getContext(), FeedbackActivity.class));
-                mNotificationCv.setVisibility(View.GONE);
-            }
-        });
+        mTabLayout = view.findViewById(R.id.main_tab_layout);
+        mViewPager = view.findViewById(R.id.main_view_pager);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        List<Book> bookList = new BookDaoManager().queryAllBook();
-        if (bookList != null && bookList.size() > 0) {
-            mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-        }else {
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        }
-        mAdapter = new DbBookAdapter(getContext(),bookList);
-        mRecyclerView.setAdapter(mAdapter);
-    }
 
     @Override
     public void onResume() {

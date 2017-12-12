@@ -27,8 +27,8 @@ import com.chrissen.cartoon.fragment.MainFragment;
 import com.chrissen.cartoon.fragment.SearchFragment;
 import com.chrissen.cartoon.fragment.SettingFragment;
 import com.chrissen.cartoon.fragment.TypeFragment;
-import com.chrissen.cartoon.module.model.AcgModel;
 import com.chrissen.cartoon.module.model.HitokotoModel;
+import com.chrissen.cartoon.module.model.ImageModel;
 import com.chrissen.cartoon.util.ConfigUtil;
 import com.chrissen.cartoon.util.ImageUtil;
 
@@ -126,7 +126,7 @@ public class MainActivity extends BaseAbstractActivity implements DuoMenuView.On
             }else {
                 ImageUtil.loadBlurImageByRes(R.drawable.main_bg,this,imageView);
             }
-            new AcgModel().saveAcg();
+            new ImageModel().saveImage();
         }else {
             imageView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }

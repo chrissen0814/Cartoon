@@ -21,6 +21,9 @@ public class ConfigUtil {
     public static final int SUCCESS_MSG = 1;
     public static final int FAIL_MSG = -1;
 
+//    二次元图片
+    public static final String ER_CI_YUAN = "https://r-wallpaper.maidsystem.win/";
+
 
     public static final String BG_IMAGE_NAME = "bg_image.jpg";
     public static final String APP_DIR = CartoonApplication.getContext().getPackageName();

@@ -27,6 +27,12 @@ allprojects {
             url "http://mvn.leancloud.cn/nexus/content/repositories/public"
         }
         maven { url "https://jitpack.io" }
+        maven {
+            url  "http://dl.bintray.com/lukaville/maven"
+        }
+        maven {
+            url 'http://dl.bintray.com/amulyakhare/maven'
+        }
     }
 }
 
