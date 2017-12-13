@@ -7,8 +7,10 @@
     <string name="navi_main">首页</string>
     <string name="navi_type">分类</string>
     <string name="navi_search">搜索</string>
-    <string name="navi_setting">设置</string>
-    <string name="navi_about">关于</string>
+
+    <!--toolbar-->
+    <string name="toolbar_setting">设置</string>
+    <string name="toolbar_about">关于</string>
 
     <!--漫画类型-->
     <string-array name="comic_type">
@@ -107,7 +109,5 @@
     <string name="feedback_send">发送</string>
     <string name="shortcuts_help">联系开发者</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

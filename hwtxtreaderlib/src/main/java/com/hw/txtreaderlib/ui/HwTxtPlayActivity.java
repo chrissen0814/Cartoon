@@ -23,6 +23,7 @@ import com.hw.txtreaderlib.bean.TxtMsg;
 import com.hw.txtreaderlib.interfaces.IChapter;
 import com.hw.txtreaderlib.interfaces.ILoadListener;
 import com.hw.txtreaderlib.interfaces.IPageChangeListener;
+import com.hw.txtreaderlib.interfaces.IViewListener;
 import com.hw.txtreaderlib.main.TxtConfig;
 import com.hw.txtreaderlib.main.TxtReaderView;
 
@@ -232,6 +233,19 @@ public class HwTxtPlayActivity extends AppCompatActivity {
                     mChapterNameText.setText((currentChapter.getTitle() + "").trim());
                 } else {
                     mChapterNameText.setText("无章节");
+                }
+            }
+        });
+
+        mTxtReaderView.setOnViewClickListener(new IViewListener() {
+            @Override
+            public void onViewClick() {
+                if (mTopDecoration.getVisibility() == View.VISIBLE && mBottomDecoration.getVisibility() == View.VISIBLE) {
+                    mTopDecoration.setVisibility(View.GONE);
+                    mBottomDecoration.setVisibility(View.GONE);
+                }else {
+                    mTopDecoration.setVisibility(View.VISIBLE);
+                    mBottomDecoration.setVisibility(View.VISIBLE);
                 }
             }
         });

@@ -26,4 +26,8 @@ public class IntentConstants {
 
     public static final String FILE_PATH = "file_path";
 
+    public static final String CARTOON_FRAGMENT_TYPE = "cartoon_fragment_type";
+
+    public static final String SYSTEM_FRAGMENT_TYPE = "system_fragment_type";
+
 }

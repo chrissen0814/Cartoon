@@ -19,7 +19,6 @@ import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.activity.BaseAbstractActivity;
 import com.chrissen.cartoon.activity.BookDetailAbstractActivity;
 import com.chrissen.cartoon.activity.BookNoteActivity;
-import com.chrissen.cartoon.activity.ChapterActivity;
 import com.chrissen.cartoon.dao.greendao.Book;
 import com.chrissen.cartoon.dao.manager.BookDaoManager;
 import com.chrissen.cartoon.dao.manager.BookNetDaoManager;
@@ -79,9 +78,13 @@ public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             dbBookViewHolder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, ChapterActivity.class);
-                    intent.putExtra(IntentConstants.BOOK_NAME,book.getBookName());
-                    intent.putExtra(IntentConstants.BOOK,book);
+//                    Intent intent = new Intent(mContext, ChapterActivity.class);
+//                    intent.putExtra(IntentConstants.BOOK_NAME,book.getBookName());
+//                    intent.putExtra(IntentConstants.BOOK,book);
+//                    mContext.startActivity(intent);
+                    ((BaseAbstractActivity)mContext).putBindClick(v);
+                    Intent intent = new Intent(mContext, BookDetailAbstractActivity.class);
+                    intent.putExtra(IntentConstants.BOOK,mBookList.get(holder.getAdapterPosition()));
                     mContext.startActivity(intent);
                 }
             });

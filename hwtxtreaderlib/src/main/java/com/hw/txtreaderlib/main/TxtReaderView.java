@@ -13,6 +13,7 @@ import com.hw.txtreaderlib.interfaces.IPage;
 import com.hw.txtreaderlib.interfaces.IReaderViewDrawer;
 import com.hw.txtreaderlib.interfaces.ITextSelectListener;
 import com.hw.txtreaderlib.interfaces.ITxtTask;
+import com.hw.txtreaderlib.interfaces.IViewListener;
 import com.hw.txtreaderlib.tasks.DrawPrepareTask;
 import com.hw.txtreaderlib.tasks.TxtConfigInitTask;
 import com.hw.txtreaderlib.tasks.TxtPageLoadTask;
@@ -145,6 +146,16 @@ public class TxtReaderView extends TxtReaderBaseView {
         }
 
         invalidate();
+    }
+
+    @Override
+    protected void onClick(MotionEvent event) {
+        viewListener.onViewClick();
+    }
+
+    private IViewListener viewListener;
+    public void setOnViewClickListener(IViewListener listener){
+        viewListener = listener;
     }
 
     protected void onActionUp(MotionEvent event) {

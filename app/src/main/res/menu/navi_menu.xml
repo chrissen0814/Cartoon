@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/navi_main"
-        android:title="@string/navi_main"
-        android:icon="@drawable/navi_main"/>
+    <item android:title="漫画">
+        <menu>
+            <item
+                android:id="@+id/navi_type"
+                android:title="@string/navi_type"
+                android:icon="@drawable/navi_type"/>
 
-    <item
-        android:id="@+id/navi_type"
-        android:title="@string/navi_type"
-        android:icon="@drawable/navi_type"/>
+            <item
+                android:id="@+id/navi_search"
+                android:title="@string/navi_search"
+                android:icon="@drawable/navi_search"/>
+        </menu>
+    </item>
 
-    <item
-        android:id="@+id/navi_search"
-        android:title="@string/navi_search"
-        android:icon="@drawable/navi_search"/>
+    <item android:title="电子书">
 
-    <item
-        android:id="@+id/navi_setting"
-        android:title="@string/navi_setting"
-        android:icon="@drawable/navi_setting"/>
+        <menu>
 
-    <item
-        android:id="@+id/navi_about"
-        android:title="@string/navi_about"
-        android:icon="@drawable/navi_about"/>
+            <item android:id="@+id/navi_txt"
+                  android:title="导入"
+                  android:icon="@drawable/icon_import"/>
+
+        </menu>
+
+
+    </item>
 
 </menu>

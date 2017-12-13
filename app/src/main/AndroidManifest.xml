@@ -26,12 +26,6 @@
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts"/>
@@ -72,6 +66,17 @@
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activity.system.FeedbackActivity">
+        </activity>
+        <activity android:name=".activity.Main2Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.CartoonActivity">
+        </activity>
+        <activity android:name=".activity.system.SystemActivity">
         </activity>
     </application>
 

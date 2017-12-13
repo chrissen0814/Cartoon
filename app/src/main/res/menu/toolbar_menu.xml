@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/toolbar_setting"
+        android:title="设置"
+        android:enabled="false"/>
+
+    <item
+        android:id="@+id/toolbar_about"
+        android:title="关于"/>
+
+</menu>

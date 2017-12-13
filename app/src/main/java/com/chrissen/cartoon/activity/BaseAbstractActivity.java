@@ -27,6 +27,8 @@ public abstract class BaseAbstractActivity extends AppCompatActivity {
         mAct = this;
     }
 
+
+
     protected abstract void initViews();
 
     protected abstract void initParams();

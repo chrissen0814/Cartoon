@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.chrissen.cartoon.R;
 import com.hw.txtreaderlib.ui.HwTxtPlayActivity;
 
@@ -38,15 +38,16 @@ public class TxtAdapter extends RecyclerView.Adapter<TxtAdapter.TxtViewHolder> {
     @Override
     public void onBindViewHolder(TxtViewHolder holder, int position) {
         final File file = mFileList.get(position);
-        final String fileName = file.getName();
-        holder.titleTv.setText(fileName.split("\\.")[0]);
+        final String fileName = file.getName().split("\\.")[0];
+        ColorGenerator colorGenerator = ColorGenerator.MATERIAL;
+        int color = colorGenerator.getRandomColor();
         TextDrawable textDrawable = TextDrawable.builder()
-                .buildRound(fileName.substring(0,1),mContext.getResources().getColor(R.color.colorPrimary));
+                .buildRect(fileName,color);
         holder.coverIv.setImageDrawable(textDrawable);
         holder.layout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                return false;
+                return true;
             }
         });
         holder.layout.setOnClickListener(new View.OnClickListener() {
@@ -65,13 +66,11 @@ public class TxtAdapter extends RecyclerView.Adapter<TxtAdapter.TxtViewHolder> {
     class TxtViewHolder extends RecyclerView.ViewHolder{
         private View layout;
         private ImageView coverIv;
-        private TextView titleTv;
 
         public TxtViewHolder(View itemView) {
             super(itemView);
             layout = itemView;
             coverIv = itemView.findViewById(R.id.txt_cover_image_iv);
-            titleTv = itemView.findViewById(R.id.txt_title_tv);
         }
     }
 

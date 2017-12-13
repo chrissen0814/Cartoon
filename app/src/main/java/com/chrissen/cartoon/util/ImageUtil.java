@@ -36,6 +36,9 @@ public class ImageUtil {
             .centerInside()
             .placeholder(R.drawable.placeholder_cat);
 
+    private static RequestOptions sNoCacheOptions = new RequestOptions()
+            .diskCacheStrategy(DiskCacheStrategy.NONE);
+
 
     public static void loadImageByUrl(String url , Context context , ImageView imageView){
         Glide.with(context).load(url).into(imageView);
@@ -52,9 +55,19 @@ public class ImageUtil {
                 .into(imageView);
     }
 
+    public static void loadImageByRes(int resId , Context context , ImageView imageView){
+        Glide.with(context).load(resId)
+                .into(imageView);
+    }
+
     public static void loadBlurImageByFile(File file , Context context , ImageView imageView){
         Glide.with(context).load(file)
                 .apply(mOptions)
+                .into(imageView);
+    }
+
+    public static void loadImageByFile(File file , Context context , ImageView imageView){
+        Glide.with(context).load(file)
                 .into(imageView);
     }
 

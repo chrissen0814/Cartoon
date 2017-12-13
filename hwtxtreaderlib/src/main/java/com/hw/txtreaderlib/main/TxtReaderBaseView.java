@@ -239,6 +239,11 @@ public abstract class TxtReaderBaseView extends View implements GestureDetector.
      */
     protected abstract void onPageMove(MotionEvent event);
 
+    /**
+     *
+     * @param event 单次点击
+     */
+    protected abstract void onClick(MotionEvent event);
 
     @Override
     public boolean onDown(MotionEvent motionEvent) {
@@ -285,8 +290,8 @@ public abstract class TxtReaderBaseView extends View implements GestureDetector.
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-
-        return false;
+        onClick(e);
+        return true;
     }
 
     @Override

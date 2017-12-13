@@ -24,4 +24,6 @@
     <color name="text_default_bg">#FFFFFF</color>
     <color name="text_default_text">#000000</color>
 
+    <color name="white">#FFFFFF</color>
+
 </resources>

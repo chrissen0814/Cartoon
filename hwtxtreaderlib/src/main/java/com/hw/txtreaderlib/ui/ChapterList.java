@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.hw.txtreaderlib.R;
 import com.hw.txtreaderlib.interfaces.IChapter;
+import com.hw.txtreaderlib.utils.DisPlayUtil;
 
 import java.util.List;
 
@@ -64,19 +66,28 @@ public class ChapterList extends PopupWindow {
         m.getDefaultDisplay().getMetrics(metrics);
 
         int ViewHeight = height;
-        int ViewWidth = metrics.widthPixels;
+        int ViewWidth = DisPlayUtil.dip2px(context,200);
         mRootView = new ListView(context);
+        mRootView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (isShowing()) {
+                    dismiss();
+                }
+                return true;
+            }
+        });
         ViewGroup.LayoutParams params =
                 new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT);
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
         mRootView.setLayoutParams(params);
         this.setContentView(mRootView);
         this.setWidth(ViewWidth);
         this.setHeight(ViewHeight);
         this.setFocusable(true);
         this.setOutsideTouchable(true);
-        this.setAnimationStyle(R.style.HwTxtChapterMenuAnimation);
-        this.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#f1f6b8")));
+        this.setAnimationStyle(R.style.HwTxtChapterPopupWindowAnimation);
+        this.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
         mAdapter = new MyAdapter();
         mRootView.setAdapter(mAdapter);
     }

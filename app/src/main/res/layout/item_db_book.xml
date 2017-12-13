@@ -4,9 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:foreground="?android:attr/selectableItemBackground"
-    android:layout_width="wrap_content"
-    android:layout_height="250dp"
-    android:layout_margin="12dp"
+    android:layout_width="140dp"
+    android:layout_marginBottom="6dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_height="match_parent"
     app:cardCornerRadius="@dimen/card_view_coner_radius"
     app:cardElevation="@dimen/card_view_elevation">
 
@@ -26,7 +28,7 @@
         <TextView
             android:id="@+id/dbbook_name_tv"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:textSize="12sp"
             tools:text="五月妹杀"
             android:maxLines="1"

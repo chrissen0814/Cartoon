@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
+
+    <com.hw.txtreaderlib.main.TxtReaderView
+        android:id="@+id/activity_hwtxtplay_readerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:clickable="true"
+        android:background="#ffffff"/>
 
     <RelativeLayout
         android:id="@+id/activity_hwtxtplay_top"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:background="#ffffff"
         android:paddingBottom="10dp"
         android:paddingTop="10dp">
@@ -19,74 +34,51 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/activity_hwtxtplay_chpatermenu"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="第一章"
             android:textColor="#b1b4b3"/>
 
-        <LinearLayout
-            android:id="@+id/activity_hwtxtplay_chpatermenu"
+        <TextView
+            android:id="@+id/activity_hwtxtplay_progress_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:clickable="true"
-            android:orientation="horizontal">
-
-            <View
-
-                android:layout_width="7dp"
-                android:layout_height="7dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/activity_hwtxtplay_chapter_menutext"
-                android:background="@drawable/shape_little_ball"/>
-
-            <TextView
-                android:id="@+id/activity_hwtxtplay_chapter_menutext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:clickable="true"
-                android:text="章节"
-                android:textColor="#858582"/>
-        </LinearLayout>
-
+            android:text="0%"
+            android:textColor="#b1b4b3"/>
 
     </RelativeLayout>
 
-    <com.hw.txtreaderlib.main.TxtReaderView
-        android:id="@+id/activity_hwtxtplay_readerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/activity_hwtxtplay_bottom"
-        android:layout_below="@+id/activity_hwtxtplay_top"
-        android:background="#ffffff"/>
-
     <RelativeLayout
         android:id="@+id/activity_hwtxtplay_bottom"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_alignParentBottom="true"
         android:background="#ffffff"
         android:paddingTop="5dp">
 
         <TextView
-            android:id="@+id/activity_hwtxtplay_progress_text"
+            android:id="@+id/activity_hwtxtplay_chapter_menutext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
-            android:text="0%"
-            android:textColor="#b1b4b3"/>
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:text="章节"
+            android:textColor="#858582"/>
+
 
         <TextView
             android:id="@+id/activity_hwtxtplay_setting_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="10dp"
             android:clickable="true"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
@@ -100,8 +92,8 @@
         android:background="#00000000"
         android:clickable="true"
         android:focusable="true"
-        android:layout_below="@+id/activity_hwtxtplay_menu_top"
-        android:layout_above="@+id/activity_hwtxtplay_menu_bottom"
+        app:layout_constraintTop_toBottomOf="@id/activity_hwtxtplay_menu_top"
+        app:layout_constraintBottom_toTopOf="@id/activity_hwtxtplay_menu_bottom"
         android:visibility="gone"
         android:layout_height="match_parent"/>
 
@@ -110,16 +102,19 @@
         android:focusable="true"
         android:id="@+id/activity_hwtxtplay_menu_top"
         android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
         layout="@layout/view_menu_top"/>
 
     <include
         android:clickable="true"
         android:focusable="true"
         android:id="@+id/activity_hwtxtplay_menu_bottom"
-        android:layout_alignParentBottom="true"
         layout="@layout/view_menu_bottom"
         android:visibility="gone"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="wrap_content"/>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
