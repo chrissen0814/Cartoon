@@ -1,191 +1,257 @@
 package com.chrissen.cartoon.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.annotation.NonNull;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.widget.Button;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.avos.avoscloud.AVUser;
 import com.chrissen.cartoon.CartoonApplication;
 import com.chrissen.cartoon.R;
+import com.chrissen.cartoon.activity.system.SystemActivity;
 import com.chrissen.cartoon.activity.user.SignInActivity;
 import com.chrissen.cartoon.activity.user.UserInfoActivity;
-import com.chrissen.cartoon.adapter.list.MenuAdapter;
-import com.chrissen.cartoon.bean.HitokotoBean;
+import com.chrissen.cartoon.adapter.list.DbBookAdapter;
+import com.chrissen.cartoon.adapter.list.TxtAdapter;
 import com.chrissen.cartoon.dao.greendao.Book;
+import com.chrissen.cartoon.dao.greendao.Txt;
 import com.chrissen.cartoon.dao.manager.BookDaoManager;
 import com.chrissen.cartoon.dao.manager.BookNetDaoManager;
-import com.chrissen.cartoon.fragment.AboutFragment;
-import com.chrissen.cartoon.fragment.MainFragment;
-import com.chrissen.cartoon.fragment.SearchFragment;
-import com.chrissen.cartoon.fragment.SettingFragment;
-import com.chrissen.cartoon.fragment.TypeFragment;
-import com.chrissen.cartoon.module.model.HitokotoModel;
+import com.chrissen.cartoon.dao.manager.TxtDaoManager;
 import com.chrissen.cartoon.module.model.ImageModel;
+import com.chrissen.cartoon.util.AnimUtil;
 import com.chrissen.cartoon.util.ConfigUtil;
 import com.chrissen.cartoon.util.ImageUtil;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
-import nl.psdcompany.duonavigationdrawer.views.DuoMenuView;
-import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
-
-public class MainActivity extends BaseAbstractActivity implements DuoMenuView.OnMenuClickListener{
+public class MainActivity extends BaseAbstractActivity implements View.OnClickListener{
     private static final int REQUEST_CODE_SIGN_IN = 2;
 
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
+    private CollapsingToolbarLayout mCollapsingTl;
+    private ImageView mImageView;
     private Toolbar mToolbar;
-    private DuoDrawerLayout mDrawerLayout;
-    private DuoMenuView mMenuView;
-    private ArrayList<String> mTitleList;
-    private MenuAdapter mMenuAdapter;
+    private RecyclerView mCartoonRv , mTxtRv;
+    private TextView mCartoonMoreTv , mTxtMoreTv;
+
+    private TextView mLoginTv;
+    private ImageView mHeadIv;
+    private ImageView mCatIv;
+
+    private DbBookAdapter mDbBookAdapter;
+    private TxtAdapter mTxtAdapter;
+    private List<Book> mBookList = new ArrayList<>();
+    private List<Txt> mFileList = new ArrayList<>();
+    private LinearLayoutManager mCartoonLm , mTxtLm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initStatus();
         initViews();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initNavi();
         initParams();
     }
 
+    private void initStatus() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
+
+    private void initNavi() {
+        AVUser user = AVUser.getCurrentUser();
+        if (user != null) {
+            mHeadIv.setVisibility(View.VISIBLE);
+            mLoginTv.setVisibility(View.INVISIBLE);
+            String userName = user.getUsername();
+            TextDrawable nameDrawable = TextDrawable.builder()
+                    .beginConfig()
+                    .textColor(R.color.colorPrimary)
+                    .endConfig()
+                    .buildRound(userName.substring(0,1),Color.WHITE);
+            mHeadIv.setImageDrawable(nameDrawable);
+        }else {
+            mHeadIv.setVisibility(View.INVISIBLE);
+            mLoginTv.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     protected void initViews() {
-        mDrawerLayout = findViewById(R.id.main_duo_drawer_layout);
-        mMenuView = findViewById(R.id.main_duo_menu_view);
+        mDrawerLayout = findViewById(R.id.main_drawer_layout);
+        mNavigationView = findViewById(R.id.main_navi_view);
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navi_type:
+                        CartoonActivity.actionStart(MainActivity.this,0);
+                        break;
+                    case R.id.navi_search:
+                        CartoonActivity.actionStart(MainActivity.this,1);
+                        break;
+                    case R.id.navi_txt:
+                        CartoonActivity.actionStart(MainActivity.this,2);
+                        break;
+                }
+                return true;
+            }
+        });
+        mCollapsingTl = findViewById(R.id.main_collapsing_ctl);
+        mImageView = findViewById(R.id.main_picture_iv);
         mToolbar = findViewById(R.id.main_toolbar);
-        setSupportActionBar(mToolbar);
-        DuoDrawerToggle toggle = new DuoDrawerToggle(this,mDrawerLayout,mToolbar,R.string.navi_open,R.string.navi_close);
-        mDrawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
-        mTitleList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.navi_title)));
-        mMenuAdapter = new MenuAdapter(mTitleList);
-        mMenuView.setAdapter(mMenuAdapter);
-        mMenuView.setOnMenuClickListener(this);
-        setTitle(mTitleList.get(0));
+        mToolbar.setNavigationIcon(R.drawable.toolbar_menu);
+        mToolbar.inflateMenu(R.menu.toolbar_menu);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+        mToolbar.setOverflowIcon(getResources().getDrawable(R.drawable.icon_overflow));
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.toolbar_setting:
+                        break;
+                    case R.id.toolbar_about:
+                        SystemActivity.actionStart(MainActivity.this,1);
+                        break;
+                }
+                return true;
+            }
+        });
+        mCartoonRv = findViewById(R.id.main_cartoon_rv);
+        mTxtRv = findViewById(R.id.main_txt_rv);
+        mCartoonMoreTv = findViewById(R.id.main_cartoon_more_tv);
+        mCartoonMoreTv.setOnClickListener(this);
+        mTxtMoreTv = findViewById(R.id.main_txt_more_tv);
+        mTxtMoreTv.setOnClickListener(this);
+        View headView = mNavigationView.getHeaderView(0).getRootView();
+        mLoginTv = headView.findViewById(R.id.main_login_tv);
+        mLoginTv.setOnClickListener(this);
+        mHeadIv = headView.findViewById(R.id.main_header_iv);
+        mHeadIv.setOnClickListener(this);
+        mCatIv = headView.findViewById(R.id.navi_cat_iv);
+        mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                AnimUtil.slideInFromBottom(mCatIv,MainActivity.this);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                AnimUtil.slideOutFromBottom(mCatIv,MainActivity.this);
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
     }
 
     @Override
     protected void initParams() {
-        startFragment(new MainFragment(),false);
-        mMenuAdapter.setViewSelected(0,true);
-        setTitle(mTitleList.get(0));
-        Button button = mMenuView.getFooterView().findViewById(R.id.footer_bt);
-        initHitokoto();
-        initAcg();
-        if (AVUser.getCurrentUser() != null) {
-            button.setText(R.string.navi_user_info);
-        }else {
-            button.setText(R.string.navi_register_sign_in);
-        }
-    }
-
-    private void initHitokoto(){
-        final TextView textTv = mMenuView.getHeaderView().findViewById(R.id.header_text_tv);
-        final boolean hitokoto = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("setting_hitokoto",false);
-        if (hitokoto) {
-            new HitokotoModel().getHitokoto(new Handler(){
+        loadPicture(mImageView);
+        mBookList.clear();
+        mDbBookAdapter = null;
+        mCartoonRv.setAdapter(null);
+        mCartoonRv.setLayoutManager(null);
+        mBookList = new BookDaoManager().queryAllBook();
+        if (mBookList != null && mBookList.size() > 0) {
+            mDbBookAdapter = new DbBookAdapter(this,mBookList);
+            mCartoonLm = new LinearLayoutManager(mAct,LinearLayoutManager.HORIZONTAL,false){
                 @Override
-                public void handleMessage(Message msg) {
-                    super.handleMessage(msg);
-                    if (msg.what == ConfigUtil.SUCCESS_MSG) {
-                        HitokotoBean hitokotoBean = (HitokotoBean) msg.obj;
-                        if (hitokotoBean != null) {
-                            textTv.setText(hitokotoBean.getHitokoto());
-                        }else {
-                            textTv.setText(R.string.default_header_text);
-                        }
-                    }else {
-                        textTv.setText(R.string.default_header_text);
-                    }
+                public boolean canScrollVertically() {
+                    return true;
                 }
-            });
-        }else {
-            textTv.setText(R.string.default_header_text);
+            };
+            mCartoonRv.setLayoutManager(mCartoonLm);
+            mCartoonRv.setAdapter(mDbBookAdapter);
+        }
+        mFileList.clear();
+        mTxtAdapter = null;
+        mTxtRv.setAdapter(null);
+        mTxtRv.setLayoutManager(null);
+        mFileList = new TxtDaoManager().queryAll();
+        if (mFileList != null && mFileList.size() > 0) {
+            mTxtAdapter = new TxtAdapter(mFileList,this);
+            mTxtLm = new LinearLayoutManager(mAct,LinearLayoutManager.HORIZONTAL,false){
+                @Override
+                public boolean canScrollVertically() {
+                    return true;
+                }
+            };
+            mTxtRv.setLayoutManager(mTxtLm);
+            mTxtRv.setAdapter(mTxtAdapter);
         }
     }
 
-    private void initAcg() {
-        boolean acg = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("setting_navi_bg",false);
-        ImageView imageView = mMenuView.findViewById(R.id.duo_view_menu_background);
-        if (acg) {
-            File appDir = CartoonApplication.getContext().getExternalCacheDir();
-            File file = new File(appDir,ConfigUtil.BG_IMAGE_NAME);
-            if (file != null && file.exists()) {
-                ImageUtil.loadBlurImageByFile(file,this,imageView);
-            }else {
-                ImageUtil.loadBlurImageByRes(R.drawable.main_bg,this,imageView);
-            }
-            new ImageModel().saveImage();
+    private void loadPicture(ImageView imageView) {
+        File appDir = CartoonApplication.getContext().getExternalCacheDir();
+        File file = new File(appDir, ConfigUtil.BG_IMAGE_NAME);
+        if (file != null && file.exists()) {
+            ImageUtil.loadImageByFile(file,this,imageView);
         }else {
-            imageView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            ImageUtil.loadImageByRes(R.drawable.main_bg,this,imageView);
         }
-
+        new ImageModel().saveImage();
     }
+
 
 
     @Override
-    public void onFooterClicked() {
-        AVUser avUser = AVUser.getCurrentUser();
-        if (avUser != null) {
-            startActivity(new Intent(this, UserInfoActivity.class));
-        }else {
-            Intent intent = new Intent(this,SignInActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_SIGN_IN);
-        }
-    }
-
-    @Override
-    public void onHeaderClicked() {
-
-    }
-
-    @Override
-    public void onOptionClicked(int position, Object objectClicked) {
-        setTitle(mTitleList.get(position));
-        mMenuAdapter.setViewSelected(position,true);
-
-        switch (position){
-            case 0:
-                startFragment(new MainFragment(),false);
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.main_cartoon_more_tv:
                 break;
-            case 1:
-                startFragment(new TypeFragment(),false);
+            case R.id.main_txt_more_tv:
                 break;
-            case 2:
-                startFragment(new SearchFragment(),false);
+            case R.id.main_login_tv:
+                Intent intent = new Intent(this,SignInActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_SIGN_IN);
                 break;
-            case 3:
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.main_container,new SettingFragment())
-                        .commit();
-                break;
-            case 4:
-                startFragment(new AboutFragment(),false);
+            case R.id.main_header_iv:
+                startActivity(new Intent(this, UserInfoActivity.class));
                 break;
         }
-        mDrawerLayout.closeDrawer();
     }
 
-    private void startFragment(Fragment fragment , boolean addToBackStack){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        if (addToBackStack) {
-            transaction.addToBackStack(null);
-        }
-        transaction.replace(R.id.main_container, fragment).commit();
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

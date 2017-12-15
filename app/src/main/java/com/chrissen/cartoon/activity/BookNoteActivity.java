@@ -12,13 +12,14 @@ import com.chrissen.cartoon.dao.greendao.Book;
 import com.chrissen.cartoon.dao.manager.BookDaoManager;
 import com.chrissen.cartoon.util.IntentConstants;
 
+import java.util.Calendar;
+
 import es.dmoral.toasty.Toasty;
 
 public class BookNoteActivity extends BaseAbstractActivity {
 
     private Toolbar mToolbar;
     private EditText mNoteEt;
-    private boolean fromDetail;
     private Book mBook;
 
 
@@ -32,13 +33,19 @@ public class BookNoteActivity extends BaseAbstractActivity {
 
     protected void initParams() {
         mBook = (Book) getIntent().getSerializableExtra(IntentConstants.BOOK);
-        fromDetail = getIntent().getBooleanExtra(IntentConstants.FROM_DETAIL,false);
         mToolbar.setTitle(mBook.getBookName());
+        if (mBook.getComment() != null && !mBook.getComment().equals("")) {
+            mNoteEt.setText(mBook.getComment());
+            mNoteEt.setSelection(mBook.getComment().length());
+        }
     }
 
     protected void initViews() {
         mToolbar = findViewById(R.id.book_note_toolbar);
         mNoteEt = findViewById(R.id.book_note_et);
+        mNoteEt.setFocusable(true);
+        mNoteEt.requestFocusFromTouch();
+        mNoteEt.requestFocus();
     }
 
 
@@ -48,6 +55,7 @@ public class BookNoteActivity extends BaseAbstractActivity {
             Toasty.error(this,getString(R.string.book_note_none), Toast.LENGTH_SHORT,false).show();
         }else {
             mBook.setComment(note);
+            mBook.setUpdatedTime(Calendar.getInstance().getTimeInMillis());
             new BookDaoManager().updateBook(mBook);
             Toasty.success(this,getString(R.string.book_note_save_success),Toast.LENGTH_SHORT,true).show();
         }
@@ -56,13 +64,9 @@ public class BookNoteActivity extends BaseAbstractActivity {
     public void onSaveClick(View view) {
         putBindClick(view);
         saveNote();
-        if (fromDetail) {
-            Intent intent = new Intent();
-            intent.putExtra(IntentConstants.BOOK_NOTE,mNoteEt.getText().toString());
-            setResult(RESULT_OK,intent);
-            finish();
-        }else {
-            finish();
-        }
+        Intent intent = new Intent();
+        intent.putExtra(IntentConstants.BOOK_NOTE,mNoteEt.getText().toString());
+        setResult(RESULT_OK,intent);
+        finish();
     }
 }

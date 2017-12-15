@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.chrissen.cartoon.R;
+import com.chrissen.cartoon.dao.manager.TxtDaoManager;
 import com.chrissen.cartoon.fragment.SearchFragment;
 import com.chrissen.cartoon.fragment.TypeFragment;
-import com.chrissen.cartoon.module.model.TxtModel;
 import com.chrissen.cartoon.util.IntentConstants;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
+import java.io.File;
 import java.util.regex.Pattern;
 
 public class CartoonActivity extends BaseAbstractActivity {
@@ -72,7 +73,10 @@ public class CartoonActivity extends BaseAbstractActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_FILE && resultCode == RESULT_OK) {
             String filePath = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
-            new TxtModel().copyFile(filePath);
+            File file = new File(filePath);
+            if (!new TxtDaoManager().judgeExist(filePath)) {
+                new TxtDaoManager().addTxt(file);
+            }
             finish();
         }
     }

@@ -33,13 +33,7 @@ public class AboutFragment extends Fragment {
     private CardView mAdviseCv , mProtocolCv , mProjectCv;
     private ImageView mDeveloperIv , mIconDesIv;
     private TextView mDevLinkTv , mIconDesLinkTv;
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
+    private ImageView mBackIv;
 
 
     @Nullable
@@ -51,6 +45,13 @@ public class AboutFragment extends Fragment {
     }
 
     private void initView(View view) {
+        mBackIv = view.findViewById(R.id.about_back_iv);
+        mBackIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
         mAdviseCv = view.findViewById(R.id.about_advise_cv);
         mProtocolCv = view.findViewById(R.id.about_protocol_cv);
         mProjectCv = view.findViewById(R.id.about_project_cv);

@@ -6,10 +6,20 @@
     android:background="@color/colorPrimary">
 
     <ImageView
+        android:id="@+id/navi_cat_iv"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="16dp"
+        android:src="@drawable/app_cat"
+        android:visibility="invisible"/>
+
+    <ImageView
         android:id="@+id/main_header_iv"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginLeft="24dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="24dp"
         android:layout_marginTop="42dp"
         android:clickable="true"
         android:visibility="invisible"/>

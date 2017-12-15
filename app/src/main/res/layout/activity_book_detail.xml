@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.chrissen.cartoon.activity.BookDetailAbstractActivity">
+    tools:context="com.chrissen.cartoon.activity.BookDetailActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -46,7 +46,6 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -70,13 +69,42 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimary">
 
-    </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/icon_delete"
+            android:layout_marginLeft="12dp"
+            android:padding="4dp"
+            android:layout_gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="onDeleteClick"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/icon_reading"
+            android:padding="4dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:onClick="onReadingClick"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/icon_note"
+            android:layout_marginRight="12dp"
+            android:padding="4dp"
+            android:layout_gravity="right|center_vertical"
+            android:clickable="true"
+            android:onClick="onNoteClick"/>
+
+    </FrameLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

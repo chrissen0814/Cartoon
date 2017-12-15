@@ -23,28 +23,23 @@
             android:name="Channel ID"
             android:value="Coolapk"/>
 
-        <activity
-            android:name=".activity.MainActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts"/>
-        </activity>
         <!-- Book -->
         <activity
             android:name=".activity.ChapterActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".activity.ContentActivity"
-            android:screenOrientation="portrait">
+            android:name=".activity.CartoonContentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme">
         </activity>
         <activity
             android:name=".activity.BookNoteActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
-            android:name=".activity.BookDetailAbstractActivity"
+            android:name=".activity.BookDetailActivity"
             android:screenOrientation="portrait">
         </activity>
 
@@ -67,17 +62,25 @@
         </activity>
         <activity android:name=".activity.system.FeedbackActivity">
         </activity>
-        <activity android:name=".activity.Main2Activity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CartoonActivity">
+        <activity android:name=".activity.CartoonActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activity.system.SystemActivity">
+        <activity android:name=".activity.system.SystemActivity"
+            android:screenOrientation="portrait">
         </activity>
+
+        <activity android:name="txtreaderlib.ui.HwTxtPlayActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullscreenTheme">
+        </activity>
+
     </application>
 
 </manifest>

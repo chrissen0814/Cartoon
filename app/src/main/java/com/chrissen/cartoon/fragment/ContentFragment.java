@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.avos.avoscloud.AVAnalytics;
 import com.chrissen.cartoon.R;
-import com.chrissen.cartoon.activity.ContentActivity;
+import com.chrissen.cartoon.activity.CartoonContentActivity;
 import com.chrissen.cartoon.bean.ContentBean;
 import com.chrissen.cartoon.util.ImageUtil;
 import com.chrissen.cartoon.util.view.PinchImageView;
@@ -48,7 +48,7 @@ public class ContentFragment extends Fragment {
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((ContentActivity)getActivity()).setTopAndBottomBarVisibility();
+                ((CartoonContentActivity)getActivity()).setTopAndBottomBarVisibility();
             }
         });
         ImageUtil.loadImageByUrl(mImage.getImageUrl(),getContext(),mImageView);

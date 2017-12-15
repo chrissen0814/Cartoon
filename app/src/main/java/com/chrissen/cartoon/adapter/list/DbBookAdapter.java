@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.avos.avoscloud.AVUser;
 import com.chrissen.cartoon.R;
 import com.chrissen.cartoon.activity.BaseAbstractActivity;
-import com.chrissen.cartoon.activity.BookDetailAbstractActivity;
+import com.chrissen.cartoon.activity.BookDetailActivity;
 import com.chrissen.cartoon.activity.BookNoteActivity;
 import com.chrissen.cartoon.dao.greendao.Book;
 import com.chrissen.cartoon.dao.manager.BookDaoManager;
@@ -83,7 +83,7 @@ public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 //                    intent.putExtra(IntentConstants.BOOK,book);
 //                    mContext.startActivity(intent);
                     ((BaseAbstractActivity)mContext).putBindClick(v);
-                    Intent intent = new Intent(mContext, BookDetailAbstractActivity.class);
+                    Intent intent = new Intent(mContext, BookDetailActivity.class);
                     intent.putExtra(IntentConstants.BOOK,mBookList.get(holder.getAdapterPosition()));
                     mContext.startActivity(intent);
                 }
@@ -126,7 +126,7 @@ public class DbBookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @Override
             public void onClick(View v) {
                 ((BaseAbstractActivity)mContext).putBindClick(v);
-                Intent intent = new Intent(mContext, BookDetailAbstractActivity.class);
+                Intent intent = new Intent(mContext, BookDetailActivity.class);
                 intent.putExtra(IntentConstants.BOOK,mBookList.get(clickedPos));
                 mContext.startActivity(intent);
                 showOrHideDialog(false);

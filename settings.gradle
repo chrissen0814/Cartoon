@@ -1,1 +1,1 @@
-include ':app', ':hwtxtreaderlib'
+include ':app'

@@ -1,50 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_duo_drawer_layout"
+    android:id="@+id/main_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.chrissen.cartoon.activity.MainActivity">
 
-    <nl.psdcompany.duonavigationdrawer.views.DuoMenuView
-        android:id="@+id/main_duo_menu_view"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <include layout="@layout/layout_main"/>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/main_navi_view"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:tag="menu"
-        app:footer="@layout/layout_footer"
-        app:header="@layout/layout_header">
-    </nl.psdcompany.duonavigationdrawer.views.DuoMenuView>
+        android:layout_gravity="left"
+        app:headerLayout="@layout/navi_header"
+        app:menu="@menu/navi_menu">
+    </android.support.design.widget.NavigationView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@android:color/white"
-        android:tag="content">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/main_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-        </android.support.v7.widget.Toolbar>
-
-        <FrameLayout
-            android:id="@+id/main_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white">
-        </FrameLayout>
-
-    </LinearLayout>
-
-
-
-</nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout>
+</android.support.v4.widget.DrawerLayout>
