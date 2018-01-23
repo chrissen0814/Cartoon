@@ -23,6 +23,4 @@
 ## 下载链接
 酷安： https://www.coolapk.com/apk/169188
 ## 关于我
-目前在常州麦拉风网络科技有限公司实习  
-从事Android开发  
 邮箱：chrissen0814@gmail.com
