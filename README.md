@@ -1,4 +1,4 @@
-# 猫漫-可爱的漫画软件
+# 爱漫-漫画软件
 ![](https://img.shields.io/badge/license-MIT-000000.svg)  
   
   因为遇见你，我才知道我也能拥有美丽的记忆
